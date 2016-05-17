@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load staticfiles %} 
+{% extends 'layout.html' %} {% load staticfiles %}
 
 {% block cssformat %}
      <style>
@@ -110,7 +110,7 @@
                 yAxis: {{ item.yAxis|safe  }},
                 plotOptions: {{ item.plotOptions|safe }},
                 credits: {{ item.credits|safe }},
-                legend : { enabled :  {{ item.legend }} },
+                legend : { enabled : {{ item.legend }} },
                 series: {{ item.series|safe }}
             });
         {% endfor %}
@@ -120,19 +120,6 @@
 
 
 
-<script type="text/javascript">
-$(document).ready(function() {
-	// Load Google Chart API and callback to draw test graphs
-	// This need for correct resize charts, when box open or drag
-	var graphxChartsResize;
-	$(".box").resize(function(event){
-		event.preventDefault();
-		clearTimeout(graphxChartsResize);
-		graphxChartsResize = setTimeout(DrawAllCharts, 500);
-	});
-	// Add Drag-n-Drop action for .box
-	WinMove();
-});
-</script>
+
 
 {% endblock %}

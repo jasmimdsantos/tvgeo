@@ -1,8 +1,8 @@
-{% extends 'base.html' %} {% load staticfiles %} 
+{% extends 'layout.html' %} {% load staticfiles %}
 
 
 {% block cssformat %}
-	<link href="/static/css/typeahead.css" rel="stylesheet">  
+	<link href="/static/plugins/typeahead/typeahead.css" rel="stylesheet">
 {% endblock %}
 
 
@@ -15,7 +15,7 @@
         </a>
         <ol class="breadcrumb pull-left">
             <li><a href="/">Home</a></li>
-            <li><a href="/normais">Estações Normais</a></li>
+            <li><a href="/clima/normais">Estações Normais</a></li>
         </ol>
     </div>
 </div>
@@ -75,7 +75,7 @@
 
 
 {% block scriptsJava %}
-    <script  type="text/javascript" src="/static/js/typeahead/typeahead.jquery.min.js"></script>
+    <script  type="text/javascript" src="/static/plugins/typeahead/typeahead.jquery.min.js"></script>
 	<script>
 
 

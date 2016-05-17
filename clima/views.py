@@ -31,7 +31,7 @@ def normais(request):
             texto = http.urlquote(texto)
 
             if estacao:
-                return redirect('clima/grafnormais/{0}/{1}'.format(estacao[0].id, texto.replace(' ', '_')) )
+                return redirect('/clima/grafnormais/{0}/{1}'.format(estacao[0].id, texto.replace(' ', '_')) )
     else:
         form = PesquisaEstacaoFRM()
 
@@ -55,10 +55,9 @@ def grafnormais(request, station, texto):
     except:
         return redirect('clima/normais/')
 
-
     grf = NormalGraficos(station, texto).getGrafico()
 
-    template = loader.get_template('climagrafnormais.html')
+    template = loader.get_template('clima/grafnormais.html')
     context = RequestContext(request, { 'estacao': estacao, 'graficos': grf });
     return HttpResponse(template.render(context))
 

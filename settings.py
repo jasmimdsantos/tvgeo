@@ -135,7 +135,7 @@ USE_TZ = True
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'core/static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'tvgeo/static'),)
 
 EMAIL_USE_TLS = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

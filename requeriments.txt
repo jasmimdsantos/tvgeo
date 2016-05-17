@@ -1,0 +1,8 @@
+Django==1.9.6
+django-colorfield==0.1.10
+django-crispy-forms==1.6.0
+django-geojson==2.9.0
+django-paintstore==0.2
+psycopg2==2.6.1
+requests==2.10.0
+six==1.10.0

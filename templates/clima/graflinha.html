@@ -1,0 +1,227 @@
+{% extends 'base.html' %} {% load staticfiles %} 
+
+{% block cssformat %}
+     <style>
+        .bloco
+        {
+        height: 100%; /*Specify Height*/
+        width:  100%; /*Specify Width*/
+        border: 1px solid black; /*Add 1px solid border, use any color you want*/
+        text-align:center; /*Align the text to the center*/
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <a href="#" class="show-sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ol class="breadcrumb pull-left">
+            <li><a href="/">Home</a></li>
+            <li><a href="/automaticas">Estações Automáticas</a></li>
+        </ol>
+   </div>
+</div>
+
+
+<div id="dashboard-header" class="row">
+    <div class="col-xs-12 col-sm-4 col-md-5">
+        <h3>{{estacao.Nome}}</h3>
+    </div>
+    <div class="clearfix visible-xs"></div>
+    <div class="col-xs-12 col-sm-8 col-md-7 pull-right">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="sparkline-dashboard" id="sparkline-1"></div>
+                <div class="sparkline-dashboard-info">
+                    <span class="txt-primary">Altitude</span>
+                    {{ estacao.Altitude }}
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="sparkline-dashboard" id="sparkline-2"></div>
+                <div class="sparkline-dashboard-info">
+                    <span class="txt-info">UF</span>
+                    {{ estacao.UF }}
+                </div>
+            </div>
+       </div>
+    </div>
+</div>
+
+        {% for grafico in result %}
+	<div class="col-xs-12 col-sm-6" >
+		<div class="box">
+			<div class="box-header">
+				<div class="box-name">
+					<i class="fa fa-bar-chart-o"></i>
+					<span>{{ grafico.titulo|safe }}</span>
+				</div>
+				<div class="box-icons">
+					<a class="collapse-link">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+					<a class="expand-link">
+						<i class="fa fa-expand"></i>
+					</a>
+					<a class="close-link">
+						<i class="fa fa-times"></i>
+					</a>
+				</div>
+				<div class="no-move"></div>
+			</div>
+			<div class="box-content" style='height:500px;'>
+				<div class='bloco'  id="container{{ grafico.id}}" ></div>
+			</div>
+		</div>
+	</div>
+
+{% endfor %}
+
+
+{% endblock %}
+
+{% block scriptsJava %}
+
+
+
+<script type='text/javascript'>//<![CDATA[
+
+    $(function () {
+
+    {% for grafico in result %}
+
+
+        {% if grafico.type != 'rosa' %}
+
+
+        $('#container{{ grafico.id}}').highcharts({
+            chart: {
+                type: '{{ grafico.type|safe }}',
+                events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                }       
+            },
+            title: {
+                text: '{{ grafico.titulo|safe }}' 
+            },
+            subtitle: {
+                text: '{{ grafico.subtitulo|safe }}'
+            },
+            xAxis: {
+                categories:{{ grafico.categories|safe }}
+            },
+            yAxis: {
+                title: {
+                    text: '{{ grafico.ytitle|safe }}'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                }
+            },
+	    credits : {  text : '{{ grafico.creditos.text }}' }, 
+            series: {{ grafico.series|safe }}
+
+        });
+
+    {% else %}
+        $('#container{{ grafico.id}}').highcharts({
+        chart: {
+            polar: true,
+                events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                }       
+ 
+        },
+
+        title: {
+            text: '{{ grafico.titulo|safe }}' 
+        },
+        subtitle: {
+                text: '{{ grafico.subtitulo|safe }}'
+            },
+        pane: {
+            startAngle: 0,
+            endAngle: 360
+        },
+
+        xAxis: {
+            tickInterval: 45,
+            min: 0,
+            max: 360,
+            labels: {                
+                formatter: function () {
+                    label = '';
+                    if (this.value == 0 ){
+                        label = 'N';
+                    }
+                    if (this.value == 45) {
+                        label = 'NE';
+                    }
+                    if (this.value == 90) {
+                        label = 'E';
+                    }
+                    if (this.value == 135 ){
+                        label = 'SE';
+                    }
+                    if (this.value == 180 ){
+                        label = 'S';
+                    }
+                    if (this.value == 225) {
+                        label = 'SW';
+                    }
+                    if (this.value == 270) {
+                        label = 'W';
+                    }
+                    if (this.value == 315) {
+                        label = 'NW';
+                    }
+                    return label + ' ' + this.value + '°';
+                }
+            }
+       },
+
+        yAxis: {
+            min: 0
+        },
+
+        plotOptions: {
+            series: {
+                pointStart: 0,
+                pointInterval: 45
+            },
+            column: {
+                pointPadding: 0,
+                groupPadding: 0
+            }
+        },
+        legend : { enabled : false },
+        series:  {{ grafico.series|safe }}  
+  }); 
+
+    {% endif %}
+
+
+    {% endfor %}
+
+
+    });
+
+
+    //]]> 
+
+</script>
+
+{% endblock %}
+

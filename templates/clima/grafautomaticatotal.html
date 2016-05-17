@@ -1,0 +1,736 @@
+{% extends 'base.html' %} {% load staticfiles %} 
+
+{% block cssformat %}
+     <style>
+        .bloco
+        {
+        height: 100%; /*Specify Height*/
+        width:  100%; /*Specify Width*/
+        border: 1px solid black; /*Add 1px solid border, use any color you want*/
+        text-align:center; /*Align the text to the center*/
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <a href="#" class="show-sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ol class="breadcrumb pull-left">
+            <li><a href="/">Home</a></li>
+            <li><a href="/automaticas">Estações Automáticas</a></li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="col-xs-12 col-sm-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <i class="fa fa-search"></i>
+                    <span>Dados Históricos das Estações Automáticas</span>
+                </div>
+                <div class="box-icons pull-right">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content">
+                <div id="grafico">
+                    <ul>
+                        <li><a href="#grafico01">Temperatura</a></li>
+                        <li><a href="#grafico01a">Umidade</a></li>
+                        <li><a href="#grafico02">Pressão</a></li>
+                        <li><a href="#grafico03">Ponto de Orvalho</a></li>
+                        <li><a href="#grafico04">Radiação</a></li>
+                        <li><a href="#grafico05">Precipitação</a></li>
+                        <li><a href="#grafico06">Direção do Vento</a></li>
+                        <li><a href="#grafico07">Velocidade do Vento</a></li>
+                    </ul>
+                    <div id='grafico01'  style='height: 530px; width: 80%'></div>
+                    <div id='grafico01a' style='height: 530px; width: 80%'></div>
+                    <div id='grafico02'  style='height: 530px; width: 80%'></div>
+                    <div id='grafico03'  style='height: 530px; width: 80%'></div>
+                    <div id='grafico04'  style='height: 530px; width: 80%'></div>
+                    <div id='grafico05'  style='height: 530px; width: 80%'></div>
+                    <div id='grafico06'  style='height: 530px; width: 80%'></div>
+                    <div id='grafico07'  style='height: 530px; width: 80%'></div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scriptsJava %}
+<script type="text/javascript">
+
+$(function() {
+
+    $( "#grafico" ).tabs();
+
+	var graphxChartsResize;
+	$(".box").resize(function(event){
+		event.preventDefault();
+		clearTimeout(graphxChartsResize);
+		graphxChartsResize = setTimeout(DrawAllCharts, 500);
+	});
+	// Add Drag-n-Drop action for .box
+	WinMove();
+
+	vlrEstacaoText = '{{ texto|safe }}';
+
+        $.ajax({
+            dataType : "json",                                  
+            url : '/getautomaticajson/{{ estacao.Codigo }}/',
+            method : 'GET',
+            async:false,
+            timeout:60000,
+            success : function(result) {
+                dados_temp = result.dados.dados_temp,
+                dados_umi  = result.dados.dados_umi ,
+                dados_po   = result.dados.dados_po  ,
+                dados_pres = result.dados.dados_pres,
+                dados_rad  = result.dados.dados_rad ,
+                dados_pre  = result.dados.dados_pre ,
+                dados_vdd  = result.dados.dados_vdd ,
+                dados_vvel = result.dados.dados_vvel;
+            }
+        });
+
+<!---        alert(dados_temp);  -->
+        var dataLength = dados_temp.length;
+<!---        alert(dataLength);  -->
+<!---        alert(dados_temp);  -->
+
+        Highcharts.setOptions({
+           lang: {
+                    loading:           'Carregando...',
+<!---                    decimalPoint:      ',', -->
+<!---                    thousandSep:       ',', -->
+                    months:            ['Janeiro', 'Fevereiro', 'MarÃ§o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    weekdays:          ['Domingo', 'Segunda-Feira', 'TerÃ§a-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado'],
+                    shortMonths:       ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'],
+                    rangeSelectorFrom: 'De:',
+                    rangeSelectorTo:   ' a '
+            }
+        });
+
+         window.chart = new Highcharts.StockChart({ 
+            chart : { 
+                 events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                },       
+               renderTo : 'grafico01', 
+               margin: 30, 
+               marginLeft: 30, 
+               marginRight: 30, 
+               borderWidth: 1, 
+               plotBorderColor: '#346691', 
+               plotBorderWidth: 2, 
+               zoomType: 'xy' 
+            }, 
+	        credits: {{ credits|safe }},
+            tooltip: { 
+               formatter: function() { 
+                  var s = '<b>Data: '+ Highcharts.dateFormat('%d/%m/%Y %H:00', this.x) +'</b>'; 
+                  $.each(this.points, function(i, point) { 
+                     if (i == 0) { s += '<br/>Temperatura (C): '+ (point.y).toFixed(0) +'C'; } 
+                  }); 
+                  return s; 
+               } 
+            }, 
+            navigator: { 
+               top: 440, 
+               margin: 30 
+            }, 
+            rangeSelector : { 
+               selected : 1, 
+               buttons: [ 
+                  { type: 'month', count: 1, text: '1m'    }, 
+                  { type: 'month', count: 3, text: '3m'  }, 
+                  { type: 'month', count: 6, text: '6m'  }, 
+                  { type: 'ytd',             text: 'ano'   }, 
+                  { type: 'year',  count: 1, text: '1ano'   }, 
+                  { type: 'all',             text: 'tudo'     } 
+               ] 
+            }, 
+            xAxis: { 
+               title: { 
+                  text: 'Data' 
+               }, 
+               gridLineWidth: 2, 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto' 
+            }, 
+            yAxis: { 
+               labels: { 
+                  formatter: function() { return this.value +''; } 
+               }, 
+               title: { 
+                  text: 'Temperatura (C)' 
+               }, 
+               min: -20, 
+               max: 50, 
+               alternateGridColor: '#FDFFD5', 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto', 
+            }, 
+            title : { 
+               text : vlrEstacaoText
+            }, 
+            series : [{ 
+               name :'Temperatura (C)', 
+               data : dados_temp, 
+               tooltip: { yDecimals: 0    } 
+            }] 
+         }); 
+         window.chart = new Highcharts.StockChart({ 
+
+            chart : { 
+                 events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                },       
+ 
+               renderTo : 'grafico01a', 
+               margin: 30, 
+               marginLeft: 30, 
+               marginRight: 30, 
+               borderWidth: 1, 
+               plotBorderColor: '#346691', 
+               plotBorderWidth: 2, 
+               zoomType: 'xy' 
+            }, 
+	    credits: {{ credits|safe }},
+            tooltip: { 
+               formatter: function() { 
+                  var s = '<b>Data: '+ Highcharts.dateFormat('%d/%m/%Y %H:00', this.x) +'</b>'; 
+                  $.each(this.points, function(i, point) { 
+                     if (i == 0) { s += '<br/>Umidade (%): '+ (point.y).toFixed(0) +'%'; } 
+                  }); 
+                  return s; 
+               } 
+            }, 
+            navigator: { 
+               top: 440, 
+               margin: 30 
+            }, 
+            rangeSelector : { 
+               selected : 1, 
+               buttons: [ 
+                  { type: 'month', count: 1, text: '1m'    }, 
+                  { type: 'month', count: 3, text: '3m'  }, 
+                  { type: 'month', count: 6, text: '6m'  }, 
+                  { type: 'ytd',             text: 'ano'   }, 
+                  { type: 'year',  count: 1, text: '1ano'   }, 
+                  { type: 'all',             text: 'tudo'     } 
+               ] 
+            }, 
+            xAxis: { 
+               title: { 
+                  text: 'Data' 
+               }, 
+               gridLineWidth: 2, 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto' 
+            }, 
+            yAxis: { 
+               labels: { 
+                  formatter: function() { return this.value +''; } 
+               }, 
+               title: { 
+                  text: 'Umidade (%)' 
+               }, 
+               min: 0, 
+               max: 100, 
+               alternateGridColor: '#FDFFD5', 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto', 
+            }, 
+            title : { 
+               text : vlrEstacaoText
+            }, 
+            series : [{ 
+               name :'Umidade (%)', 
+               data : dados_umi, 
+               tooltip: { yDecimals: 0    } 
+            }] 
+         }); 
+         window.chart = new Highcharts.StockChart({ 
+
+            chart : { 
+                 events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                },       
+ 
+               renderTo : 'grafico02', 
+               margin: 30, 
+               marginLeft: 30, 
+               marginRight: 30, 
+               borderWidth: 1, 
+               plotBorderColor: '#346691', 
+               plotBorderWidth: 2, 
+               zoomType: 'xy' 
+            }, 
+	    credits: {{ credits|safe }},
+            tooltip: { 
+               formatter: function() { 
+                  var s = '<b>Data: '+ Highcharts.dateFormat('%d/%m/%Y %H:00', this.x) +'</b>'; 
+                  $.each(this.points, function(i, point) { 
+                     if (i == 0) { s += '<br/>Pressao (hPa): '+ (point.y).toFixed(0) +' '; } 
+                  }); 
+                  return s; 
+               } 
+            }, 
+            navigator: { 
+               top: 440, 
+               margin: 30 
+            }, 
+            rangeSelector : { 
+               selected : 1, 
+               buttons: [ 
+                  { type: 'month', count: 1, text: '1m'    }, 
+                  { type: 'month', count: 3, text: '3m'  }, 
+                  { type: 'month', count: 6, text: '6m'  }, 
+                  { type: 'ytd',             text: 'ano'   }, 
+                  { type: 'year',  count: 1, text: '1ano'   }, 
+                  { type: 'all',             text: 'tudo'     } 
+               ] 
+            }, 
+            xAxis: { 
+               title: { 
+                  text: 'Data' 
+               }, 
+               gridLineWidth: 2, 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto' 
+            }, 
+            yAxis: { 
+               labels: { 
+                  formatter: function() { return this.value +''; } 
+               }, 
+               title: { 
+                  text: 'Pressao (hPa)' 
+               }, 
+               min: 800, 
+               max: 1200, 
+               alternateGridColor: '#FDFFD5', 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto', 
+            }, 
+            title : { 
+               text : vlrEstacaoText
+            }, 
+            series : [{ 
+               name :'Pressao (hPa)', 
+               data : dados_pres, 
+               tooltip: { yDecimals: 0    } 
+            }] 
+         }); 
+         window.chart = new Highcharts.StockChart({ 
+
+            chart : { 
+                 events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                },       
+ 
+               renderTo : 'grafico03', 
+               margin: 30, 
+               marginLeft: 30, 
+               marginRight: 30, 
+               borderWidth: 1, 
+               plotBorderColor: '#346691', 
+               plotBorderWidth: 2, 
+               zoomType: 'xy' 
+            }, 
+	    credits: {{ credits|safe }},
+            tooltip: { 
+               formatter: function() { 
+                  var s = '<b>Data: '+ Highcharts.dateFormat('%d/%m/%Y %H:00', this.x) +'</b>'; 
+                  $.each(this.points, function(i, point) { 
+                     if (i == 0) { s += '<br/>Temperatura de Ponto de Orvalho (C): '+ (point.y).toFixed(0) +' '; } 
+                  }); 
+                  return s; 
+               } 
+            }, 
+            navigator: { 
+               top: 440, 
+               margin: 30 
+            }, 
+            rangeSelector : { 
+               selected : 1, 
+               buttons: [ 
+                  { type: 'month', count: 1, text: '1m'    }, 
+                  { type: 'month', count: 3, text: '3m'  }, 
+                  { type: 'month', count: 6, text: '6m'  }, 
+                  { type: 'ytd',             text: 'ano'   }, 
+                  { type: 'year',  count: 1, text: '1ano'   }, 
+                  { type: 'all',             text: 'tudo'     } 
+               ] 
+            }, 
+            xAxis: { 
+               title: { 
+                  text: 'Data' 
+               }, 
+               gridLineWidth: 2, 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto' 
+            }, 
+            yAxis: { 
+               labels: { 
+                  formatter: function() { return this.value +''; } 
+               }, 
+               title: { 
+                  text: 'Temperatura de Ponto de Orvalho (C)' 
+               }, 
+               min: 0, 
+               max: 100, 
+               alternateGridColor: '#FDFFD5', 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto', 
+            }, 
+            title : { 
+               text : vlrEstacaoText
+            }, 
+            series : [{ 
+               name :'Temperatura de Ponto de Orvalho (C)', 
+               data : dados_po, 
+               tooltip: { yDecimals: 0    } 
+            }] 
+         }); 
+         window.chart = new Highcharts.StockChart({ 
+
+            chart : { 
+                 events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                },       
+ 
+               renderTo : 'grafico04', 
+               margin: 30, 
+               marginLeft: 30, 
+               marginRight: 30, 
+               borderWidth: 1, 
+               plotBorderColor: '#346691', 
+               plotBorderWidth: 2, 
+               zoomType: 'xy' 
+            }, 
+	    credits: {{ credits|safe }},
+            tooltip: { 
+               formatter: function() { 
+                  var s = '<b>Data: '+ Highcharts.dateFormat('%d/%m/%Y %H:00', this.x) +'</b>'; 
+                  $.each(this.points, function(i, point) { 
+                     if (i == 0) { s += '<br/>Radiacao (kJm2): '+ (point.y).toFixed(0) +' '; } 
+                  }); 
+                  return s; 
+               } 
+            }, 
+            navigator: { 
+               top: 440, 
+               margin: 30 
+            }, 
+            rangeSelector : { 
+               selected : 1, 
+               buttons: [ 
+                  { type: 'month', count: 1, text: '1m'    }, 
+                  { type: 'month', count: 3, text: '3m'  }, 
+                  { type: 'month', count: 6, text: '6m'  }, 
+                  { type: 'ytd',             text: 'ano'   }, 
+                  { type: 'year',  count: 1, text: '1ano'   }, 
+                  { type: 'all',             text: 'tudo'     } 
+               ] 
+            }, 
+            xAxis: { 
+               title: { 
+                  text: 'Data' 
+               }, 
+               gridLineWidth: 2, 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto' 
+            }, 
+            yAxis: { 
+               labels: { 
+                  formatter: function() { return this.value +''; } 
+               }, 
+               title: { 
+                  text: 'Radiacao (kJm2)' 
+               }, 
+               /*min: 0, 
+               max: 4000, */
+               alternateGridColor: '#FDFFD5', 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto', 
+            }, 
+            title : { 
+               text : vlrEstacaoText
+            }, 
+            series : [{ 
+               name :'Radiacao (kJm2)', 
+               data : dados_rad, 
+               tooltip: { yDecimals: 0    } 
+            }] 
+         }); 
+         window.chart = new Highcharts.StockChart({ 
+
+            chart : { 
+                 events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                },       
+ 
+               renderTo : 'grafico05', 
+               margin: 30, 
+               marginLeft: 30, 
+               marginRight: 30, 
+               borderWidth: 1, 
+               plotBorderColor: '#346691', 
+               plotBorderWidth: 2, 
+               zoomType: 'xy' 
+            }, 
+            tooltip: { 
+               formatter: function() { 
+                  var s = '<b>Data: '+ Highcharts.dateFormat('%d/%m/%Y %H:00', this.x) +'</b>'; 
+                  $.each(this.points, function(i, point) { 
+                     if (i == 0) { s += '<br/>Precipitacao (mm): '+ (point.y).toFixed(0) +' mm '; } 
+                  }); 
+                  return s; 
+               } 
+            }, 
+            navigator: { 
+               top: 440, 
+               margin: 30 
+            }, 
+            rangeSelector : { 
+               selected : 1, 
+               buttons: [ 
+                  { type: 'month', count: 1, text: '1m'    }, 
+                  { type: 'month', count: 3, text: '3m'  }, 
+                  { type: 'month', count: 6, text: '6m'  }, 
+                  { type: 'ytd',             text: 'ano'   }, 
+                  { type: 'year',  count: 1, text: '1ano'   }, 
+                  { type: 'all',             text: 'tudo'     } 
+               ] 
+            }, 
+            xAxis: { 
+               title: { 
+                  text: 'Data' 
+               }, 
+               gridLineWidth: 2, 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto' 
+            }, 
+            yAxis: { 
+               labels: { 
+                  formatter: function() { return this.value +''; } 
+               }, 
+               title: { 
+                  text: 'Precipitacao (mm)' 
+               }, 
+               min: 0, 
+               max: 120, 
+               alternateGridColor: '#FDFFD5', 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto', 
+            }, 
+            title : { 
+               text : vlrEstacaoText
+            }, 
+            series : [{ 
+               type :'column', 
+               name :'Precipitacao (mm)', 
+               data : dados_pre, 
+               tooltip: { yDecimals: 0    } 
+            }] 
+         }); 
+         window.chart = new Highcharts.StockChart({ 
+
+            chart : { 
+                 events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                },       
+ 
+               renderTo : 'grafico06', 
+               margin: 30, 
+               marginLeft: 30, 
+               marginRight: 30, 
+               borderWidth: 1, 
+               plotBorderColor: '#346691', 
+               plotBorderWidth: 2, 
+               zoomType: 'xy' 
+            }, 
+	    credits: {{ credits|safe }},
+            tooltip: { 
+               formatter: function() { 
+                  var s = '<b>Data: '+ Highcharts.dateFormat('%d/%m/%Y %H:00', this.x) +'</b>'; 
+                  $.each(this.points, function(i, point) { 
+                     if (i == 0) { s += '<br/>Direcao do Vento (grau): '+ (point.y).toFixed(0) +' grau '; } 
+                  }); 
+                  return s; 
+               } 
+            }, 
+            navigator: { 
+               top: 440, 
+               margin: 30 
+            }, 
+            rangeSelector : { 
+               selected : 1, 
+               buttons: [ 
+                  { type: 'month', count: 1, text: '1m'    }, 
+                  { type: 'month', count: 3, text: '3m'  }, 
+                  { type: 'month', count: 6, text: '6m'  }, 
+                  { type: 'ytd',             text: 'ano'   }, 
+                  { type: 'year',  count: 1, text: '1ano'   }, 
+                  { type: 'all',             text: 'tudo'     } 
+               ] 
+            }, 
+            xAxis: { 
+               title: { 
+                  text: 'Data' 
+               }, 
+               gridLineWidth: 2, 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto' 
+            }, 
+            yAxis: { 
+               labels: { 
+                  formatter: function() { return this.value +''; } 
+               }, 
+               title: { 
+                  text: 'Direcao do Vento (grau)' 
+               }, 
+               min: 0, 
+               max: 360, 
+               alternateGridColor: '#FDFFD5', 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto', 
+            }, 
+            title : { 
+               text : vlrEstacaoText
+            }, 
+            series : [{ 
+               name :'Direcao do Vento (grau)', 
+               data : dados_vdd, 
+               tooltip: { yDecimals: 0    } 
+            }] 
+         }); 
+         window.chart = new Highcharts.StockChart({ 
+
+            chart : { 
+                 events: {
+                          load: function(event) {
+                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                     }
+                                },       
+ 
+               renderTo : 'grafico07', 
+               margin: 30, 
+               marginLeft: 30, 
+               marginRight: 30, 
+               borderWidth: 1, 
+               plotBorderColor: '#346691', 
+               plotBorderWidth: 2, 
+               zoomType: 'xy' 
+            }, 
+	    credits: {{ credits|safe }},
+            tooltip: { 
+               formatter: function() { 
+                  var s = '<b>Data: '+ Highcharts.dateFormat('%d/%m/%Y %H:00', this.x) +'</b>'; 
+                  $.each(this.points, function(i, point) { 
+                     if (i == 0) { s += '<br/>Velocidade do Vento (m/s): '+ (point.y).toFixed(0) +' m/s '; } 
+                  }); 
+                  return s; 
+               } 
+            }, 
+            navigator: { 
+               top: 440, 
+               margin: 30 
+            }, 
+            rangeSelector : { 
+               selected : 1, 
+               buttons: [ 
+                  { type: 'month', count: 1, text: '1m'    }, 
+                  { type: 'month', count: 3, text: '3m'  }, 
+                  { type: 'month', count: 6, text: '6m'  }, 
+                  { type: 'ytd',             text: 'ano'   }, 
+                  { type: 'year',  count: 1, text: '1ano'   }, 
+                  { type: 'all',             text: 'tudo'     } 
+               ] 
+            }, 
+            xAxis: { 
+               title: { 
+                  text: 'Data' 
+               }, 
+               gridLineWidth: 2, 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto' 
+            }, 
+            yAxis: { 
+               labels: { 
+                  formatter: function() { return this.value +''; } 
+               }, 
+               title: { 
+                  text: 'Velocidade do Vento (m/s)' 
+               }, 
+               min: 0, 
+               max: 40, 
+               alternateGridColor: '#FDFFD5', 
+               minorGridLineColor: '#F0F0F0', 
+               minorGridLineWidth: 1, 
+               minorTickInterval: 'auto', 
+            }, 
+            title : { 
+               text : vlrEstacaoText
+            }, 
+            series : [{ 
+               name :'Velocidade do Vento (m/s)', 
+               data : dados_vvel, 
+               tooltip: { yDecimals: 0    } 
+            }] 
+         }); 
+        
+});
+</script>
+
+{% endblock %}
+

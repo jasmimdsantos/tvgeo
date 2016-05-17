@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+     <div id="page_cadastro">
+        <section class="centralizar">
+            <div class="breadcumb">
+                <a href="/">Home</a> » <a href="/">local</a> » <a href="/">local</a> » <span>local</span>
+            </div>
+            <div class="container-fluid">
+                <h1 class="titulo_interno">{{ page }}</h1>
+                {% if state %}
+                    {% if state.mode == "sucess" %}
+                        <div class="alert alert-success">{{ state.msg }}</div>
+                    {% elif state.mode == "error" %}
+                        <div class="alert alert-danger">{{ state.msg }}</div>
+                    {% elif state.mode == "error" %}
+                        <div class="alert alert-warning">{{ state.msg }}</div>
+                    {% endif %}
+                {% endif %}
+
+                <div class="content">
+                    <div class="container-login">
+                        <h3>Altera a senha para, {{  request.user.username }}</h3>
+                        <br>
+
+                         <form role="form" id="postform" action="/mudasenha/" method="POST">
+                            {% csrf_token %}
+                             {{ form|crispy }}
+                             <div class="row panel-body">
+                                <p>
+                                   <button class="btn btn btn-primary" type="submit">Enviar</button>
+                                </p>
+                            </div>
+                    </form>
+                    </div><!--FIM container-login -->
+                    <div class="clear"></div>
+                </div>
+            </div><!--FIM container-login-user -->
+        </section>
+    </div>
+{% endblock %}

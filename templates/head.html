@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>{{ page }} | Terravision </title>
+
+  <link href="/static/assets/css/vendor/adminex.min.css" rel="stylesheet">
+  <link href="/static/assets/css/vendor/adminex-responsive.min.css" rel="stylesheet">
+  <link href="/static/assets/css/vendor/jquery-ui.min.css" rel="stylesheet">
+  <link href="/static/assets/css/firemonitor.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/static/assets/js/vendor/html5shiv.js"></script>
+  <script src="/static/assets/js/vendor/respond.min.js"></script>
+  <![endif]-->
+  
+  {% if spinner %}
+    <meta http-equiv="refresh" content="{{ seconds }}" />
+  {% endif %}
+</head>

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+     <div id="page_cadastro">
+        <section class="centralizar">
+
+        <div class="breadcumb">
+            <a href="/">Home</a> » <a href="/">Powercycle</a> » <a href="/">Planos</a> » <span>Login</span>
+        </div>
+
+        <div class="container-fluid">
+            <h1 class="titulo_interno">Cadastro</h1>
+
+            <div class="content">
+                <div class="container-login">
+                    <span class="subtitulo">Login</span>
+                    {% if errormsg != None %}
+                        <p class="text-warning">{{ errormsg }}</p>
+                    {% else %}
+                        <p class="texto">Já está cadastrado? Continue seu checkout realizando o login.</p>
+                    {% endif %}
+                     <form role="form" id="postform" action="/web/login" method="POST">
+                        {% csrf_token %}
+                        {{ form }}
+                        <div>
+                            <button type="submit">Login</button>
+                            <a href="/web/mudasenha" class="esqueceu-senha?">Esqueceu sua senha?</a>
+                        </div>
+                    </form>
+                </div><!--FIM container-login -->
+                <div class="clear"></div>
+            </div>
+        </div><!--FIM container-login-user -->
+    </section>
+    </div>
+{% endblock %}

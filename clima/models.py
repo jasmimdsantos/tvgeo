@@ -26,7 +26,7 @@ class Station(models.Model):
     class Meta:
         ordering = ['Nome',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.Nome)
 
 class Foco(models.Model):

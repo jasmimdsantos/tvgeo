@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'login',
     'teste',
     'toolbox',
+    'clima',
     'scripts',
 ]
 

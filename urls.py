@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf.urls import include, url
 from django.contrib import admin
 from login import views as login
+from clima import  urls
 
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     url(r'^mudasenha/', login.mudasenha, name="mudasenha"),
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('login.urls')),
+    url(r'^clima/', include('clima.urls')),
     url(r'^', login.home, name='home'),
 
 ]

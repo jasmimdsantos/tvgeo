@@ -1,14 +1,17 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
-    {% include 'head.html' %}
+<html lang="pt-BR">
+    <head>
+        {% include 'head.html' %}
+        {% block cssformat %}{% endblock %}
+    </head>
     <body class="horizontal-menu-page">
 
         <section>
             <!-- NAVBAR -->
             {% include 'navbar.html' %}
             <!-- /.navbar -->
-        
+
             <!-- container -->
             <div class="wrapper">
                 {% block content %}
@@ -23,5 +26,6 @@
         <!-- JavaScript libs are placed at the end of the document so the pages load faster  - moved to top to test something-->
         {% include 'javabase.html' %}
         <!-- /java includes -->
+        {% block scriptsJava %}{% endblock %}
     </body>
 </html>

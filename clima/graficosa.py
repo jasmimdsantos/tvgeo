@@ -1,11 +1,6 @@
 
 import psycopg2
-import re
-import requests
-import json
-import ast
-from datetime import datetime, timedelta 
-import time
+from datetime import datetime, timedelta
 import calendar
 
 
@@ -503,7 +498,6 @@ class GeraGraficos:
     def pool(self, _codstac, _data, _tipo, _nomeestac):
         
         if _tipo == 'D':
-
             col =  ['temp_media_diaria',        
                     'umidade_media_diaria_inst',
                     'umidade_media_diaria_min', 
@@ -514,13 +508,11 @@ class GeraGraficos:
                     'umidade_media_diaria_max'
                    ]
         else:
-
             col =  ['temp_media_mensal',          'temp_absoluta_mensal', 
                     'umidade_media_mensal_inst',  'umidade_media_mensal_max',
                     'umidade_media_mensal_min',   'pressao_media_mensal', 
                     'vento_media_mensal',         'radiacao_mensal',      
                     'precipitacao_mensal']
-           
 
         retorno = []
         indice = 0
@@ -530,11 +522,8 @@ class GeraGraficos:
             retorno.append(result)
         indice += 1
 
-
         result = self.procRsVentos( _codstac,  _data, '', _tipo, _nomeestac) 
-    	retorno.append(result)	
-
-
+        retorno.append(result)
         self.db.close()
         return retorno
 

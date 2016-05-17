@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'login',
     'teste',
     'toolbox',
+    'djgeojson',
+    'leaflet',
     'clima',
     'scripts',
 ]

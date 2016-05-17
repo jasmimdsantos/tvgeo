@@ -362,18 +362,16 @@ class Medicao:
             dados_vdd.append(     [ dt, item['vdirmed']])
             dados_vvel.append(    [ dt, item['vvelmed']])
 
-    	saida = {
-    		'dados_temp' :  dados_temp,
-    		'dados_umi'  :  dados_umi,
-    		'dados_po'   :  dados_po,
-    		'dados_pres' :  dados_pres,
-    		'dados_rad'  :  dados_rad,
-    		'dados_pre'  :  dados_pre,
-    		'dados_vdd'  :  dados_vdd,
-    		'dados_vvel' :  dados_vvel
-    		}
+        saida = {   'dados_temp' :  dados_temp,
+    		        'dados_umi'  :  dados_umi,
+    		        'dados_po'   :  dados_po,
+    		        'dados_pres' :  dados_pres,
+    		        'dados_rad'  :  dados_rad,
+    		        'dados_pre'  :  dados_pre,
+    		        'dados_vdd'  :  dados_vdd,
+    		        'dados_vvel' :  dados_vvel }
 
-	return saida
+        return saida
 
 
 

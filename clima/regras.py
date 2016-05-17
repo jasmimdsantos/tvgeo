@@ -2,7 +2,7 @@
 #!/usr/bin/env python
 
 import django
-from normais.models import Parametro, Classe, Resultado
+from .models import Parametro, Classe, Resultado
 import json
 
 # convert a dictionary to a class

@@ -12,7 +12,7 @@ from django.utils import http
 from django.shortcuts import  redirect
 from django.contrib.auth.decorators import login_required
 import json
-
+from django.core import serializers
 
 @login_required()
 def normais(request):
@@ -31,7 +31,7 @@ def normais(request):
             texto = http.urlquote(texto)
 
             if estacao:
-                return redirect('/grafnormais/{0}/{1}'.format(estacao[0].id, texto.replace(' ', '_')) )
+                return redirect('clima/grafnormais/{0}/{1}'.format(estacao[0].id, texto.replace(' ', '_')) )
     else:
         form = PesquisaEstacaoFRM()
 
@@ -41,7 +41,7 @@ def normais(request):
         saida += '\'' +  i + '\','
     saida += ']'
     context = RequestContext(request, { 'estacoes': saida, 'form': form });
-    template = loader.get_template('normais.html')
+    template = loader.get_template('clima/normais.html')
 
     return HttpResponse(template.render(context))
 
@@ -53,12 +53,12 @@ def grafnormais(request, station, texto):
     try:
         estacao = db.Station.objects.get(pk=station)
     except:
-        return redirect('/normais/')
+        return redirect('clima/normais/')
 
 
     grf = NormalGraficos(station, texto).getGrafico()
 
-    template = loader.get_template('grafnormais.html')
+    template = loader.get_template('climagrafnormais.html')
     context = RequestContext(request, { 'estacao': estacao, 'graficos': grf });
     return HttpResponse(template.render(context))
 
@@ -83,9 +83,9 @@ def automaticas(request):
 
             if estacao:
                 if mes == '99':
-                    return redirect(u'/grafautomaticatotal/{0}/{1}'.format(estacao[0].id,texto ))
+                    return redirect(u'clima/grafautomaticatotal/{0}/{1}'.format(estacao[0].id,texto ))
                 else:
-                    return redirect(u'/grafautomatica/{0}/{1}/{2}/{3}/'.format(estacao[0].Codigo, mes, ano,  texto ))
+                    return redirect(u'clima/grafautomatica/{0}/{1}/{2}/{3}/'.format(estacao[0].Codigo, mes, ano,  texto ))
     else:
         form = PesquisaAutomaticasFRM()
 
@@ -95,7 +95,7 @@ def automaticas(request):
         saida += '\'' +  i + '\','
     saida += ']'
     context = RequestContext(request, { 'estacoes': saida, 'form': form });
-    template = loader.get_template('automaticas.html')
+    template = loader.get_template('climaa/utomaticas.html')
 
     return HttpResponse(template.render(context))
 
@@ -117,18 +117,15 @@ def grafAutomatica(request, station, ano, mes, texto):
     result = obj.pool( station, datadefinida, tipo, texto)
 
     context = RequestContext(request, { 'result' : result} )
-    template = loader.get_template('graflinha.html')
+    template = loader.get_template('clima/graflinha.html')
 
     return HttpResponse(template.render(context))
-
-
 
 def getautomaticajson(request, station):
 
     result = json.dumps( { 'dados' :  Medicao().graficos(station) } )
 
     return HttpResponse(result,content_type='text/javascript')
-
 
 def dadosAutomatica(request, station):
 
@@ -145,7 +142,7 @@ def grafAutomaticaTotal(request, station, texto):
     try:
         estacao = db.Station.objects.get(pk=station)
     except:
-        return redirect('/estacoes/')
+        return redirect('clima/estacoes/')
 
     if texto.strip() == '':
         texto = estacao.Nome
@@ -156,23 +153,22 @@ def grafAutomaticaTotal(request, station, texto):
               }
 
     context = RequestContext(request, { 'estacao':  estacao, 'credits' : credits, 'texto': texto })
-    template = loader.get_template('grafautomaticatotal.html')
+    template = loader.get_template('clima/grafautomaticatotal.html')
 
     return HttpResponse(template.render(context))
 
 @login_required()
 def mapaestacoes(request):
     context = RequestContext(request)
-    template = loader.get_template('mapaestacoes.html')
+    template = loader.get_template('clima/mapaestacoes.html')
 
     return HttpResponse(template.render(context))
 
 def mapafocoincendio(request):
     context = RequestContext(request)
-    template = loader.get_template('mapafocoincendio.html')
+    template = loader.get_template('clima/mapafocoincendio.html')
 
     return HttpResponse(template.render(context))
-
 
 def focoCalor(request, id):
 
@@ -181,7 +177,7 @@ def focoCalor(request, id):
     saida = { 'Temp' :  reg.Temp, 'FireFlag' : reg.FireFlag, 'Data' : reg.foco_FK.dataUTC, 'id' : reg.id }
     context = RequestContext(request, { 'foco': saida } )
 
-    template = loader.get_template('focoCalor.html')
+    template = loader.get_template('clima/focoCalor.html')
 
     return HttpResponse(template.render(context))
 

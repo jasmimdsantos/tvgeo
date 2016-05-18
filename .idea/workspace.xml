@@ -2,43 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d54ab57-0c74-47a6-a9c5-b710f9296989" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/static/img/ibama.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/static/img/previfogo.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/admin.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/alarme.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/dashboard.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/firms.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/fma.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/fmagrafico.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/models.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/pontoproximo.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/previsao.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/tests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/urls.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/views.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/wfabba.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/admin.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/migrations/0001_initial.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/migrations/0002_auto_20151124_2119.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/migrations/0003_auto_20151124_2120.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/migrations/0004_roi_deteccaotxt.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/migrations/0005_auto_20151125_1645.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/migrations/0006_auto_20151126_1105.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/migrations/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/models.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/templates/roi.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/test_utf-8.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/tests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/urls.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roi/views.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/firemonitor/dashboard.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/firemonitor/dashboard_old.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/firemonitor/mailalertafoco.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firemonitor/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/assets/js/daterangepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/assets/js/daterangepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/assets/js/moment.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/assets/js/moment.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/Leaflet.Coordinates-0.1.5.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/Leaflet.Coordinates-0.1.5.ie.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/Leaflet.Coordinates-0.1.5.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/Leaflet.Coordinates-0.1.5.src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/iso8601.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/leaflet.timedimension.control.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/leaflet.timedimension.control.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/leaflet.timedimension.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/leaflet.timedimension.src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/plugins/leaflet/leaflet.timedimension.src.withlog.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.py" afterPath="$PROJECT_DIR$/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/staticmap.py" afterPath="$PROJECT_DIR$/toolbox/staticmap.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/urls.py" afterPath="$PROJECT_DIR$/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/firemonitor/dashboard.html" afterPath="$PROJECT_DIR$/templates/firemonitor/dashboard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/firemonitor/dashboard_old.html" afterPath="$PROJECT_DIR$/templates/firemonitor/dashboard_old.html" />
     </list>
     <ignored path="core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,7 +64,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pontoproximo.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pontoproximo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/firemonitor/pontoproximo.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
@@ -91,6 +72,70 @@
               <folding>
                 <element signature="e#1#49#0" expanded="true" />
                 <marker date="1463604820953" expanded="true" signature="488:618" placeholder="SELECT &quot;CD_G... municipios" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/firemonitor/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_utf-8.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roi/test_utf-8.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roi/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-833">
+              <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/firemonitor/dashboard.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="1042" column="0" selection-start-line="1042" selection-start-column="0" selection-end-line="1042" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboard_old.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/firemonitor/dashboard_old.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="1081" column="0" selection-start-line="1081" selection-start-column="0" selection-end-line="1081" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mailalertafoco.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/firemonitor/mailalertafoco.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
+              <folding>
+                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,77 +161,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/firemonitor/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fma.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/firemonitor/fma.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
-              <folding>
-                <element signature="e#47#60#0" expanded="true" />
-                <marker date="1463603543864" expanded="true" signature="839:892" placeholder="SELECT codig... Clima_estacoes" />
-                <marker date="1463603543864" expanded="true" signature="1197:1246" placeholder="SELECT * FRO... Clima_estacoes" />
-                <marker date="1463603543864" expanded="true" signature="1768:2181" placeholder="SELECT date_... Clima_dadosestacao" />
-                <marker date="1463603543864" expanded="true" signature="2505:2996" placeholder="SELECT date_... Clima_dadosestacao" />
-                <marker date="1463603543864" expanded="true" signature="3352:3554" placeholder="SELECT &quot;Data... Clima_dadosestacao" />
-                <marker date="1463603543864" expanded="true" signature="3629:3877" placeholder="SELECT &quot;Data... Clima_dadosestacao" />
-                <marker date="1463603543864" expanded="true" signature="4226:4415" placeholder="SELECT &quot;Data... Clima_dadosestacao" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/toolbox/tools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/firemonitor/dashboard.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roi/migrations/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/firemonitor/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding>
-                <element signature="e#48#80#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -203,9 +177,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/teste/forms.py" />
-        <option value="$PROJECT_DIR$/templates/login/fim.html" />
-        <option value="$PROJECT_DIR$/login/urls.py" />
         <option value="$PROJECT_DIR$/teste/urls.py" />
         <option value="$PROJECT_DIR$/teste/views.py" />
         <option value="$PROJECT_DIR$/login/sitemap.py" />
@@ -254,6 +225,9 @@
         <option value="$PROJECT_DIR$/firemonitor/alarme.py" />
         <option value="$PROJECT_DIR$/settings.py" />
         <option value="$PROJECT_DIR$/firemonitor/pontoproximo.py" />
+        <option value="$PROJECT_DIR$/templates/firemonitor/dashboard.html" />
+        <option value="$PROJECT_DIR$/templates/firemonitor/dashboard_old.html" />
+        <option value="$PROJECT_DIR$/templates/firemonitor/mailalertafoco.html" />
       </list>
     </option>
   </component>
@@ -302,6 +276,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -318,16 +302,17 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\wbeirigo\PycharmProjects\core\static\assets\js" />
       <recent name="C:\Users\wbeirigo\PycharmProjects\core\login" />
       <recent name="C:\Users\wbeirigo\PycharmProjects\core\templates\login" />
       <recent name="C:\Users\wbeirigo\PycharmProjects\core" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\wbeirigo\PycharmProjects\core\static\assets" />
+      <recent name="C:\Users\wbeirigo\PycharmProjects\core\static\assets\js" />
+      <recent name="C:\Users\wbeirigo\PycharmProjects\core\static\plugins\leaflet" />
       <recent name="C:\Users\wbeirigo\PycharmProjects\core\roi" />
       <recent name="C:\Users\wbeirigo\PycharmProjects\core\firemonitor" />
-      <recent name="C:\Users\wbeirigo\PycharmProjects\core\templates\firemonitor" />
-      <recent name="C:\Users\wbeirigo\PycharmProjects\core\static\img" />
-      <recent name="C:\Users\wbeirigo\PycharmProjects\core\templates\clima" />
     </key>
   </component>
   <component name="RunManager" selected="Django server.core">
@@ -683,7 +668,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463600554055</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Firemonitor Incorporado">
+      <created>1463604991006</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1463604991006</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -734,7 +726,8 @@
     <MESSAGE value="Ajustes clima 13:11" />
     <MESSAGE value="Finalizado Clima" />
     <MESSAGE value="Finalizado Mapa&#10;Criação inicio Firemonitor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalizado Mapa&#10;Criação inicio Firemonitor" />
+    <MESSAGE value="Firemonitor Incorporado" />
+    <option name="LAST_COMMIT_MESSAGE" value="Firemonitor Incorporado" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -765,62 +758,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/plugins/leaflet/esri-leaflet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/javabase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/plugins/highcharts/js/themes/gray.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="34" column="77" selection-start-line="34" selection-start-column="77" selection-end-line="34" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/plugins/typeahead/bloodhound.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/plugins/typeahead/typeahead.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1031,14 +968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/firemonitor/mailalertafoco.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/firemonitor/firms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1048,14 +977,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/firemonitor/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firemonitor/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1114,7 +1035,7 @@
         <state relative-caret-position="153">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#48#80#0" expanded="true" />
+            <element signature="e#48#80#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1199,6 +1120,82 @@
           <folding>
             <element signature="e#1#49#0" expanded="true" />
             <marker date="1463604820953" expanded="true" signature="488:618" placeholder="SELECT &quot;CD_G... municipios" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firemonitor/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roi/test_utf-8.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roi/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-833">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/plugins/leaflet/iso8601.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/firemonitor/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="1042" column="0" selection-start-line="1042" selection-start-column="0" selection-end-line="1042" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/assets/js/daterangepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/assets/js/moment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/firemonitor/dashboard_old.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="1081" column="0" selection-start-line="1081" selection-start-column="0" selection-end-line="1081" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/firemonitor/mailalertafoco.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

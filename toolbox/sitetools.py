@@ -21,7 +21,7 @@ class sitemap(object):
             ('Grafico Normais', 'grafnormais', 1, False, False),
             ('Automáticas', 'automaticas', 1, False, True),
             ('Grafico Linhas', 'graflinha', 2, False, False),
-            ('Grafico Total', 'grafautomaticatotal', 2, False, False)
+            ('Grafico Total', 'grafautomaticatotal', 2, False, False),
 
           )
 
@@ -40,15 +40,19 @@ class sitemap(object):
         nivel = 0
         titulo = ''
         for item in campos:
-            registro = [it  for it in self.col if it[1]== item and it[2] == nivel][0]
+            reg = [it  for it in self.col if it[1]== item and it[2] == nivel]
+            if not reg:
+                continue
+            registro = reg
             if _path == path:
                 key ='class ="active"'
                 titulo = item[0]
             else:
                 key = ''
-            print(path, _path)
             html += markup.format(path, registro[0], key)
             nivel +=1
+            if nivel > 2:
+                break
 
         return html, titulo
 

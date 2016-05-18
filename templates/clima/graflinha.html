@@ -27,30 +27,7 @@
 </div>
 
 
-<div id="dashboard-header" class="row">
-    <div class="col-xs-12 col-sm-4 col-md-5">
-        <h3>{{estacao.Nome}}</h3>
-    </div>
-    <div class="clearfix visible-xs"></div>
-    <div class="col-xs-12 col-sm-8 col-md-7 pull-right">
-        <div class="row">
-            <div class="col-xs-4">
-                <div class="sparkline-dashboard" id="sparkline-1"></div>
-                <div class="sparkline-dashboard-info">
-                    <span class="txt-primary">Altitude</span>
-                    {{ estacao.Altitude }}
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="sparkline-dashboard" id="sparkline-2"></div>
-                <div class="sparkline-dashboard-info">
-                    <span class="txt-info">UF</span>
-                    {{ estacao.UF }}
-                </div>
-            </div>
-       </div>
-    </div>
-</div>
+
 
         {% for grafico in result %}
 	<div class="col-xs-12 col-sm-6" >
@@ -103,7 +80,7 @@
                 type: '{{ grafico.type|safe }}',
                 events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 }       
             },
@@ -139,7 +116,7 @@
             polar: true,
                 events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 }       
  

@@ -1,5 +1,91 @@
 {% extends 'layout.html' %} {% load staticfiles %}
 
+{% block cssformat %}
+    <link rel="stylesheet" href="/static/plugins/leaflet/MarkerCluster.css" />
+    <link rel="stylesheet" href="/static/plugins/leaflet/MarkerCluster.Default.css" />
+    <style>
+        /* Map */
+        #map {
+            position: absolute;
+            float: left;
+            top: 7%;
+            height: 800px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .leaflet-popup-content {
+            width: 500px;
+        }
+
+        .leaflet-popup-wraper {
+            width: 510px;
+        }
+
+    table.popkxy {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 300px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 12px;
+    }
+
+    .popkxy td, .popkxy th {
+    border: 1px solid transparent;
+    height: 30px;
+    transition: all 0.3s;
+    }
+
+    .popkxy th {
+    background: #186C5C;
+    font-weight: bold;
+    color: #fff;
+    }
+
+    .popkxy td {
+    background: #FAFAFA;
+    text-align: center;
+    }
+
+
+    .popkxy tr:nth-child(even) td { background: #FEFEFE; }
+
+
+    .popkxy tr:nth-child(odd) td { background: #F1F1F1; }
+
+    .popkxy tr td:hover { background: #ccc; }
+
+
+    .popkxy .title-table{
+        font-weight: 800;
+        background-color: #000;
+
+    }
+
+    .popkxy tr.first-title{
+        background: #888;
+    }
+
+
+    .popkxy tr:first-child th:nth-child(1) {
+      border-radius: 5px 0 0 0;
+    }
+
+    .popkxy tr:first-child th:last-child {
+      border-radius: 0 5px 0 0;
+    }
+
+    .popkxy a.btngeral {
+        padding: 8px 12px;
+        margin-left: 9px;
+    }
+
+
+
+
+    </style>
+{% endblock %}
 
 
 
@@ -7,25 +93,8 @@
        <div id="map"></div>
 {% endblock %}
 
-       <div class="wrapper">
-            <div class="row">
-                <div class="col-md-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Basic
-                              <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                <a href="javascript:;" class="fa fa-times"></a>
-                            </span>
-                        </header>
-                        <div class="panel-body">
-                            <div id="gmap_basic" class="gmaps">
-                                 <div id="map"></div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
+<div id="map"></div>
+
 
 
 {% block scriptsJava %}
@@ -110,7 +179,7 @@
 
 
         var myIcon = L.icon({
-            iconUrl: 'https://www.openstreetmap.org/assets/marker-green-c37a767792941fc078f363f51dc9c035.png',
+            iconUrl: '/static/img/pint_green.png',
             iconSize: [25, 41],
             iconAnchor: [22, 94],
             popupAnchor: [-3, -76],

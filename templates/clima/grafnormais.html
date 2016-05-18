@@ -15,25 +15,7 @@
 
 {% block content %}
 
-<div class="row">
-    <div id="breadcrumb" class="col-xs-12">
-        <a href="#" class="show-sidebar">
-            <i class="fa fa-bars"></i>
-        </a>
-        <ol class="breadcrumb pull-left">
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="/normais/">Estacções</a></li>
-            <li><a href="#">{{estacao.Nome}}</a></li>
-        </ol>
-        <div id="social" class="pull-right">
-            <a href="#"><i class="fa fa-google-plus"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-youtube"></i></a>
-        </div>
-    </div>
-</div>
+
 
 <div id="dashboard-header" class="row">
     <div class="col-xs-12 col-sm-4 col-md-5">
@@ -119,20 +101,5 @@
 
 
 
-
-<script type="text/javascript">
-$(document).ready(function() {
-	// Load Google Chart API and callback to draw test graphs
-	// This need for correct resize charts, when box open or drag
-	var graphxChartsResize;
-	$(".box").resize(function(event){
-		event.preventDefault();
-		clearTimeout(graphxChartsResize);
-		graphxChartsResize = setTimeout(DrawAllCharts, 500);
-	});
-	// Add Drag-n-Drop action for .box
-	WinMove();
-});
-</script>
 
 {% endblock %}

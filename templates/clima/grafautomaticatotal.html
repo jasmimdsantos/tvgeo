@@ -14,18 +14,6 @@
 
 
 {% block content %}
-<div class="row">
-    <div id="breadcrumb" class="col-xs-12">
-        <a href="#" class="show-sidebar">
-            <i class="fa fa-bars"></i>
-        </a>
-        <ol class="breadcrumb pull-left">
-            <li><a href="/">Home</a></li>
-            <li><a href="/clima/automaticas">Estações Automáticas</a></li>
-        </ol>
-    </div>
-</div>
-
 
 <div class="col-xs-12 col-sm-12">
         <div class="box">
@@ -83,20 +71,11 @@ $(function() {
 
     $( "#grafico" ).tabs();
 
-	var graphxChartsResize;
-	$(".box").resize(function(event){
-		event.preventDefault();
-		clearTimeout(graphxChartsResize);
-		graphxChartsResize = setTimeout(DrawAllCharts, 500);
-	});
-	// Add Drag-n-Drop action for .box
-	WinMove();
-
 	vlrEstacaoText = '{{ texto|safe }}';
 
         $.ajax({
             dataType : "json",                                  
-            url : '/getautomaticajson/{{ estacao.Codigo }}/',
+            url : '/clima/getautomaticajson/{{ estacao.Codigo }}/',
             method : 'GET',
             async:false,
             timeout:60000,
@@ -134,7 +113,7 @@ $(function() {
             chart : { 
                  events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 },       
                renderTo : 'grafico01', 
@@ -208,7 +187,7 @@ $(function() {
             chart : { 
                  events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 },       
  
@@ -283,7 +262,7 @@ $(function() {
             chart : { 
                  events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 },       
  
@@ -358,7 +337,7 @@ $(function() {
             chart : { 
                  events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 },       
  
@@ -433,7 +412,7 @@ $(function() {
             chart : { 
                  events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 },       
  
@@ -508,7 +487,7 @@ $(function() {
             chart : { 
                  events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 },       
  
@@ -583,7 +562,7 @@ $(function() {
             chart : { 
                  events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 },       
  
@@ -658,7 +637,7 @@ $(function() {
             chart : { 
                  events: {
                           load: function(event) {
-                                 this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                 this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                      }
                                 },       
  

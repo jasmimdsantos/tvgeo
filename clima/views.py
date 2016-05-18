@@ -18,16 +18,16 @@ from toolbox import sitetools
 @login_required()
 def clima(request):
 
-    print('------', request.get_full_path())
+
 
     context = sitetools.sitemap(request.get_full_path()).html
-    print(context)
     template = loader.get_template('clima/clima.html')
     return HttpResponse(template.render(context))
 
 @login_required()
 def normais(request):
 
+    context = sitetools.sitemap(request.get_full_path()).html
     if request.method == 'POST':
         form = PesquisaEstacaoFRM(request.POST)
         if form.is_valid():
@@ -51,7 +51,11 @@ def normais(request):
     for i in colEstacoes:
         saida += '\'' +  i + '\','
     saida += ']'
-    context = RequestContext(request, { 'estacoes': saida, 'form': form });
+
+
+    context['estacoes'] = saida
+    context['form'] = form
+    context = RequestContext(request, context)
     template = loader.get_template('clima/normais.html')
 
     return HttpResponse(template.render(context))

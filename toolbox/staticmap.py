@@ -2,7 +2,7 @@
 #!/usr/bin/env python 
 
 import requests
-from proj import settings
+import settings
 import shutil
 
 #GOOGLE STATIC API KEY
@@ -18,9 +18,9 @@ class StaticMap:
         self.markers = []
         self.filename = None
 
-    def processa(self, center,\
-                 size='800x600',\
-                 type='hybrid',\
+    def processa(self, center,
+                 size='800x600',
+                 type='hybrid',
                  zoom=10 ):
 
         arquivo  ='{0}.{1}'.format(self.filename, FORMATO)
@@ -31,10 +31,10 @@ class StaticMap:
 
         mask= 'center={0},{1}&zoom={2}&size={3}&maptype={4}&{5} key={6}'
 
-        url_postfix = mask.format(center[1], center[0],\
-                                  zoom,\
-                                  size,\
-                                  type,\
+        url_postfix = mask.format(center[1], center[0],
+                                  zoom,
+                                  size,
+                                  type,
                                   strmark,
                                   API_KEY)
 
@@ -42,7 +42,7 @@ class StaticMap:
 
         r = requests.get(url, stream=True)
         if r.status_code != HTTP_OK:
-            print r.status_code
+            print(r.status_code)
             raise 'Erro ao consultar Google API' 
         else:
             filename ='{0}{1}'.format(settings.MEDIA_ROOT, arquivo)

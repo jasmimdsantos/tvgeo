@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+       <title>Terravision - Geotecnologia </title>
+       <meta name="description" content="description">
+       <meta name="author" content="Terravision">
+	</head>
+	<body >
+        <form method='POST' id='formulario'>        
+            {% csrf_token %}
+            <div style='display:block;width:800px;'>
+                <div style='display:inline;width:800px;height:150px'>
+                    <img  style='float:left' width='100px' src='/static/img/ibama.png'/ >		
+                    <div style='float:left;padding-left:120px;padding-top:10px;'><h3>ROI - Relatório de Ocorrência de Incédio</h3></div>
+                    <img  style='float:right;margin-top:20px'  width='100px' src='/static/img/previfogo.jpg'/ >			
+                </div>
+                    
+                <table width='100%'>
+                    <tr>
+                        <td><strong>Município:</strong>{{ form.municip}} </td>
+                    </tr>
+                    <tr  colspan=6>
+                            <td><strong>Distrito/Bairro: </strong>{{ form.distrito }} </td>
+                            <td><strong>UF:</strong>{{ form.uf }}</td>
+                            <td><strong>ROI:</strong>{{ form.ROIID}}</td>
+
+                    </tr>
+                </table>
+                
+                <h3> I - Localização do Incêndio </h3>
+                <div style='display:inline;'>				
+                    <span>
+                        <strong>Especificação do Local:</strong>
+                        {{ form.local }}
+                    </span>
+                </div>			
+                <table  width='100%'>
+                    <tr>
+                        <td>				
+                            <h3>Áreas Protegidas</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan=2 >
+                            {% for vlr,desc in form.AREAS_PROT_CHOICES %}
+                                <input type='radio' name='areaprot' value='{{ vlr }}'
+                                {% ifequal form.areasprot vlr %} checked="checked" {% endifequal %} > {{ desc }} 
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+                <hr></hr>
+                <table  width='100%'>
+                    <tr>
+                        <td colspan='2'>
+                                    {% for vlr1,desc in form.TIPO_AREA_CHOICES %}
+                                        <input type='radio' name='tipoarea' value='{{ vlr1 }}' 
+                                        {% ifequal form.tipoarea vlr1 %} checked="checked" {% endifequal %} > {{desc}}  
+                                    {% endfor %}
+                        </td>
+                    </tr>
+                </table>			
+                <hr></hr>
+                <table  width='100%'>
+                    <tr>
+                        <td colspan=2 >
+                            {% for vlr,desc in form.POSICAO_AREA_CHOICES %}
+                                 <input type='radio' name='posicaoarea' value='{{ vlr }}'
+                                 {% ifequal form.posicaoarea vlr %} checked="checked" {% endifequal %} 
+                                 > {{ desc }} 
+
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+                <hr></hr>
+               <h3>Áreas Públicas e Particulares</h3>
+                <table>
+                    <tr style='width:600px;'>
+                        {% for vlr,desc in form.AREAPUBPART_CHOICES %}
+                            <td style='width:200px;float:left;'>
+                                <input type='radio' name='areapubpart' value='{{ vlr }}'
+                                 {% ifequal form.areapubpart vlr %} checked="checked" {% endifequal %} 
+                                > {{ desc }} </td>
+                        {% endfor %}
+                    </tr>
+                </table>			
+                <span> Outras:{{ form.areapubparttxt }}</span>
+                <table WIDTH='100%'>
+                    <tr>
+                        <td>				
+                            <h3>Início do Incêndio</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong> Latitude: </strong> {{form.poslat}}  
+                        </td>
+                        <td>
+                            <strong> Longitude: </strong>{{form.poslong}}
+                        </td>
+                    </tr>
+                </table>
+                <h3> II - Dados do Combate </h3>
+                <table  width='100%'>				
+                    <tr>
+                        <td colspan=2>
+                            <table width='100%'>							
+                                <tr colspan=3>
+                                    <td><strong>Detecção:</strong><td>
+                                </tr>
+                                <tr style='width:600px;'>
+                                    {% for item  in colDeteccao  %}
+                                        <td style='width:200px;float:left;'>
+                                            <input type='checkbox' name='deteccao' value='{{ item.id }}'
+                                            {% for ii in form.deteccao.all %}
+                                                {% ifequal ii.id item.id %} checked="checked" {% endifequal %} 
+                                           {% endfor %}
+                                            > {{ item.descricao }} 
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Outros:{{form.deteccaotxt  }}</td>									
+                                </tr>
+                            </table>
+                        <td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <table width='100%'> 				
+                                <tr>						
+                                    <td><strong>Etapas do Combate:</strong></td>						
+                                </tr>
+                                <tr >
+                                    <td>
+                                        <table  >
+                                            <tr >
+                                                <td style='flota:left;width:300px;'><strong>Fase<strong></td>
+                                                <td style='flota:left;width:300px;'><strong>Data (dd/mm/aaa)<strong></td>											
+                                            </tr>
+                                            <tr>
+                                                <td style='flota:left;width:300px;'>Início do Incêndio</td>												
+                                                <td style='flota:left;width:300px;'>{{ form.etapadatainic|date:'d-m-Y h:i'}}</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td style='flota:left;width:300px;'>Detecção</td>
+                                                <td style='flota:left;width:300px;'>{{ form.etapadatadetec|date:'d-m-Y h:i' }}</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td style='flota:left;width:300px;'>Primeiro Ataque</td>
+                                                <td style='flota:left;width:300px;'>{{ form.etapadataatac|date:'d-m-Y h:i' }}</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td style='flota:left;width:300px;'>Controle</td>
+                                                <td style='flota:left;width:300px;'>{{ form.etapadatacontr|date:'d-m-Y h:i' }}</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td style='flota:left;width:300px;'>Extinção</td>
+                                                <td style='flota:left;width:300px;'>{{ form.etapadataext|date:'d-m-Y h:i' }}</td>
+                                                
+                                            </tr>	
+                                        </table>
+                                    </td>
+                                    <td >
+                                        <table>
+                                            <tr>
+                                                <td><strong>Forma de Extinção:</strong></td>						
+                                            </tr>
+                                            <tr style='width:250px;'>    
+                                                 {% for vlr1,desc in form.FORMA_EXT_CHOICES%}
+                                                   <td style='width:250px;float:left;'>
+                                                        <input type='radio' name='formaext' value='{{ vlr1 }}'  
+                                                        {% ifequal form.formaext vlr1 %} checked="checked" {% endifequal %} > {{desc}}  
+                                                   </td>
+                                                {% endfor %}
+                                           </tr>
+                                       </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>		
+                </table>
+                <span> Dificuldades no combate:{{ form.dificultcombate }}</span>
+                <h3> III - PROVÁVEIS CAUSAS </h3>
+                <table width='100%' >
+                    <tr>
+                        <td style='width:250px;'>
+                            <table >
+                                <tr colspan=2>
+                                    <td><h3>Acidente</h3></td>
+                                </tr>
+
+                                <tr>
+                                    {% for item  in colCausaAcidente  %}
+                                        <td style='width:250px;float:left;'>
+                                            <input type='checkbox' name='causaacidente' value='{{ item.descricao }}'
+                                                    {% for ii in form.causaacidente.all %}
+                                                        {% ifequal ii.id item.id %} checked="checked" {% endifequal %} 
+                                                {% endfor %}
+                                            > {{ item.descricao}} 
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                           </table>
+                        </td>
+                        <td style='width:250px;'>
+                            <table >
+                                <tr colspan=2>
+                                    <td><h3>Extrativismo:</h3></td>
+                                </tr>
+                                <tr >
+                                    {% for item in colExtrata %}
+                                        <td style='width:250px;float:left;'>
+                                            <input type='checkbox' name='extratacidente' value='{{ item.id }}'
+                                                    {% for ii in form.extratacidente.all %}
+                                                        {% ifequal ii.id item.id %} checked="checked" {% endifequal %} 
+                                                {% endfor %}
+ 
+                                            > {{ item.descricao}} 
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style='width:300px;'>
+                            <table >
+                                <tr colspan=2>
+                                    <td><h3>Atividade Agropecuaria</h3></td>
+                                </tr>
+                                <tr >
+                                    {% for item in colAtivAgr %}
+                                        <td style='width:300px;float:left;'>
+                                            <input type='checkbox' name='ativagracidente' value='{{ item.id }}'
+                                                     {% for ii in form.ativagracidente.all %}
+                                                        {{ ii.id }}
+                                                        {% ifequal ii.id item.id %} checked="checked" {% endifequal %} 
+                                                {% endfor %}
+                                            > {{ item.descricao}} 
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+
+
+                           </table>
+                        </td>
+                        <td style='width:300px;'>
+                            <table  >
+                                <tr colspan=2>
+                                    <td><h3>Outras Causas</h3></td>
+                                </tr>
+                                <tr >
+                                    {% for item in colOutrasAcidente %}
+                                        <td style='width:300px;float:left;'>
+                                            <input type='checkbox' name='outrasacidente' value='{{ item.id }}'
+                                                      {% for ii in form.outrasacidente.all %}
+                                                        {{ ii.id }}
+                                                        {% ifequal ii.id item.id %} checked="checked" {% endifequal %} 
+                                                {% endfor %}
+                                            
+                                            > {{ item.descricao}} 
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <span>Outras causas:</span>{{ form.outrasacidentedesc }}
+                <h3> IV - PROVÁVEL CAUSADOR </h3>
+                <table  width='100%' > 
+                    <tr style='width:250px;'> 
+                       {% for item in colCausador %}
+                            <td style='width:250px;float:left;'>
+                               <input type='checkbox' name='causador' value='{{ item.id }}'
+                               
+                               {% for ii in form.causador.all %}
+                                     {% ifequal ii.id item.id %} checked="checked" {% endifequal %} 
+                               {% endfor %}
+ 
+                               > {{ item.descricao}} 
+                           </td>
+                       {% endfor %}
+                    </tr>
+                </table>
+                <span>Outros:{{ form.caudadordesc }}</span>
+                <h3> V - DANOS </h3>
+                <table  width='100%' >
+                    <tr>
+                        <td><strong>Estimativa de área queimada</strong> {{ form.danosarea }}ha</td>
+                        
+                    <tr>
+                    </tr>
+                        <td><strong>Estruturas Atingidas</strong> 
+                            {{ form.danosestrutura}}
+                        </td>
+                        <td style='width:300px;'>
+                            <table>
+                                <tr>
+                                    <td><strong>Vegetação Atingida</strong></td>
+                                </tr>
+                                <tr>
+                                    {% for item in colDanosVegeta %}
+                                        <td style='width:300px;float:left;'>
+                                            <input type='checkbox' name='danosvegetacao' value='{{ item.id }}'
+                                            
+                                            {% for ii in form.danosvegetacao.all %}
+                                                        {{ ii.id }}
+                                                        {% ifequal ii.id item.id %} checked="checked" {% endifequal %} 
+                                                {% endfor %}
+ 
+                                            
+                                            > {{ item.descricao}} 
+                                       </td>
+                                    {% endfor %}
+                                </tr>
+                           </table>
+                        </td>						
+                    </tr>
+                    <tr>
+                        <td><strong>Animais mortos</strong> {{ form.danosanimais}}</td>
+                        <td><strong>Outras Vegetações Atingidas</strong> {{ form.outdanosveget }}</td>
+                    </tr>
+                </table>
+                <h3> OBSERVAÇÔES </h3> {{ form.observaoces }}
+                <p>
+                    <strong>Responsável (nome Legível)</strong> {{ form.responsavel }}/ {{form.data}}
+                </p>
+            </div>
+        </form>
+
+        {% block scriptsJava %}
+
+
+        <script src="/static/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#formulario :input").prop("disabled", true);
+            });
+        </script>
+
+        {% endblock %}
+	</body>
+</html>
+

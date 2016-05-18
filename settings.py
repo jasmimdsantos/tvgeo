@@ -37,15 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+    'django.contrib.sites',
     'crispy_forms',
     'login',
-    'teste',
     'toolbox',
+    'teste',
     'djgeojson',
     'leaflet',
     'clima',
     'scripts',
     'firemonitor',
+    'roi',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,6 +59,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sites.models.Site',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -148,3 +152,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+WFABBA_PATH = BASE_DIR + '/dados/WFABBA'
+FIRMS_PATH  = BASE_DIR + '/dados/FIRMS'

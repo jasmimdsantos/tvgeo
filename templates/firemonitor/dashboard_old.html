@@ -1,0 +1,1081 @@
+<--- -*- coding: utf-8 -*- -->
+
+{% extends 'base.html' %} {% load staticfiles %} 
+
+{% block cssformat %}
+
+
+    <link rel="stylesheet" href="/static/js/leaflet.timedimension.control.css" />
+    <link rel="stylesheet" href="/static/js/Leaflet.Coordinates-0.1.3.css" />
+
+
+     <style>
+        .bloco
+        {
+        height: 100%; /*Specify Height*/
+        width:  100%; /*Specify Width*/
+        border: 1px solid black; /*Add 1px solid border, use any color you want*/
+        text-align:center; /*Align the text to the center*/
+        }
+       .leaflet-popup-content {
+            width:auto !important;
+        }
+        #map {
+            height: 100%;
+        }
+        .leaflet-popup-content {
+            width:auto !important;
+        }
+
+    </style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<!--Start Breadcrumb-->
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <a href="#" class="show-sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ol class="breadcrumb pull-left">
+            <li><a href="#">Dashboard</a></li>
+        </ol>
+        <div id="social" class="pull-right">
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+<!--End Breadcrumb-->
+<!--Start Dashboard 1-->
+
+
+
+
+<div id="dashboard-header" class="row">
+
+    <div class="col-xs-4">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <i class="fa fa-home"></i>
+                    <span>{{ result.projeto }}</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>                    
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content">
+                <div class="card">
+                    <h4 class="page-header">{{ result.projeto }}</h4>
+                </div>
+                <div class="card address">                  
+                    <p>
+                        <span>{{ result.estacao.nome  }}</span> <br>
+                        <span>WMO {{ result.estacao.wmo}}</span> <br>
+                        <span>Altitude {{ result.estacao.altitude}}</span><br>
+                        <span>Posicao {{ result.estacao.posicao}}</span><br>
+                        <span>Implanta {{ result.estacao.cadastro}} </span><br>
+                    </p>
+                    <p>
+                        <form name='frmMudaData' id='frmMudaData' method='post'>
+                            {% csrf_token %}
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <input type="text" class='col-sm-5' id="faixaData" > </br>
+                            <input type="text" style='display:none;' id="txtStart" name="txtStart" value= '{{ start }}'  >
+                            <input type="text" style='display:none;' id="txtEnd"   name="txtEnd"   value= '{{ end }}'  >
+                        </form>
+                    </p>
+                </div>
+           </div>
+        </div>
+    </div>
+    <div class="col-xs-7">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <i class="fa fa-home"></i>
+                    <span>Inidcadores</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content">
+                <div id="ow-server-footer">
+                
+                    {% for item in result.parametros %}
+                
+                        <a  href="#" 
+                            style="color: white;background-color:{{ item.color }};" 
+                            class="col-xs-3 col-sm-2 btn-default text-center">
+                                <i class="fa {{ item.icone }}"></i>  <span>
+                                <b>{{ item.valor}} {{item.unidade}} </b><span>{{ item.nome}}</span>
+                        </a>
+                        
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Dashboard 1-->
+<!--Start Dashboard 2-->
+<div class="row-fluid">
+    <div id="dashboard_links" class="col-xs-12 col-sm-2 pull-right">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#" class="tab-link" id="overview">Visao Geral</a></li>
+            <li><a href="#" class="tab-link" id="clients">FMA</a></li>
+            <li><a href="#" class="tab-link" id="graph">Previsao do Tempo</a></li>
+            <li><a href="#" class="tab-link" id="servers">Mapa</a></li>
+            <li><a href="#" class="tab-link" id="planning">Alertas</a></li>
+            <li><a href="#" class="tab-link" id="netmap">Focos de Calor</a></li>
+            <li><a href="#" class="tab-link" id="stock">Historico</a></li>
+        </ul>
+    </div>
+    <div id="dashboard_tabs" class="col-xs-12 col-sm-10">
+        <!--Start Dashboard Tab 1-->
+        <div id="dashboard-overview" class="row" style="visibility: visible; position: relative;">
+            <div id="ow-marketplace" class="col-sm-12 col-md-6">
+                <div id="ow-setting">
+                    <a href="#"><i class="fa fa-folder-open"></i></a>
+                    <a href="#"><i class="fa fa-credit-card"></i></a>
+                    <a href="#"><i class="fa fa-ticket"></i></a>
+                    <a href="#"><i class="fa fa-bookmark-o"></i></a>
+                    <a href="#"><i class="fa fa-globe"></i></a>
+                </div>
+                <h4 class="page-header">ULTIMA MEDICAO 14:00</h4>
+                <table id="ticker-table" class="table m-table table-bordered table-hover table-heading">
+                    <thead>
+                        <tr>
+                            <th>PARAMETRO</th>
+                            <th>VALOR</th>
+                            <th>24 horas</th>
+                            <th>30 dias</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="m-ticker"><b>UMIDADE</b><span>%</span></td>
+                            <td class="m-price">33.27</td>
+                            <td class="td-graph"></td>
+                            <td class="td-graph"></td>
+                        </tr>
+                        <tr>
+                            <td class="m-ticker"><b>PRESSAO</b><span>Aswell Corp.</span></td>
+                            <td class="m-price">45.13</td>
+                            <td class="td-graph"></td>
+                            <td class="td-graph"></td>
+                        </tr>
+                        <tr>
+                            <td class="m-ticker"><b>TEMPERATURA</b><span>Mixal LTD.</span></td>
+                            <td class="m-price">71.13</td>
+                            <td class="td-graph"></td>
+                            <td class="td-graph"></td>
+                        </tr>
+                        <tr>
+                            <td class="m-ticker"><b>PRECIPITACAO</b><span>L.A. Prod.</span></td>
+                            <td class="m-price">30.24</td>
+                            <td class="td-graph"></td>
+                            <td class="td-graph"></td>
+                        </tr>
+                        <tr>
+                            <td class="m-ticker"><b>VENTO</b><span>Allien K.</span></td>
+                            <td class="m-price">51.1</td>
+                            <td class="td-graph"></td>
+                            <td class="td-graph"></td>
+                        </tr>
+                        <tr>
+                            <td class="m-ticker"><b>FMA</b><span>Lenstri Sweet</span></td>
+                            <td class="m-price">123.12</td>
+                            <td class="td-graph"></td>
+                            <td class="td-graph"></td>
+                        </tr>
+                        <tr>
+                            <td class="m-ticker"><b>FMA+</b><span>Ron LEED</span></td>
+                            <td class="m-price">64.14</td>
+                            <td class="td-graph"></td>
+                            <td class="td-graph"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12 col-md-6">
+    
+
+                <div id="ow-summary" class="row">
+                    <div class="col-xs-12">
+                        <h4 class="page-header">&Sigma; SUMARIO (30 dias)</h4>a
+
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-6">Dias sem chuva<b>1245634</b></div>
+                                    <div class="col-xs-6">Umidade Ultimos 30 dias<b>227</b></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">Alertas de foccos<b>5222345</b></div>
+                                    <div class="col-xs-6">Incidentes<b>324322</b></div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Dashboard Tab 1-->
+        <!--Start Dashboard Tab 2-->
+        <div id="dashboard-clients" class="row" style="visibility: hidden; position: absolute;">
+            <div id="tabs">
+                <ul>
+                    <li> <a href="#tabs-1">Tabela </a></li>
+                    <li> <a href="#tabs-2">Grafico </a></li>
+                </ul>
+                <div id="tabs-1">
+
+                    <div class="row one-list-message">              
+                        <div class="col-xs-2"><b>Data</b></div>
+                        <div class="col-xs-1">Dias Sem Chuva</div>
+                        <div class="col-xs-1">Precipitacao</div>
+                        <div class="col-xs-1">Umidade</div>
+                        <div class="col-xs-1">FMA</div>
+                        <div class="col-xs-1"> </div>
+                        <div class="col-xs-1">FMA+</div>                
+                    </div>
+
+                    {% for item in result.fma %}
+                        <div class="row one-list-message">              
+                            <div class="col-xs-2">{{ item.data | date:'d/m/Y'  }}</div>
+                            <div class="col-xs-1">{{ item.diaschuva }}</div>
+                            <div class="col-xs-1">{{ item.precipt }}</div>
+                            <div class="col-xs-1">{{ item.umid }}</div>
+                            <div class="col-xs-1" 
+                                style="color:{{ item.colorfma }};" >
+                                        {{ item.fma }} <br> {{ item.lblfma }} 
+                            </div>          
+
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-1"
+                                style="color:{{ item.colorfmap }};" >
+                                    {{ item.fmap }}<br> {{ item.lblfmap }} 
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="tabs-2">
+                    <div id="container" style="min-width: 600px; height: 400px; max-width:800px;  margin: 0 auto"></div>
+                </div>
+            </div>
+        </div>
+        <!--End Dashboard Tab 2-->
+        <!--Start Dashboard Tab 3-->
+        <div id="dashboard-graph" class="row" style="width:100%; visibility: hidden; position: absolute;" >
+            <div class="col-xs-12">
+                <h4 class="page-header">Previsao do Tempo</h4>
+                        
+            <div class="row one-list-message">              
+                <div class="col-xs-2"><b>Data</b></div>
+                <div class="col-xs-2">TEMPO</div>
+                <div class="col-xs-2">TEMPERATURA</div>
+                <div class="col-xs-2">UMIDADE</div>
+                <div class="col-xs-2">VENTOS</div>
+                <div class="col-xs-2">SOL</div>
+                
+            </div>
+            {% for item in result.previsao %}
+                <div class="row one-list-message">              
+                    <div class="col-xs-2">
+                        <b>{{ item.data }} {{ item.dia_semana}} </b><br>
+                        {{ item.resumo }} 
+                    </div>
+                    <div class="col-xs-2"><img src='{{ item.icone }}' alt=''/></div>
+                    <div class="col-xs-2">
+                    <td class="m-change"><i class="fa fa-angle-up"></i> 
+                    {{ item.temp_max }}C   <img src='{{ item.temp_max_tende_icone}}'/><br>
+                    <td class="m-change"><i class="fa fa-angle-down"></i> 
+                     {{ item.temp_min }}C   <img src='{{ item.temp_min_tende_icone}}'/>
+                    </div>          
+
+
+                    <div class="col-xs-2">
+                    <td class="m-change"><i class="fa fa-angle-up"></i> 
+                    {{ item.umidade_max }}   <img src='{{ item.umidade_max_tende_icone}}'/>%<br>
+                    <td class="m-change"><i class="fa fa-angle-down"></i> 
+                    {{ item.umidade_min }}   <img src='{{ item.umidade_min_tende_icone}}'/>%
+                    </div>          
+
+                <div class="col-xs-2 ">
+                        {{ item.dir_vento }} 
+                       <img src='http://individual.icons-land.com/IconsPreview/Weather/PNG/24x24/Wind_Direction_NW.png'  />
+                        <br> 
+                        {{ item.int_vento }} 
+                                        </div>              
+                    <div class="col-xs-2 ">
+                                            <img src='http://pt.clubpenguinwiki.info/static/images/cpwpt/thumb/1/1d/PinSol.PNG/50px-PinSol.PNG' width='30px' />
+                                            {{ item.nascer }}<br>
+                                           <img src='https://pbs.twimg.com/profile_images/1723294853/SOL_normal.png' width='30px'/>
+                                           {{ item.ocaso }}</div>               
+                </div>
+            {% endfor %}
+        </div>
+            </div>
+    
+        <!--End Dashboard Tab 3-->
+        <!--Start Dashboard Tab 4-->
+        <div id="dashboard-servers" class="col-xs-12row" style="visibility: hidden; position: absolute;">
+
+                        <div class='' id='map'></div>
+
+
+        </div>
+        <!--End Dashboard Tab 4-->
+        <!--Start Dashboard Tab 5-->
+        <div id="dashboard-planning" class="row" style="visibility: hidden; position: absolute;">
+                <div class="col-xs-10 col-sm-10">
+                    <h4 class="page-header">Planned projects</h4>
+                    <a href="#">Expense items</a><a href="#" class="pull-right">Project members</a>
+                    <table class="table m-table table-bordered table-hover table-heading">
+                        <thead>
+                            <tr>
+                                <th>Projects</th>
+                                <th>Ending date</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="m-ticker"><b>Network upgrade</b><span>Change Dlink devices to Cisco</span></td>
+                                <td class="m-price">Aug</td>
+                                <td class="m-change">179459</td>
+                            </tr>
+                            <tr>
+                                <td class="m-ticker"><b>Improved power equipment</b><span>Nevada datacenter</span></td>
+                                <td class="m-price">Nov</td>
+                                <td class="m-change">59411</td>
+                            </tr>
+                            <tr>
+                                <td class="m-ticker"><b>New ticket system</b><span>developed from scratch</span></td>
+                                <td class="m-price">Jul</td>
+                                <td class="m-change">14906</td>
+                            </tr>
+                            <tr>
+                                <td class="m-ticker"><b>Storage Area Network</b><span>project</span></td>
+                                <td class="m-price">Nov</td>
+                                <td class="m-change">250000</td>
+                            </tr>
+                            <tr>
+                                <td class="m-ticker"><b>New optical channels</b><span>6 links</span></td>
+                                <td class="m-price">Nov</td>
+                                <td class="m-change">22359</td>
+                            </tr>
+                            <tr>
+                                <td class="m-ticker"><b>Load-balance system</b><span>based on Linux</span></td>
+                                <td class="m-price">Dec</td>
+                                <td class="m-change">33950</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+        <!--End Dashboard Tab 5-->
+        <!--Start Dashboard Tab 6-->
+        <div id="dashboard-netmap" class="row" style="visibility: hidden; position: absolute;">
+            <div class="col-xs-12">
+                <h4 class="page-header">Network map(mesh topology)</h4>
+                <canvas id="springy-demo" width="900" height="480" />
+            </div>
+        </div>
+        <!--End Dashboard Tab 6-->
+        <!--Start Dashboard Tab 7-->
+        <div id="dashboard-stock" class="row" style="visibility: hidden; position: absolute;">
+
+
+                <div class="col-xs-10 col-sm-10">
+                    <h4 class="page-header">Relatorio de Ocorrencia de Incendio</h4>
+                    <table class="table m-table table-bordered table-hover table-heading">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Localidade</th>
+                                <th>Local</th>
+                                <th>Responsavel</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in result.roi %}
+                            <tr>
+                                <td><a target='_blank' href='/DetailROI/{{item.id}}'>{{ item.ROIID }}</a></td>
+                                <td class="m-ticker"><b><span> {{ item.distrito}}</b> {{item.municip }}</span></td>
+                                <td> {{item.local}} </td>
+                                <td>{{item.responsavel}}</td>
+                                <td>{{item.data}}</td>
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+        </div>
+        <!--End Dashboard Tab 7-->
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!--End Dashboard 2 -->
+<div style="height: 40px;"></div>
+
+{% endblock %}
+
+{% block scriptsJava %}
+    <script type="text/javascript" src="/static/js/Leaflet.Coordinates-0.1.5.min.js"></script>
+    <script type="text/javascript" src="/static/js/iso8601.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/js/daterangepicker.css" />
+    <script type="text/javascript" src="/static/js/moment.js"></script>
+    <script type="text/javascript" src="/static/js/daterangepicker.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // Load Google Chart API and callback to draw test graphs
+    // This need for correct resize charts, when box open or drag
+    
+    DashboardTabChecker(function() {
+        map.invalidateSize();
+    });
+    $("#tabs").tabs();
+    
+    var graphxChartsResize;
+    $(".box").resize(function(event){
+        event.preventDefault();
+    });
+    // Add Drag-n-Drop action for .box
+    WinMove();
+
+    plot = [];
+    {% for item in result.graphFMA.plotBands %}
+
+        var it = {{item | safe }};
+
+        plot.push( {    from  :  it[0], 
+                        to    :  it[1], 
+                        color :  it[2], 
+                        label : { text : it[3]   } 
+                    } );
+    {% endfor %}
+
+
+    series = []
+    {% for item in result.graphFMA.series %}
+        var it = {{item | safe }};
+        series.push( { name : it[0], data : it[1] });
+    {% endfor %}
+
+    $('#faixaData').daterangepicker({
+        "locale": {
+        "format": "DD-MM-YYYY",
+        "separator": " - ",
+        "applyLabel": "Aplicar",
+        "cancelLabel": "Cancelar",
+        "fromLabel": "De",
+        "toLabel": "Ate",
+        "customRangeLabel": "Cutomizado",
+        "daysOfWeek": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+        ],
+        "monthNames": [
+            "Janeiro",
+            "Fevereiro",
+            "Marco",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Augosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro"
+        ],
+        "firstDay": 1
+        },
+        "startDate": "{{ start }}",
+        "endDate": "{{ end }}"
+    }, function(start, end, label) {
+      $("#txtStart").val( start.format('DD-MM-YYYY') );
+      $("#txtEnd").val( end.format('DD-MM-YYYY')) ;
+      $("#frmMudaData").submit();
+    });
+
+
+    $('#container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: '{{ result.graphFMA.titulo }}' 
+        },
+        subtitle: {
+            text: '{{ result.projeto }} -  {{ result.graphFMA.subtitulo }}'
+        },
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        yAxis: {
+            title: {
+                text: '{{ result.graphFMA.unidade }}'
+            },
+            minorGridLineWidth: 0,
+            gridLineWidth: 0,
+            alternateGridColor: null,
+            plotBands: plot    },
+        tooltip: {
+            valueSuffix: ' {{ result.graphFMA.unidade }} '
+        },
+        plotOptions: {
+            spline: {
+                lineWidth: 4,
+                states: {
+                    hover: {
+                        lineWidth: 5
+                    }
+                },
+                marker: {
+                    enabled: false
+                },
+                pointInterval: 24 *  3600000, // one hour
+                pointStart: Date.UTC({{ result.graphFMA.data.ano }}, {{ result.graphFMA.data.mes}}, {{ result.graphFMA.data.dia }}, 0, 0, 0)
+            }
+        },
+        series: series,
+        navigation: {
+            menuItemStyle: {
+                fontSize: '10px'
+            }
+        }
+    });
+
+
+// add an OpenStreetMap tile layer
+    
+    var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                        'Imagery  <a href="http://mapbox.com">Mapbox</a>',
+            mbUrl ='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ';
+    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+            streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+    var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { 
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+
+
+    var urlWMS = "http://geonode.terravisiongeo.com.br/geoserver/geonode/wms?";
+    var worldviewlayer = L.tileLayer.wms(urlWMS, {
+                layers: 'geonode:worldview_jun_10_orto_spts_urb_final',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "Terravision"
+            });
+
+
+
+
+
+
+    var baseLayers = {
+            "Grayscale": grayscale,
+            "Streets": streets,
+            "ESRI" : Esri_WorldImagery,
+            "World View" : worldviewlayer
+    };
+
+
+    function style(color) {
+         return {
+                  fillColor: color, 
+                  weight: 2,
+                  opacity: 1,
+                  color: 'white',
+                  dashArray: '3',
+                  fillOpacity: 0.7
+               };
+    }
+
+
+
+    //Vegetacao
+
+    function defCamadaFMA(color){
+
+        var colColors = {};
+
+        if (color == '#00FF33'){
+            colColors = {'am-14' : '#003b0c',
+            'am-18' : '#007618',
+            'am-15' : '#009d1f',
+            'am-13' : '#00d82b',
+            'am-17' : '#00ff33', };
+        }
+
+
+        if (color == '#3399CC'){
+            colColors = {'am-14' : '#1b526e',
+            'am-18' : '#27769d',
+            'am-15' : '#3399cc',
+            'am-13' : '#52a9d4',
+            'am-17' : '#9158e4',};
+        }
+
+
+        if (color == '#CC6600') {
+            colColors = {'am-14' : '#ff8308',
+            'am-18' : '#ffa143',
+            'am-15' : '#ffbe76',
+            'am-13' : '#ffd2a5',
+            'am-17' : '#ffe6cc',};
+        }
+
+
+        if (color == '#FF0033') {
+            colColors = {'am-14' : '#760018',
+            'am-18' : '#b10023',
+            'am-15' : '#d8002b',
+            'am-13' : '#ff3b62',
+            'am-17' : '#ff89a1',};
+        }
+
+
+        return colColors
+
+    }
+
+
+
+    var lgrp001  = new L.layerGroup();
+    var lyr001   = new L.geoJson();
+
+    var lgrpFMA  = new L.layerGroup();
+    var lyrFMA   = new L.geoJson();
+
+    var lgrpFMAP  = new L.layerGroup();
+    var lyrFMAP   = new L.geoJson();
+
+
+    var colorFMA = '{{ result.colorFMA|safe }}';
+    var colorFMAP = '{{ result.colorFMAP|safe }}';
+
+
+    var colVegetacao = { 'am-14' : '#800026' ,
+                         'am-13' : '#BD0026' ,
+                         'am-15' : '#E31A1C' ,
+                         'am-18' : '#FC4E2A' ,
+                         'am-17' : '#FD8D3C' };
+
+   function  getJson001(data) {
+              lyr001  = new L.geoJson(data, {
+                       style: function( feature){
+                                    key = feature.properties['CODIGO'];
+                                    cor = colVegetacao[key];
+                                    return style(cor);
+                               },
+                       onEachFeature: function(feature, layer){
+                            layer.bindPopup(feature.properties['NOME']);
+                  }
+              });
+              lyrFMA  = new L.geoJson(data, {
+                       style: function( feature){
+                                    key = feature.properties['CODIGO'];
+                                    colFMA = defCamadaFMA(colorFMA);
+                                    cor = colFMA[key];
+                                    return style(cor);
+                               }
+              });
+              lyrFMAP  = new L.geoJson(data, {
+                       style: function( feature){
+                                    key = feature.properties['CODIGO'];
+                                    colFMAP = defCamadaFMA(colorFMAP);
+                                    cor = colFMAP[key];
+                                    return style(cor);
+                               }
+              });
+              lgrp001.addLayer(lyr001);
+              lgrpFMA.addLayer(lyrFMA);
+              lgrpFMAP.addLayer(lyrFMAP);
+   }
+
+   var owsrootUrl = 'http://geonode.terravisiongeo.com.br/geoserver/ows';
+   var defaultParameters = {
+            service : 'WFS',
+            version : '1.0',
+            request : 'GetFeature',
+            maxfeatures : 100000, 
+            typeName : 'geonode:_2ferr004_ger_pl_vegetacao',
+            outputFormat : 'text/javascript',
+            format_options : 'callback:getJson001',
+            SrsName : 'EPSG:4326'
+   };
+   var parameters = L.Util.extend(defaultParameters);
+   var URL001 = owsrootUrl + L.Util.getParamString(parameters);
+                                                    
+   new $.ajax({
+            type: "POST",
+            url: URL001,
+            dataType: 'jsonp',
+            jsonpCallback : 'getJson001',
+            success: getJson001
+   });
+
+
+
+
+    //Zoneamento
+    var lgrp002  = new L.layerGroup();
+    var lyr002   = new L.geoJson();
+
+
+
+    var colZoneamento = { 'am-2' : '#edf8fb' ,
+                         'am-5' : '#ccece6' ,
+                         'am-5' : '#525252' ,
+                         'am-8' : '#99d8c9' ,
+                         'am-6' : '#66c2a4' ,
+                         'am-1' : '#2ca25f' ,
+                         'am-3' : '#006d2c' };
+
+    function  getJson002(data) {
+              lyr002  = new L.geoJson(data, {
+                       style: function( feature){
+                                    key = feature.properties['CODIGO'];
+                                    cor = colZoneamento[key];
+                                    return style(cor);
+                               },
+                       onEachFeature: function(feature, layer){
+                            layer.bindPopup(feature.properties['NOME']);
+                  }
+              });
+              lgrp002.addLayer(lyr002);
+   }
+
+   var owsrootUrl = 'http://geonode.terravisiongeo.com.br/geoserver/ows';
+   var defaultParameters = {
+            service : 'WFS',
+            version : '1.0',
+            request : 'GetFeature',
+            maxfeatures : 100000, 
+            typeName : 'geonode:_2ferr004_ger_pl_zoneamento',
+            outputFormat : 'text/javascript',
+            format_options : 'callback:getJson002',
+            SrsName : 'EPSG:4326'
+   };
+   var parameters = L.Util.extend(defaultParameters);
+   var URL002 = owsrootUrl + L.Util.getParamString(parameters);
+                                                    
+   new $.ajax({
+            type: "POST",
+            url: URL002,
+            dataType: 'jsonp',
+            jsonpCallback : 'getJson002',
+            success: getJson002
+   });
+
+
+
+    //Solar
+    var lgrp003  = new L.layerGroup();
+    var lyr003   = new L.geoJson();
+
+    var colSolar = { 'Edificada' : '#fdc086', 'Loteamento' : '#beaed4' };
+    
+    function  getJson003(data) {
+              lyr003  = new L.geoJson(data, {
+                       style: function( feature){
+                                    key = feature.properties['Categoria'];
+                                    cor = colSolar[key];
+                                    return style(cor);
+                               },
+                       onEachFeature: function(feature, layer){
+                            layer.bindPopup(feature.properties['Categoria']);
+                  }
+              });
+              lgrp003.addLayer(lyr003);
+   }
+
+   var owsrootUrl = 'http://geonode.terravisiongeo.com.br/geoserver/ows';
+   var defaultParameters = {
+            service : 'WFS',
+            version : '1.0',
+            request : 'GetFeature',
+            maxfeatures : 100000, 
+            typeName : 'geonode:_2ferr004_ger_pl_solar_barreiro',
+            outputFormat : 'text/javascript',
+            format_options : 'callback:getJson003',
+            SrsName : 'EPSG:4326'
+   };
+   var parameters = L.Util.extend(defaultParameters);
+   var URL003 = owsrootUrl + L.Util.getParamString(parameters);
+                                                    
+   new $.ajax({
+            type: "POST",
+            url: URL003,
+            dataType: 'jsonp',
+            jsonpCallback : 'getJson003',
+            success: getJson003
+   });
+
+
+    //Glebas
+    var lgrp004  = new L.layerGroup();
+    var lyr004   = new L.geoJson();
+
+     var colGlebas = {   'Gleba 5'           :  ' #feebe2',
+                        'Gleba 2'            :  '#fcc5c0',
+                        'Gleba 4'            :  '#fa9fb5',
+                        'Gleba 3'            :  '#f768a1',
+                        'Gleba 6'            :  '#c51b8a',
+                        'Gleba 1'            :  '#7a0177'};
+    
+    function  getJson004(data) {
+              lyr004  = new L.geoJson(data, {
+                       style: function( feature){
+                                    key = feature.properties['Glebas'];
+                                    cor = colGlebas[key];
+                                    return style(cor);
+                               },
+                       onEachFeature: function(feature, layer){
+                            layer.bindPopup(feature.properties['Glebas']);
+                  }
+              });
+              lgrp004.addLayer(lyr004);
+   }
+
+   var owsrootUrl = 'http://geonode.terravisiongeo.com.br/geoserver/ows';
+   var defaultParameters = {
+            service : 'WFS',
+            version : '1.0',
+            request : 'GetFeature',
+            maxfeatures : 100000, 
+            typeName : 'geonode:_2ferr004_ger_pl_perimetro_glebas',
+            outputFormat : 'text/javascript',
+            format_options : 'callback:getJson004',
+            SrsName : 'EPSG:4326'
+   };
+   var parameters = L.Util.extend(defaultParameters);
+   var URL004 = owsrootUrl + L.Util.getParamString(parameters);
+                                                    
+   new $.ajax({
+            type: "POST",
+            url: URL004,
+            dataType: 'jsonp',
+            jsonpCallback : 'getJson004',
+            success: getJson004
+   });
+
+
+   //FIRMS
+   var myIcon005 = L.icon({
+                         iconUrl:
+                         'http://1.bp.blogspot.com/_98gj-G3sUG4/TS4Pf3lpkyI/AAAAAAAABIc/Cn3AlAi7S1Q/s1600/hot_orange.png',
+                         iconSize: [24, 24],
+                                             });
+    var lgrp005  = new L.layerGroup();
+    var lyr005   =  new L.geoJson();
+  
+ 
+
+    function  getJson005(data) {
+              lyr005  = L.geoJson(data, {
+                      onEachFeature: function(feature, layer){
+                            layer.bindPopup("<div id=FX" + feature.id + " style='width:260px' ></div>");
+                            layer.options.icon = myIcon005;
+                      }, 
+              });
+              lgrp005.addLayer(lyr005);
+   }
+
+
+
+   var pattern = /(\d{2})\-(\d{2})\-(\d{4})/;
+   var start   = $("#txtStart").val()
+   var end     = $("#txtEnd").val()
+
+   var startDate = new Date(start.replace(pattern,'$3-$2-$1'));
+   var endDate   = new Date(end.replace(pattern,'$3-$2-$1'));
+
+   var URL005 = '/firmsLayer/' + startDate.valueOf() + '/' + endDate.valueOf();
+                                                    
+   new $.getJSON(URL005, getJson005);
+
+
+   //WFABBA
+   var myIcon006 = L.icon({
+                         iconUrl:
+                         'http://twemoji.maxcdn.com/16x16/1f525.png',
+                         iconSize: [24, 24],
+                                             });
+    var lgrp006  = new L.layerGroup();
+    var lyr006   =  new L.geoJson();
+  
+ 
+
+    function  getJson006(data) {
+              lyr006  = L.geoJson(data, {
+                      onEachFeature: function(feature, layer){
+                            layer.bindPopup("<div id=WX" + feature.id + " style='width:260px' ></div>");
+                            layer.options.icon = myIcon006;
+                      }, 
+              });
+              lgrp006.addLayer(lyr006);
+   }
+
+
+
+   var pattern = /(\d{2})\-(\d{2})\-(\d{4})/;
+   var start   = $("#txtStart").val()
+   var end     = $("#txtEnd").val()
+
+   var startDate = new Date(start.replace(pattern,'$3-$2-$1'));
+   var endDate   = new Date(end.replace(pattern,'$3-$2-$1'));
+
+   var URL006 = '/wfabbaLayer/' + startDate.valueOf() + '/' + endDate.valueOf();
+                                                    
+   new $.getJSON(URL006, getJson006);
+
+
+
+
+
+    var drenagemLayer = L.tileLayer.wms(urlWMS, {
+                layers: 'geonode:_2ferr004_ger_ln_drenagem',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "Terravision"
+            });
+    var sedeLayer = L.tileLayer.wms(urlWMS, {
+                layers: 'geonode:_2ferr004_ger_pontos_sede',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "Terravision"
+            });
+    var torresLayer = L.tileLayer.wms(urlWMS, {
+                layers: 'geonode:_2ferr004_ger_pt_torres',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "Terravision"
+            });
+    var perimetroLayer = L.tileLayer.wms(urlWMS, {
+                layers: 'geonode:_2ferr004_ger_ln_perimetro_linha',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "Terravision"
+            });
+     var perimetroLayer = L.tileLayer.wms(urlWMS, {
+                layers: 'geonode:_2ferr004_ger_ln_perimetro_linha',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "Terravision"
+            }); 
+            
+    var perimetroBuffer  = L.tileLayer.wms(urlWMS, {
+                layers: 'geonode:_2ferr004_ger_pl_zoneamento_buffer',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "Terravision"
+            }); 
+            
+    var OverLays = { 'Vegetacao'    : lgrp001 , 
+                     'Zoneamento'   : lgrp002, 
+                     'Solar'        : lgrp003, 
+                     'Drenagem'     : drenagemLayer, 
+                     "Sede"         : sedeLayer, 
+                     'Torres'       : torresLayer,
+                     'Glebas'       : lgrp004,
+                     'Buffer'       : perimetroBuffer,
+                     'FIRMS'        : lgrp005,
+                     'WFABBA'       : lgrp006,
+                     'FMA'          : lgrpFMA,
+                     'FMA+'         : lgrpFMAP,
+                     'Perimetro'    : perimetroLayer};
+
+
+    var map = L.map(     'map', 
+                        {  center: [-20.0511, -44.0155 ], 
+                        zoom: 12,  
+                        layers : [Esri_WorldImagery, lyr005, perimetroLayer ],
+                       }
+    );
+   
+
+    L.control.coordinates({
+        position: "bottomright",
+        decimals: 3,
+        labelTemplateLat: "Latitude: {y}",
+        labelTemplateLng: "Longitude: {x}",
+        useDMS: false,
+        enableUserInput: false
+    } ).addTo(map);
+
+    L.control.layers(baseLayers, OverLays).addTo(map);
+
+
+    map.on('popupopen', function(e) {
+          try {
+            var id = e.popup._contentNode.lastElementChild.id;
+            $.get(
+                    "/focoPopUp/" + id + "/", 
+                    function( data ) {
+                        e.popup._contentNode.lastElementChild.innerHTML = data;
+                });
+            }
+            catch(err) {
+                ia = 12;
+            }
+        });
+
+
+
+
+
+
+});
+</script>
+
+{% endblock %}

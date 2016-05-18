@@ -27,6 +27,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('login.urls')),
     url(r'^clima/', include('clima.urls')),
-    #url(r'^', login.home, name='home'),
+    url(r'^', login.home, name='home'),
 
 ]

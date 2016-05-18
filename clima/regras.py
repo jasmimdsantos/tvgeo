@@ -90,12 +90,12 @@ class NormalGraficos:
                 data.append( float(dicionario[mes]))
 
         self.yAxis =  {
-                         'title': {  'text': resultParam.unidade.encode('latin-1')}
+                         'title': {  'text': resultParam.unidade}
                       }
 
 
 
-        saida =  {'name' : resultParam.Nome.encode('latin-1') , 'color': resultParam.corGrafico.encode('latin-1'), 'data' : data   }
+        saida =  {'name' : resultParam.Nome , 'color': resultParam.corGrafico, 'data' : data   }
 
         return saida
 

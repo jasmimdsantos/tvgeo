@@ -16,29 +16,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ><a href="index.html">Dashboard</a></li>
-                <li class="active"><a href="#">Components</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">UI Kits <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">General</a></li>
-                        <li><a href="#">Buttons</a></li>
-                        <li><a href="#">Widget</a></li>
-                        <li><a href="#">Slider</a></li>
-                        <li><a href="#">Many More</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Fontawesome</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Form Components <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Form Elements</a></li>
-                        <li><a href="#">Advanced Components</a></li>
-                        <li><a href="#">Form Wizard</a></li>
-                        <li><a href="#">Form Validation</a></li>
-                        <li><a href="#">Dropzone</a></li>
-                    </ul>
-                </li>
+                {{ menu|safe }}
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

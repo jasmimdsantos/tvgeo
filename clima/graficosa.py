@@ -52,9 +52,9 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Temperatura Máxima'.encode('latin1'), 'color' : 'red', 'data' : [] }  ,
-                        { 'name' : u'Temperatura Média'.encode('latin1') , 'color' : 'orange',    'data' : [] },  
-                        { 'name' : u'Temperatura Mínima'.encode('latin1'), 'color' : 'blue',   'data' : [] }  
+                        { 'name' : u'Temperatura Máxima', 'color' : 'red', 'data' : [] }  ,
+                        { 'name' : u'Temperatura Média' , 'color' : 'orange',    'data' : [] },  
+                        { 'name' : u'Temperatura Mínima', 'color' : 'blue',   'data' : [] }  
                       ]
         if _tipo == 'temp_media_mensal':
             titulo = u'Temperatura Mensal  (Máxima, Média, Mínima)'
@@ -70,9 +70,9 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Temperatura Máxima'.encode('latin1'), 'color' : 'red', 'data' : [] }  ,
-                        { 'name' : u'Temperatura Média'.encode('latin1') , 'color' : 'orange',    'data' : [] }  ,
-                        { 'name' : u'Temperatura Mínima'.encode('latin1'), 'color' : 'blue',   'data' : [] }  
+                        { 'name' : u'Temperatura Máxima', 'color' : 'red', 'data' : [] }  ,
+                        { 'name' : u'Temperatura Média' , 'color' : 'orange',    'data' : [] }  ,
+                        { 'name' : u'Temperatura Mínima', 'color' : 'blue',   'data' : [] }  
                       ]
 
         if _tipo == 'temp_absoluta_mensal':
@@ -90,8 +90,8 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Temperatura Máxima'.encode('latin1'), 'color' : 'red', 'data' : [] }  ,
-                        { 'name' : u'Temperatura Mínima'.encode('latin1'), 'color' : 'blue',   'data' : [] }  
+                        { 'name' : u'Temperatura Máxima', 'color' : 'red', 'data' : [] }  ,
+                        { 'name' : u'Temperatura Mínima', 'color' : 'blue',   'data' : [] }  
                       ]
 
 
@@ -112,7 +112,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Umidade Média'.encode('latin1') , 'color' : 'green',    'data' : [] }  ,
+                        { 'name' : u'Umidade Média' , 'color' : 'green',    'data' : [] }  ,
                       ]
 
         if _tipo == 'umidade_media_diaria_max':
@@ -127,7 +127,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Umidade Máxima'.encode('latin1') , 'color' : 'green',    'data' : [] }  ,
+                        { 'name' : u'Umidade Máxima' , 'color' : 'green',    'data' : [] }  ,
                       ]
 
 
@@ -144,7 +144,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Umidade Minima'.encode('latin1'), 'color' : 'green', 'data' : [] }  ,
+                        { 'name' : u'Umidade Minima', 'color' : 'green', 'data' : [] }  ,
                       ]
 
 
@@ -161,7 +161,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Umidade Média'.encode('latin1') , 'color' : 'green',    'data' : [] }  ,
+                        { 'name' : u'Umidade Média' , 'color' : 'green',    'data' : [] }  ,
                       ]
 
         if _tipo == 'umidade_media_mensal_max':
@@ -176,7 +176,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Umidade Máxima'.encode('latin1') , 'color' : 'green',    'data' : [] }  ,
+                        { 'name' : u'Umidade Máxima' , 'color' : 'green',    'data' : [] }  ,
                       ]
 
 
@@ -193,7 +193,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Umidade Minima'.encode('latin1'), 'color' : 'green', 'data' : [] }  ,
+                        { 'name' : u'Umidade Minima', 'color' : 'green', 'data' : [] }  ,
                       ]
 
         
@@ -216,7 +216,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Pressão Média'.encode('latin1') , 'color' : 'blue',    'data' : [] }  ,
+                        { 'name' : u'Pressão Média' , 'color' : 'blue',    'data' : [] }  ,
                       ]
 
         if _tipo == 'pressao_media_mensal':
@@ -231,7 +231,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Pressão Média'.encode('latin1') , 'color' : 'blue',    'data' : [] }  ,
+                        { 'name' : u'Pressão Média' , 'color' : 'blue',    'data' : [] }  ,
                       ]
 
 
@@ -253,8 +253,8 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Velocidade Média'.encode('latin1') , 'color' : 'cyan',    'data' : [] }  ,
-                        { 'name' : u'Rajada Máxima'.encode('latin1')    , 'color' : 'blue',    'data' : [] }  ,
+                        { 'name' : u'Velocidade Média' , 'color' : 'cyan',    'data' : [] }  ,
+                        { 'name' : u'Rajada Máxima'    , 'color' : 'blue',    'data' : [] }  ,
                       ]
 
         if _tipo == 'vento_media_mensal':
@@ -270,8 +270,8 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Velocidade Média'.encode('latin1') , 'color' : 'cyan',    'data' : [] }  ,
-                        { 'name' : u'Rajada Máxima'.encode('latin1')    , 'color' : 'blue',    'data' : [] }  ,
+                        { 'name' : u'Velocidade Média' , 'color' : 'cyan',    'data' : [] }  ,
+                        { 'name' : u'Rajada Máxima'    , 'color' : 'blue',    'data' : [] }  ,
                       ]
 
 
@@ -294,7 +294,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Radiação Solar'.encode('latin1')    , 'color' : 'yellow',    'data' : [] }  ,
+                        { 'name' : u'Radiação Solar'    , 'color' : 'yellow',    'data' : [] }  ,
                       ]
 
         if _tipo  == 'radiacao_mensal':
@@ -309,7 +309,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Radiação Solar'.encode('latin1')    , 'color' : 'yellow',    'data' : [] }  ,
+                        { 'name' : u'Radiação Solar'    , 'color' : 'yellow',    'data' : [] }  ,
                       ]
 
 
@@ -332,7 +332,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Precipitação'.encode('latin1')    , 'color' : 'blue',    'data' : [] }  ,
+                        { 'name' : u'Precipitação'    , 'color' : 'blue',    'data' : [] }  ,
                       ]
 
         if _tipo == 'precipitacao_mensal':
@@ -347,7 +347,7 @@ class GeraGraficos:
             group =   'GROUP BY "Data"' 
 
             series =  [ 
-                        { 'name' : u'Precipitação'.encode('latin1')    , 'color' : 'blue',    'data' : [] }  ,
+                        { 'name' : u'Precipitação'    , 'color' : 'blue',    'data' : [] }  ,
                       ]
 
 
@@ -520,7 +520,7 @@ class GeraGraficos:
             result = self.processa( _codstac,  _data, item, _tipo, _nomeestac) 
             result['id'] = indice
             retorno.append(result)
-        indice += 1
+            indice += 1
 
         result = self.procRsVentos( _codstac,  _data, '', _tipo, _nomeestac) 
         retorno.append(result)

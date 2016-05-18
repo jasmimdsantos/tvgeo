@@ -1,7 +1,7 @@
-{% extends 'style.html' %} {% load staticfiles %}
+{% extends 'layout.html' %} {% load staticfiles %}
 
 {% block cssformat %}
-	<link href="/static/css/typeahead.css" rel="stylesheet">  
+	<link href="/static/plugins/typeahead/typeahead.css" rel="stylesheet">
 {% endblock %}
 
 
@@ -14,7 +14,7 @@
         </a>
         <ol class="breadcrumb pull-left">
             <li><a href="/">Home</a></li>
-            <li><a href="/automaticas/">Estações Automáticas</a></li>
+            <li><a href="/clima/automaticas/">Estações Automáticas</a></li>
         </ol>
     </div>
 </div>

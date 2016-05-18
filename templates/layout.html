@@ -12,6 +12,16 @@
             {% include 'navbar.html' %}
             <!-- /.navbar -->
 
+            <div class="page-heading">
+                <h3>
+                    {{ pagetitle|safe }}<small>{{ pagesubtitle|safe }}</small>
+                </h3>
+                <ul class="breadcrumb">
+                    {{ pagebreadgrumb|safe }}
+                </ul>
+            </div>
+
+
             <!-- container -->
             <div class="wrapper">
                 {% block content %}

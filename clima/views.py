@@ -1,5 +1,4 @@
 
-
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from .forms import PesquisaEstacaoFRM, PesquisaAutomaticasFRM
@@ -13,6 +12,18 @@ from django.shortcuts import  redirect
 from django.contrib.auth.decorators import login_required
 import json
 from django.core import serializers
+from toolbox import sitetools
+
+
+@login_required()
+def clima(request):
+
+    print('------', request.get_full_path())
+
+    context = sitetools.sitemap(request.get_full_path()).html
+    print(context)
+    template = loader.get_template('clima/clima.html')
+    return HttpResponse(template.render(context))
 
 @login_required()
 def normais(request):
@@ -59,6 +70,7 @@ def grafnormais(request, station, texto):
 
     template = loader.get_template('clima/grafnormais.html')
     context = RequestContext(request, { 'estacao': estacao, 'graficos': grf });
+
     return HttpResponse(template.render(context))
 
 @login_required()
@@ -82,9 +94,9 @@ def automaticas(request):
 
             if estacao:
                 if mes == '99':
-                    return redirect(u'clima/grafautomaticatotal/{0}/{1}'.format(estacao[0].id,texto ))
+                    return redirect('/clima/grafautomaticatotal/{0}/{1}'.format(estacao[0].id,texto ))
                 else:
-                    return redirect(u'clima/grafautomatica/{0}/{1}/{2}/{3}/'.format(estacao[0].Codigo, mes, ano,  texto ))
+                    return redirect('/clima/grafautomatica/{0}/{1}/{2}/{3}/'.format(estacao[0].Codigo, mes, ano,  texto ))
     else:
         form = PesquisaAutomaticasFRM()
 
@@ -94,7 +106,7 @@ def automaticas(request):
         saida += '\'' +  i + '\','
     saida += ']'
     context = RequestContext(request, { 'estacoes': saida, 'form': form });
-    template = loader.get_template('climaa/utomaticas.html')
+    template = loader.get_template('clima/automaticas.html')
 
     return HttpResponse(template.render(context))
 

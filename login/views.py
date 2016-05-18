@@ -9,6 +9,7 @@ import string
 from django.conf import settings
 from .forms import MudarSenhaForm
 from django.shortcuts import render
+from toolbox.sitetools import sitemap
 
 @cache.never_cache
 def loginusr(request):
@@ -22,6 +23,8 @@ def loginusr(request):
     @return:
     """
     template = loader.get_template('login/login.html')
+
+    page = sitemap ( request.get_full_path ( ) ).context
 
     context = {}
     if request.POST:
@@ -65,6 +68,7 @@ def loginusr(request):
 
         context['state'] = state
         context['username'] = username
+        context.update(page)
 
     req_context = RequestContext(request, context)
     return HttpResponse(template.render(req_context))
@@ -93,6 +97,7 @@ def mudasenha(request):
     @param request:
     @return:
     """
+    page = sitemap ( request.get_full_path ( ) ).context
     form = MudarSenhaForm(request.POST or None)
     context = {}
     state=''
@@ -116,6 +121,7 @@ def mudasenha(request):
         context['state'] = state
 
     context['form'] = form
+    context.update(page)
     return render(request, 'login/mudasenha.html', context)
 
 def webhome(request):
@@ -125,8 +131,9 @@ def webhome(request):
     @param request:
     @return:
     """
-
+    page = sitemap ( request.get_full_path ( ) ).context
     context = {'username' : request.user.username }
+    context.update(page)
     return render(request, 'login/webhome.html', context)
 
 def home(request):

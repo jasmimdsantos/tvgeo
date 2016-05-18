@@ -4,8 +4,9 @@
      <style>
         .bloco
         {
+            margin: 95px;
         height: 100%; /*Specify Height*/
-        width:  100%; /*Specify Width*/
+        width:  90%; /*Specify Width*/
         border: 1px solid black; /*Add 1px solid border, use any color you want*/
         text-align:center; /*Align the text to the center*/
         }
@@ -43,31 +44,12 @@
 </div>
 
 {% for item in graficos  %}
-	<div class="col-xs-12 col-sm-6">
-		<div class="box">
-			<div class="box-header">
-				<div class="box-name">
-					<i class="fa fa-bar-chart-o"></i>
-					<span>{{ item.title.text|safe }}</span>
-				</div>
-				<div class="box-icons">
-					<a class="collapse-link">
-						<i class="fa fa-chevron-up"></i>
-					</a>
-					<a class="expand-link">
-						<i class="fa fa-expand"></i>
-					</a>
-					<a class="close-link">
-						<i class="fa fa-times"></i>
-					</a>
-				</div>
-				<div class="no-move"></div>
-			</div>
+
+
 			<div class="box-content">
 				<div class='bloco'  id="elem{{ item.id}}" style="min-height: 400px;"></div>
 			</div>
-		</div>
-	</div>
+
 
 {% endfor %}
 
@@ -82,7 +64,7 @@
                 chart: { type : '{{ item.type}}', 
                          events: {
                                 load: function(event) {
-                                                        this.renderer.image('http://4.bp.blogspot.com/_h3aZ5dGGSeo/TMOhK79K_4I/AAAAAAAAADM/ULQBT07ZnVc/s400/clima+agoralogo.gif',05,05,130,40).add();
+                                                        this.renderer.image('/static/img/climaagoralogo.gif',05,05,130,40).add();
                                                       }
                                 }       
                         },                    

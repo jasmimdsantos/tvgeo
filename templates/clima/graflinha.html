@@ -4,8 +4,9 @@
      <style>
         .bloco
         {
+            margin: 95px;
         height: 100%; /*Specify Height*/
-        width:  100%; /*Specify Width*/
+        width:  90%; /*Specify Width*/
         border: 1px solid black; /*Add 1px solid border, use any color you want*/
         text-align:center; /*Align the text to the center*/
         }
@@ -14,49 +15,10 @@
 
 
 {% block content %}
-<div class="row">
-    <div id="breadcrumb" class="col-xs-12">
-        <a href="#" class="show-sidebar">
-            <i class="fa fa-bars"></i>
-        </a>
-        <ol class="breadcrumb pull-left">
-            <li><a href="/">Home</a></li>
-            <li><a href="/clima/automaticas">Estações Automáticas</a></li>
-        </ol>
-   </div>
-</div>
 
-
-
-
-        {% for grafico in result %}
-	<div class="col-xs-12 col-sm-6" >
-		<div class="box">
-			<div class="box-header">
-				<div class="box-name">
-					<i class="fa fa-bar-chart-o"></i>
-					<span>{{ grafico.titulo|safe }}</span>
-				</div>
-				<div class="box-icons">
-					<a class="collapse-link">
-						<i class="fa fa-chevron-up"></i>
-					</a>
-					<a class="expand-link">
-						<i class="fa fa-expand"></i>
-					</a>
-					<a class="close-link">
-						<i class="fa fa-times"></i>
-					</a>
-				</div>
-				<div class="no-move"></div>
-			</div>
-			<div class="box-content" style='height:500px;'>
-				<div class='bloco'  id="container{{ grafico.id}}" ></div>
-			</div>
-		</div>
-	</div>
-
-{% endfor %}
+    {% for grafico in result %}
+        <div class='bloco'  id="container{{ grafico.id}}" ></div>
+    {% endfor %}
 
 
 {% endblock %}

@@ -18,10 +18,10 @@ class sitemap(object):
             ('Clima', 'clima', 0, True, True),
             ('Mapa Estações', 'mapaestacoes', 1, False, True),
             ('Normais', 'normais', 1, False, True),
-            ('Grafico Normais', 'grafnormais', 1, False, False),
-            ('Automáticas', 'automaticas', 1, False, True),
-            ('Grafico Linhas', 'graflinha', 2, False, False),
-            ('Grafico Total', 'grafautomaticatotal', 2, False, False),
+            ('Grafico Normais', 'grafnormais', 2, False, False),
+            ('Automáticas', 'automaticas', 2, False, True),
+            ('Grafico Linhas', 'graflinha', 3, False, False),
+            ('Grafico Total', 'grafautomaticatotal', 3, False, False),
 
           )
 
@@ -33,7 +33,7 @@ class sitemap(object):
         """
 
         campos = [item for item in _path.split('/') if item != '']
-        markup =  '<li {2} ><a href="{0}/">{1}</a></li>'
+        markup =  '<li {2} ><a href="{0}">{1}</a></li>'
 
         path = '/'
         html = ''
@@ -43,16 +43,18 @@ class sitemap(object):
             reg = [it  for it in self.col if it[1]== item and it[2] == nivel]
             if not reg:
                 continue
-            registro = reg
-            if _path == path:
+            registro = reg[0]
+            path += '{0}/'.format(registro[1])
+            print(nivel)
+            if len(campos)  == nivel+1 or nivel == 2:
                 key ='class ="active"'
-                titulo = item[0]
+                path = ''
+                titulo = registro[0]
             else:
                 key = ''
             html += markup.format(path, registro[0], key)
             nivel +=1
-            if nivel > 2:
-                break
+
 
         return html, titulo
 
@@ -63,8 +65,8 @@ class sitemap(object):
         """
 
         markup_normal = '<li class="active"><a href="{0}">{1}</a></li>'
-        markup_grupo0 = '<li class="dropdown"><a href="{0}" class="dropdown-toggle" data-toggle="dropdown">{1}<b class="caret"></b></a>$$$</li>'
-        markup_grupo1 = '<ul class="dropdown-menu"><li><a href="{0}">{1}</a></li></ul>'
+        markup_grupo0 = '<li class="dropdown"><a href="{0}" class="dropdown-toggle" data-toggle="dropdown">{1}<b class="caret"></b></a><ul class="dropdown-menu">$$$</ul></li>'
+        markup_grupo1 = '<li><a href="{0}">{1}</a></li>'
 
         html = ''
         ingrupo = False
@@ -75,7 +77,6 @@ class sitemap(object):
                 continue
 
             if item[2] == 0:
-
                 # se for novo item grava os submenus
                 if ingrupo:
                     html = html.replace('$$$', marcador)
@@ -83,8 +84,10 @@ class sitemap(object):
                     ingrupo = False
 
                 url = '/{0}/'.format(item[1])
+                path0 = url
             else:
-                url += '{0}/'.format(item[1])
+                if item[2] == 1:
+                    url = path0 + '{0}/'.format(item[1])
 
             if item[3]:
                 html += markup_grupo0.format(url, item[0])
@@ -98,8 +101,6 @@ class sitemap(object):
         #Se ao terminar o loop ainda estiver em submenu
         if ingrupo:
             html = html.replace('$$$', marcador)
-            marcador = ''
-            ingrupo = False
 
         return html
 
@@ -111,6 +112,6 @@ class sitemap(object):
         :return: bloco html contendo o cabeçalho
         """
         html, titulo = self._breadgrumb(path)
-        self.html = {'menu' : self._menu(), 'pagetitle': titulo, 'pagebreadgrumb' : html }
+        self.context = {'menu' : self._menu(), 'pagetitle': titulo, 'pagebreadgrumb' : html }
 
 

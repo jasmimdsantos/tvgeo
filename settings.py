@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'leaflet',
     'clima',
     'scripts',
+    'firemonitor',
 ]
 
 MIDDLEWARE_CLASSES = [

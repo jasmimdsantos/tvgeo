@@ -1,201 +1,209 @@
-
 from django.http import HttpResponse
-from django.template import RequestContext, loader
-from .forms import PesquisaEstacaoFRM, PesquisaAutomaticasFRM
+from django.template import RequestContext , loader
+from .forms import PesquisaEstacaoFRM , PesquisaAutomaticasFRM
 from . import models as db
 from .regras import NormalGraficos
-from .graficosa   import GeraGraficos
-from .regrasa    import Medicao
+from .graficosa import GeraGraficos
+from .regrasa import Medicao
 from datetime import datetime
 from django.utils import http
-from django.shortcuts import  redirect
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 import json
 from django.core import serializers
 from toolbox import sitetools
 
 
-@login_required()
-def clima(request):
+@login_required ( )
+def clima ( request ):
+    context = sitetools.sitemap ( request.get_full_path ( ) ).context
+    template = loader.get_template ( 'clima/clima.html' )
+    return HttpResponse ( template.render ( context ) )
 
 
-
-    context = sitetools.sitemap(request.get_full_path()).html
-    template = loader.get_template('clima/clima.html')
-    return HttpResponse(template.render(context))
-
-@login_required()
-def normais(request):
-
-    context = sitetools.sitemap(request.get_full_path()).html
+@login_required ( )
+def normais ( request ):
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
     if request.method == 'POST':
-        form = PesquisaEstacaoFRM(request.POST)
-        if form.is_valid():
-            nomeEstac = form.cleaned_data['nomeEstacao']
-            estacao = db.Station.objects.filter(Nome__contains = nomeEstac)
-            texto     = u'{0}'.format(form.cleaned_data['nomeTexto'])
+        form = PesquisaEstacaoFRM ( request.POST )
+        if form.is_valid ( ):
+            nomeEstac = form.cleaned_data[ 'nomeEstacao' ]
+            estacao = db.Station.objects.filter ( Nome__contains=nomeEstac )
+            texto = u'{0}'.format ( form.cleaned_data[ 'nomeTexto' ] )
 
-            if texto.strip() == '':
-                texto = estacao[0].Nome
+            if texto.strip ( ) == '':
+                texto = estacao[ 0 ].Nome
 
-            texto = texto.replace('-',' ').replace('.',' ').replace('(',' ').replace(')',' ')
-            texto = http.urlquote(texto)
+            texto = texto.replace ( '-' , ' ' ).replace ( '.' , ' ' ).replace ( '(' , ' ' ).replace ( ')' , ' ' )
+            texto = http.urlquote ( texto )
 
             if estacao:
-                return redirect('/clima/grafnormais/{0}/{1}'.format(estacao[0].id, texto.replace(' ', '_')) )
+                return redirect (
+                    '/clima/normais/grafnormais/{0}/{1}/'.format ( estacao[ 0 ].id , texto.replace ( ' ' , '_' ) ) )
     else:
-        form = PesquisaEstacaoFRM()
+        form = PesquisaEstacaoFRM ( )
 
-    colEstacoes = db.Station.objects.filter(tipo='N').values_list('Nome', flat=True)
-    saida  = '['
+    colEstacoes = db.Station.objects.filter ( tipo='N' ).values_list ( 'Nome' , flat=True )
+    saida = '['
     for i in colEstacoes:
-        saida += '\'' +  i + '\','
+        saida += '\'' + i + '\','
     saida += ']'
 
+    context = {'estacoes': saida , 'form': form}
+    context.update ( page )
 
-    context['estacoes'] = saida
-    context['form'] = form
-    context = RequestContext(request, context)
-    template = loader.get_template('clima/normais.html')
+    context = RequestContext ( request , context )
+    template = loader.get_template ( 'clima/normais.html' )
 
-    return HttpResponse(template.render(context))
+    return HttpResponse ( template.render ( context ) )
 
-@login_required()
-def grafnormais(request, station, texto):
 
-    texto = http.urlunquote(texto)
+@login_required ( )
+def grafnormais ( request , station , texto ):
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
+
+    texto = http.urlunquote ( texto )
     estacao = {}
     try:
-        estacao = db.Station.objects.get(pk=station)
+        estacao = db.Station.objects.get ( pk=station )
     except:
-        return redirect('clima/normais/')
+        return redirect ( '/clima/normais/' )
 
-    grf = NormalGraficos(station, texto).getGrafico()
+    grf = NormalGraficos( station , texto ).getGrafico ( )
 
-    template = loader.get_template('clima/grafnormais.html')
-    context = RequestContext(request, { 'estacao': estacao, 'graficos': grf });
+    template = loader.get_template ( 'clima/grafnormais.html' )
 
-    return HttpResponse(template.render(context))
+    context = RequestContext ( request , {'estacao': estacao , 'graficos': grf} )
+    context.update( page )
 
-@login_required()
-def automaticas(request):
+    return HttpResponse ( template.render ( context ) )
 
+
+@login_required ( )
+def automaticas ( request ):
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
     if request.method == 'POST':
 
-        form = PesquisaAutomaticasFRM(request.POST)
-        if form.is_valid():
-            nomeEstac = form.cleaned_data['nomeEstacao']
-            mes       = form.cleaned_data['mes']
-            ano       = form.cleaned_data['ano']
-            texto     = u'{0}'.format(form.cleaned_data['nomeTexto'])
-            estacao   = db.Station.objects.filter(Nome__contains = nomeEstac)
+        form = PesquisaAutomaticasFRM ( request.POST )
+        if form.is_valid ( ):
+            nomeEstac = form.cleaned_data[ 'nomeEstacao' ]
+            mes = form.cleaned_data[ 'mes' ]
+            ano = form.cleaned_data[ 'ano' ]
+            texto = u'{0}'.format ( form.cleaned_data[ 'nomeTexto' ] )
+            estacao = db.Station.objects.filter ( Nome__contains=nomeEstac )
 
-            if texto.strip() == '':
-                texto = estacao[0].Nome
+            if texto.strip ( ) == '':
+                texto = estacao[ 0 ].Nome
 
-            texto = texto.replace('-',' ').replace('.',' ').replace('(',' ').replace(')',' ')
-            texto = http.urlquote(texto)
+            texto = texto.replace ( '-' , ' ' ).replace ( '.' , ' ' ).replace ( '(' , ' ' ).replace ( ')' , ' ' )
+            texto = http.urlquote ( texto )
 
             if estacao:
                 if mes == '99':
-                    return redirect('/clima/grafautomaticatotal/{0}/{1}'.format(estacao[0].id,texto ))
+                    return redirect ( '/clima/grafautomaticatotal/{0}/{1}'.format ( estacao[ 0 ].id , texto ) )
                 else:
-                    return redirect('/clima/grafautomatica/{0}/{1}/{2}/{3}/'.format(estacao[0].Codigo, mes, ano,  texto ))
+                    return redirect (
+                        '/clima/grafautomatica/{0}/{1}/{2}/{3}/'.format ( estacao[ 0 ].Codigo , mes , ano , texto ) )
     else:
-        form = PesquisaAutomaticasFRM()
+        form = PesquisaAutomaticasFRM ( )
 
-    colEstacoes = db.Station.objects.filter(tipo='A').values_list('Nome', flat=True)
-    saida  = '['
+    colEstacoes = db.Station.objects.filter ( tipo='A' ).values_list ( 'Nome' , flat=True )
+    saida = '['
     for i in colEstacoes:
-        saida += '\'' +  i + '\','
+        saida += '\'' + i + '\','
     saida += ']'
-    context = RequestContext(request, { 'estacoes': saida, 'form': form });
-    template = loader.get_template('clima/automaticas.html')
+    context = RequestContext ( request , {'estacoes': saida , 'form': form} )
+    context.update ( page )
 
-    return HttpResponse(template.render(context))
+    template = loader.get_template ( 'clima/automaticas.html' )
 
-@login_required()
-def grafAutomatica(request, station, ano, mes, texto):
+    return HttpResponse ( template.render ( context ) )
 
-    texto = texto.replace('_', ' ')
 
-    obj = GeraGraficos()
-    year = int(ano)
-    month  = int(mes)
-    if month  == 0:
+@login_required ( )
+def grafAutomatica ( request , station , ano , mes , texto ):
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
+    texto = texto.replace ( '_' , ' ' )
+
+    obj = GeraGraficos ( )
+    year = int ( ano )
+    month = int ( mes )
+    if month == 0:
         tipo = "A"
         month = 1
     else:
         tipo = 'D'
 
-    datadefinida = datetime(year,month,1)
-    result = obj.pool( station, datadefinida, tipo, texto)
+    datadefinida = datetime ( year , month , 1 )
+    result = obj.pool ( station , datadefinida , tipo , texto )
 
-    context = RequestContext(request, { 'result' : result} )
-    template = loader.get_template('clima/graflinha.html')
+    context = RequestContext ( request , {'result': result} )
+    context.update ( page )
+    template = loader.get_template ( 'clima/graflinha.html' )
 
-    return HttpResponse(template.render(context))
+    return HttpResponse ( template.render ( context ) )
 
-def getautomaticajson(request, station):
 
-    result = json.dumps( { 'dados' :  Medicao().graficos(station) } )
+def getautomaticajson ( request , station ):
+    result = json.dumps ( {'dados': Medicao ( ).graficos ( station )} )
+    return HttpResponse ( result , content_type='text/javascript' )
 
-    return HttpResponse(result,content_type='text/javascript')
 
-def dadosAutomatica(request, station):
+def dadosAutomatica ( request , station ):
+    result = json.dumps ( {'dados': Medicao ( ).graficos ( station )} )
 
-    result = json.dumps( { 'dados' :  Medicao().graficos(station) } )
+    return HttpResponse ( result , content_type='text/javascript' )
 
-    return HttpResponse(result,content_type='text/javascript')
 
-@login_required()
-def grafAutomaticaTotal(request, station, texto):
-
-    texto = texto.replace('_', ' ')
-
+@login_required ( )
+def grafAutomaticaTotal ( request , station , texto ):
+    texto = texto.replace ( '_' , ' ' )
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
     estacao = {}
     try:
-        estacao = db.Station.objects.get(pk=station)
+        estacao = db.Station.objects.get ( pk=station )
     except:
-        return redirect('clima/estacoes/')
+        return redirect ( 'clima/estacoes/' )
 
-    if texto.strip() == '':
+    if texto.strip ( ) == '':
         texto = estacao.Nome
 
+    credits = {'text': 'Powered by: Terravision' ,
+               'href': 'http://www.terravisiongeo.com.br/'
+               }
 
-    credits = {  'text': 'Powered by: Terravision',
-                 'href': 'http://www.terravisiongeo.com.br/'
-              }
+    context = RequestContext ( request , {'estacao': estacao , 'credits': credits , 'texto': texto} )
+    context.update ( page )
+    template = loader.get_template ( 'clima/grafautomaticatotal.html' )
 
-    context = RequestContext(request, { 'estacao':  estacao, 'credits' : credits, 'texto': texto })
-    template = loader.get_template('clima/grafautomaticatotal.html')
-
-    return HttpResponse(template.render(context))
-
-@login_required()
-def mapaestacoes(request):
-    context = RequestContext(request)
-    template = loader.get_template('clima/mapaestacoes.html')
-
-    return HttpResponse(template.render(context))
-
-def mapafocoincendio(request):
-    context = RequestContext(request)
-    template = loader.get_template('clima/mapafocoincendio.html')
-
-    return HttpResponse(template.render(context))
-
-def focoCalor(request, id):
-
-    reg =  db.FocoItem.objects.get(id=id)
-
-    saida = { 'Temp' :  reg.Temp, 'FireFlag' : reg.FireFlag, 'Data' : reg.foco_FK.dataUTC, 'id' : reg.id }
-    context = RequestContext(request, { 'foco': saida } )
-
-    template = loader.get_template('clima/focoCalor.html')
-
-    return HttpResponse(template.render(context))
+    return HttpResponse ( template.render ( context ) )
 
 
+@login_required ( )
+def mapaestacoes ( request ):
+    context = RequestContext ( request )
+    template = loader.get_template ( 'clima/mapaestacoes.html' )
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
+    context.update ( page )
+    return HttpResponse ( template.render ( context ) )
 
 
+def mapafocoincendio ( request ):
+    context = RequestContext ( request )
+    template = loader.get_template ( 'clima/mapafocoincendio.html' )
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
+    context.update ( page )
+
+    return HttpResponse ( template.render ( context ) )
+
+
+def focoCalor ( request , id ):
+    reg = db.FocoItem.objects.get ( id=id )
+
+    saida = {'Temp': reg.Temp , 'FireFlag': reg.FireFlag , 'Data': reg.foco_FK.dataUTC , 'id': reg.id}
+    context = RequestContext ( request , {'foco': saida} )
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
+    context.update ( page )
+    template = loader.get_template ( 'clima/focoCalor.html' )
+
+    return HttpResponse ( template.render ( context ) )

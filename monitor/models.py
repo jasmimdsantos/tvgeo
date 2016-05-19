@@ -19,7 +19,7 @@ class Unidade(models.Model):
     sigla     = models.CharField(max_length=20)
     descricao = models.CharField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.sigla)
 
 
@@ -57,7 +57,7 @@ class Param(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ['nome']
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.nome)
 
 
@@ -69,7 +69,7 @@ class Legislacao(models.Model):
 
     descricao = models.CharField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.descricao)
 
 class Classe(models.Model):
@@ -80,7 +80,7 @@ class Classe(models.Model):
 
     descricao = models.CharField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.descricao)
 
 class Limites(models.Model):
@@ -105,7 +105,7 @@ class Projeto(models.Model):
         verbose_name_plural = 'Projetos'
         ordering = ['nome',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.nome)
 
 
@@ -120,7 +120,7 @@ class Layer(models.Model):
         verbose_name_plural = 'Camadas'
         ordering = ['nome',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.nome)
 
 
@@ -141,7 +141,7 @@ class PtoMonit(MPTTModel):
         verbose_name_plural = 'Pontos de Monitoramento'
         ordering = ['sigla',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}-{1}'.format(self.sigla, self.nome)
 
 
@@ -157,7 +157,7 @@ class Campanha(models.Model):
         verbose_name_plural = 'Campanhas'
         ordering = ['ano','mes',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.nome)
 
 
@@ -177,7 +177,7 @@ class Medicao(models.Model):
         verbose_name_plural = u'Medicoes'
         ordering = ['data',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.controle)
 
 
@@ -194,7 +194,7 @@ class Midia(models.Model):
         verbose_name_plural = u'Midia'
         ordering = ['nome',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.nome)
 
 
@@ -207,7 +207,7 @@ class Texto(models.Model):
     class Meta:
         ordering = ['descricao',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.descricao)
 
 
@@ -220,7 +220,7 @@ class Relatorio(models.Model):
     class Meta:
         ordering = ['descricao',]
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{0}'.format(self.descricao)
 
 

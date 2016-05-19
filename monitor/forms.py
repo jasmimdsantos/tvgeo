@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 
-
 from django.db import models
-from projetos.models import Campanha, PtoMonit
-from param.models import Param, Classe, Legislacao
+from .models import Campanha, PtoMonit,  Classe, Legislacao
 from django import forms
-
 
 class frmGrafico(forms.Form):
 

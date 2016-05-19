@@ -2,10 +2,8 @@
 #!/usr/bin/env python
 
 import django
-from projetos.models import Medicao, PtoMonit, Campanha
-from param.models import  Param
+from .models import Medicao, PtoMonit, Campanha, Param
 import datetime
-
 import requests
 import base64
 import json
@@ -84,10 +82,10 @@ class Grafico:
                 col.append( [idCamp ,idPonto , float(item.vlr) ])
 
             for y in acamp:
-		for x in aptos:
-			z = [ vlr for  vlr in col if vlr[0] == y and vlr[1] == x]
-			if len(z) == 0:
-                            col.append( [y, x, -1] )
+                for x in aptos:
+                    z = [ vlr for  vlr in col if vlr[0] == y and vlr[1] == x]
+                    if len(z) == 0:
+                        col.append( [y, x, -1] )
 
 
             objParam  = Param.objects.get(pk=idParametro)
@@ -127,10 +125,10 @@ class Grafico:
             self.interval = str(objParam.intervalo)
 
 
-	def runFile(self, idParametro, pontos, campanhas):
-            self.__Processa(idParametro, pontos, campanhas)
-            sefl.__getGrafico()
+        def runFile(self, idParametro, pontos, campanhas):
+                self.__Processa(idParametro, pontos, campanhas)
+                self.__getGrafico()
 
-	def runJson(self, idParametro, pontos, campanhas):
-            self.__Processa(idParametro, pontos, campanhas)
-            return self.__getJson()
+        def runJson(self, idParametro, pontos, campanhas):
+                self.__Processa(idParametro, pontos, campanhas)
+                return self.__getJson()

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 
-from projetos.regras import Grafico
+from .regras import Grafico
 from django.db import models
-from projetos.models import Campanha, PtoMonit, Medicao
-from param.models import Param
-from projetos.forms import frmGrafico
+from .models import Campanha, PtoMonit, Medicao, Param
+from .forms import frmGrafico
+from . import prograph
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from projetos import prograph
+
 
 def proc_medicao(tipo, colusinas, colcampanha):
 
@@ -63,5 +63,5 @@ def viewGrafico(request):
     else:
         form = frmGrafico()
 
-    return render(request, 'frmGrafico.html', {'form': form, 'grafJson': grafJson, 'link': link} )
+    return render(request, 'monitor/frmGrafico.html', {'form': form, 'grafJson': grafJson, 'link': link} )
 

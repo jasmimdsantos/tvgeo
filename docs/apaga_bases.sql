@@ -1,0 +1,13 @@
+delete from monitor_unidade;
+delete from monitor_param;
+delete from monitor_classe;
+delete from monitor_legislacao;
+delete from monitor_limites;
+delete from monitor_projeto;
+delete from monitor_layer;
+delete from monitor_ptomonit;
+delete from monitor_campanha;
+delete from monitor_medicao;
+delete from monitor_midia;
+delete from monitor_texto;
+delete from monitor_relatorio;

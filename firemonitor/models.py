@@ -23,7 +23,6 @@ class Projeto(models.Model):
     def __unicode__(self):              
         return u'{0}'.format(self.nome) 
 
-
 class Camada(models.Model):
 
     Projeto_FK  = models.ForeignKey(Projeto, verbose_name="Projeto" )
@@ -38,7 +37,6 @@ class Camada(models.Model):
 
     def __unicode__(self):              
         return u'{0}'.format(self.nome) 
-
 
 class Equipe(models.Model):
 
@@ -108,7 +106,6 @@ class FocoFIRMS(models.Model):
 
     def __unicode__(self):              
         return u'{0}'.format(self.dataUTC) 
-
 
 class Alarme(models.Model):
     

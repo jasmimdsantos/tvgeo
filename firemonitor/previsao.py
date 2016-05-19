@@ -8,13 +8,12 @@ from   datetime import datetime
 
 def Previsao(codIBGE):
 
-    mask = 'http://www.inmet.gov.br/portal/index.php?\
-r=tempo2/previsaoDeTempo&code={0}'
+    mask = 'http://www.inmet.gov.br/portal/index.php?r=tempo2/previsaoDeTempo&code={0}'
 
     url = mask.format(codIBGE)
 
     req  = requests.get(url)
-    saida = json.loads( req.content)
+    saida = json.loads( req.content.decode('utf-8'))
 
     col = []
     datas = []

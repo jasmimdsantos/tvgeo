@@ -6,7 +6,7 @@ import psycopg2
 from   datetime import datetime, timedelta
 from   .models import KPI, KPI_Nivel, Projeto
 import math
-from toolbox.tools import  Struct
+from toolbox.tools import  ObjectView
 from toolbox.maillib import Email
 
 
@@ -72,11 +72,11 @@ WHERE omm = '{0}'
             raise
 
 
-        return { 'nome'     : saida[2],\
-                 'altitude' : saida[3],\
-                 'posicao'  : saida[4],\
-                 'cadastro' : saida[5],\
-                 'wmo'      : saida[6] \
+        return { 'nome'     : saida[2],
+                 'altitude' : saida[3],
+                 'posicao'  : saida[4],
+                 'cadastro' : saida[5],
+                 'wmo'      : saida[6]
                }
 
 
@@ -84,7 +84,9 @@ WHERE omm = '{0}'
 
 
     def getDiasSemChuva(self, codigo, mmChuva, dataBase):
-        
+
+        codigo = codigo.decode ( 'utf-8' )
+
         saida = ''
         try:
             sql = """ 
@@ -112,7 +114,9 @@ LIMIT 1; """.format(codigo, dataBase.strftime('%d/%m/%Y'), mmChuva)
         return saida
 
     def getPrecitacao(self, codigo, data, dataFim):
-        
+
+        codigo = codigo.decode('utf-8')
+
         try:
             sql = """
 SELECT  
@@ -140,7 +144,9 @@ ORDER BY date_trunc(\'day\',"Data" + interval \'1h\' *
 
 
     def getHistorico(self, codigo, data, dataBase,hora=99):
-        
+
+        codigo = codigo.decode('utf-8')
+
         saida = ''
         try:
             if hora == 99:
@@ -172,16 +178,17 @@ ORDER BY "Data" """.format(codigo, data, dataBase, hora)
 
     def getClima(self, wmo, data):
         
-        codigo = self.getCodigoByOMM(wmo)
+        codigo = self.getCodigoByOMM(wmo).decode('utf-8')
 
         saida = ''
         try:
             sql = """
 SELECT "Data", "Hora", "Chuva", "VentVel",  "UmidInst", "PressInst", "TempInst"  
 FROM   "Clima_dadosestacao" 
-WHERE  "codEstac"=\'{0}\' and 
-       "Data" = \'{1}\' 
-ORDER BY "Data","Hora" """.format(codigo, data)
+WHERE  "codEstac" = '{0}' and
+       "Data" = '{1}'
+ORDER BY "Data","Hora" """.format( codigo, data)
+
 
             cursor = self.db.cursor()
             cursor.execute(sql)
@@ -247,7 +254,7 @@ ORDER BY "Data","Hora" """.format(codigo, data)
                 values[item] = round(values[item], FLOAT_ROUD_PLACES)
             linha[labels[item].strip()] = values[item] 
       
-        self.colecao.append(Struct(linha))
+        self.colecao.append(ObjectView(linha))
  
 
 
@@ -354,16 +361,7 @@ ORDER BY "Data","Hora" """.format(codigo, data)
 
         return  self.colecao
 
-"""
-def run():
-    codigo = '86821'
-    dataBase = datetime(2015,1,1)
 
-    objFMA = FMA()
-    colecao = objFMA.formula(codigo)
-    for i in  colecao:
-        print  i.fmap
-"""
 
 
 

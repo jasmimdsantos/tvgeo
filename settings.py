@@ -49,6 +49,10 @@ INSTALLED_APPS = [
     'scripts',
     'firemonitor',
     'roi',
+    'monitor',
+    'django_extensions',
+    'django_mptt_admin',
+    'mptt',
 ]
 
 MIDDLEWARE_CLASSES = [

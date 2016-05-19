@@ -169,12 +169,12 @@ def dashboard(request, idProjeto):
 
     obj  = DashBoard()
     resultado = obj.execute(idProjeto, data)
-    context = RequestContext(request,\
-                                {   'result' : resultado, \
-                                    'start' : start,\
+    context = RequestContext(request,
+                                {   'result' : resultado,
+                                    'start' : start,
                                     'end' : end} )
 
-    template = loader.get_template('dashboard.html')
+    template = loader.get_template('firemonitor/dashboard.html')
     return HttpResponse(template.render(context))
 
 

@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^normais/grafnormais/(?P<station>\d+)/(?P<texto>[\w ]+)/', views.grafnormais ),
     url(r'^automaticas/grafautomatica/(?P<station>\d+)/(?P<mes>\d+)/(?P<ano>\d+)/(?P<texto>[\w ]+)/$', views.grafAutomatica ),
     url(r'^getautomaticajson/(?P<station>\d+)/$', views.getautomaticajson),
-    url(r'^automaticasgrafautomaticatotal/(?P<station>\d+)/(?P<texto>[\w ]+)/$', views.grafAutomaticaTotal),
+    url(r'^automaticas/grafautomaticatotal/(?P<station>\d+)/(?P<texto>[\w ]+)/$', views.grafAutomaticaTotal),
     url(r'^automaticas/$', views.automaticas ),
     url(r'^data.geojson$', GeoJSONLayerView.as_view(model= Station, properties=('id', 'Altitude', 'Codigo', 'Nome','Estado',"tipo",'tipo',)), name='data'),
     #url(r'^fire.geojson$', GeoJSONLayerView.as_view(model= views.FocoItem), name='data'),

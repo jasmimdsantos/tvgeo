@@ -100,10 +100,10 @@ def automaticas ( request ):
 
             if estacao:
                 if mes == '99':
-                    return redirect ( '/clima/grafautomaticatotal/{0}/{1}'.format ( estacao[ 0 ].id , texto ) )
+                    return redirect ( '/clima/automaticas/grafautomaticatotal/{0}/{1}'.format ( estacao[ 0 ].id , texto ) )
                 else:
                     return redirect (
-                        '/clima/grafautomatica/{0}/{1}/{2}/{3}/'.format ( estacao[ 0 ].Codigo , mes , ano , texto ) )
+                        '/clima/automaticas/grafautomatica/{0}/{1}/{2}/{3}/'.format ( estacao[ 0 ].Codigo , mes , ano , texto ) )
     else:
         form = PesquisaAutomaticasFRM ( )
 

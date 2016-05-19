@@ -407,28 +407,34 @@
 {% endblock %}
 
 {% block scriptsJava %}
+    <script type="text/javascript" src="/static/assets/js/devoops.js"></script>
     <script type="text/javascript" src="/static/plugins/leaflet/Leaflet.Coordinates-0.1.5.min.js"></script>
     <script type="text/javascript" src="/static/plugins/leaflet/iso8601.js"></script>
-    <link rel="stylesheet" type="text/css" media="all" href="/static/js/daterangepicker.css" />
-    <script type="text/javascript" src="/static/js/moment.js"></script>
-    <script type="text/javascript" src="/static/js/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/assets/js/daterangepicker.css" />
+    <script type="text/javascript" src="/static/assets/js/moment.js"></script>
+    <script type="text/javascript" src="/static/assets/js/daterangepicker.js"></script>
+
+
+
+    <script src="/static/plugins/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    <script src="/static/plugins/tinymce/tinymce.min.js"></script>
+    <script src="/static/plugins/tinymce/jquery.tinymce.min.js"></script>
+    <script src="/static/assets/js/devoops.js"></script>
+
+
 
 <script type="text/javascript">
 $(document).ready(function() {
     // Load Google Chart API and callback to draw test graphs
     // This need for correct resize charts, when box open or drag
-    
+    // Function for change panels of Dashboard
+//
+
     DashboardTabChecker(function() {
         map.invalidateSize();
     });
     $("#tabs").tabs();
     
-    var graphxChartsResize;
-    $(".box").resize(function(event){
-        event.preventDefault();
-    });
-    // Add Drag-n-Drop action for .box
-    WinMove();
 
     plot = [];
     {% for item in result.graphFMA.plotBands %}
@@ -895,7 +901,7 @@ $(document).ready(function() {
    var startDate = new Date(start.replace(pattern,'$3-$2-$1'));
    var endDate   = new Date(end.replace(pattern,'$3-$2-$1'));
 
-   var URL005 = '/firmsLayer/' + startDate.valueOf() + '/' + endDate.valueOf();
+   var URL005 = '/firemonitor/firmsLayer/' + startDate.valueOf() + '/' + endDate.valueOf();
                                                     
    new $.getJSON(URL005, getJson005);
 
@@ -930,7 +936,7 @@ $(document).ready(function() {
    var startDate = new Date(start.replace(pattern,'$3-$2-$1'));
    var endDate   = new Date(end.replace(pattern,'$3-$2-$1'));
 
-   var URL006 = '/wfabbaLayer/' + startDate.valueOf() + '/' + endDate.valueOf();
+   var URL006 = '/firemonitor/wfabbaLayer/' + startDate.valueOf() + '/' + endDate.valueOf();
                                                     
    new $.getJSON(URL006, getJson006);
 

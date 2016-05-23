@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d54ab57-0c74-47a6-a9c5-b710f9296989" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/matriz.docx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/apaga_bases.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/muda.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/monitor/frmGrafico.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/forms.py" afterPath="$PROJECT_DIR$/monitor/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/models.py" afterPath="$PROJECT_DIR$/monitor/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/prograph.py" afterPath="$PROJECT_DIR$/monitor/prograph.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/regras.py" afterPath="$PROJECT_DIR$/monitor/regras.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/urls.py" afterPath="$PROJECT_DIR$/monitor/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/views.py" afterPath="$PROJECT_DIR$/monitor/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/urls.py" afterPath="$PROJECT_DIR$/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/member.py" afterPath="$PROJECT_DIR$/scripts/member.py" />
     </list>
     <ignored path="core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,7 +18,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/core$member.coverage" NAME="member Coverage Results" MODIFIED="1463490860873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
+    <SUITE FILE_PATH="coverage/core$member.coverage" NAME="member Coverage Results" MODIFIED="1464012777800" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -61,8 +52,8 @@
       <file leaf-file-name="prograph.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monitor/prograph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="447" column="30" selection-start-line="447" selection-start-column="30" selection-end-line="447" selection-end-column="30" />
+            <state relative-caret-position="391">
+              <caret line="446" column="31" selection-start-line="446" selection-start-column="31" selection-end-line="446" selection-end-column="31" />
               <folding>
                 <element signature="e#1#20#0" expanded="true" />
               </folding>
@@ -70,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="api.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python34/Lib/site-packages/requests/api.py">
+      <file leaf-file-name="member.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/member.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state relative-caret-position="136">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -83,7 +74,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monitor/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
+            <state relative-caret-position="935">
               <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding>
                 <element signature="e#47#74#0" expanded="true" />
@@ -92,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/impacto/Lib/site-packages/django/core/handlers/base.py">
+      <file leaf-file-name="api.py" pinned="false" current-in-tab="false">
+        <entry file="file://C:/Python34/Lib/site-packages/requests/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="161" column="73" selection-start-line="161" selection-start-column="73" selection-end-line="161" selection-end-column="73" />
+            <state relative-caret-position="884">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -105,7 +96,7 @@
       <file leaf-file-name="frmGrafico.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/monitor/frmGrafico.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
+            <state relative-caret-position="833">
               <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
               <folding />
             </state>
@@ -115,7 +106,7 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monitor/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="255">
               <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
               <folding>
                 <element signature="e#47#75#0" expanded="true" />
@@ -127,7 +118,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monitor/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
+            <state relative-caret-position="1190">
               <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
               <folding>
                 <element signature="e#47#75#0" expanded="true" />
@@ -139,7 +130,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clima/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
+            <state relative-caret-position="459">
               <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
               <folding />
             </state>
@@ -149,7 +140,7 @@
       <file leaf-file-name="phys_pkg.py" pinned="false" current-in-tab="false">
         <entry file="file://C:/Python34/Lib/site-packages/docx/opc/phys_pkg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
+            <state relative-caret-position="374">
               <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
@@ -169,10 +160,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="dummy://restClient/response15.txt" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/clima/login.html" />
         <option value="$PROJECT_DIR$/clima/regrasa.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7cc3a9a2-c8dd-419f-b62e-ff3c832afd80/console.sql" />
         <option value="$PROJECT_DIR$/static/plugins/leaflet/esri-leaflet.js" />
@@ -222,6 +215,7 @@
         <option value="$PROJECT_DIR$/templates/monitor/frmGrafico.html" />
         <option value="$PROJECT_DIR$/monitor/forms.py" />
         <option value="$PROJECT_DIR$/monitor/models.py" />
+        <option value="$PROJECT_DIR$/scripts/member.py" />
         <option value="$PROJECT_DIR$/monitor/prograph.py" />
       </list>
     </option>
@@ -264,6 +258,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -272,9 +267,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -299,6 +317,165 @@
       <recent name="C:\Users\wbeirigo\PycharmProjects\core\templates\login" />
       <recent name="C:\Users\wbeirigo\PycharmProjects\core" />
     </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://10.3.0.29:3003" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="-X POST" />
+                <option name="value" value="" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}&quot;,&quot;constr&quot;:&quot;Chart&quot;}{&quot;infile&quot;:&quot;{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://10.3.0.29:3003" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="-X POST" />
+                <option name="value" value="" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{'infile':'{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}&quot;,&quot;constr&quot;:&quot;Chart&quot;}{&quot;infile&quot;:&quot;{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}','constr':'Chart'}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://10.3.0.29:3003" />
+          <option name="urlPath" value="/resources" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="-X POST" />
+                <option name="value" value="" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{'infile':'{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}&quot;,&quot;constr&quot;:&quot;Chart&quot;}{&quot;infile&quot;:&quot;{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}','constr':'Chart'}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://10.3.0.29:3003" />
+          <option name="urlPath" value="/resources" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="-X POST" />
+                <option name="value" value="" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;infile&quot;:&quot;{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}&quot;,&quot;constr&quot;:&quot;Chart&quot;}{&quot;infile&quot;:&quot;{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}&quot;,&quot;constr&quot;:&quot;Chart&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://10.3.0.29:3003" />
+          <option name="urlPath" value="/resources" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;infile&quot;:&quot;{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}&quot;,&quot;constr&quot;:&quot;Chart&quot;}{&quot;infile&quot;:&quot;{chart: {width:800, plotBackgroundColor: '#E6E6E6', borderColor: 'gray', borderWidth:1 },    title: { text: ' ' },    xAxis: [{ categories: ['EM100S'] , crosshair: true, labels: {style: {fontWeight: 'bold'}}, gridLineWidth:0}],    yAxis: [{title:{ text: 'Alcalinidade de bicarbonato (mg/L)',style: {fontWeight: 'bold', color: 'black'} }, labels: { style: {fontWeight: 'bold' }, format: '{value:.2f}' }, gridLineWidth:4}],    credits: { text: ' ', href: ' '},    plotOptions: { line: { lineWidth: 2, marker: { enabled: false}}},    series: [     { color:'#a8cdd7', borderColor:'#E6E6E6', data:[19.0], name:'Campanha 4/2013', type:'column'},    ]}&quot;,&quot;constr&quot;:&quot;Chart&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Django server.core">
     <configuration default="false" name="member" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -691,7 +868,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463687427300</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Ajustes GRAFICO">
+      <created>1463698037346</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1463698037346</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -700,25 +884,26 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28169015" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28138527" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35861322" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3582251" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3261105" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2707889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27345416" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Dilbert" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37378114" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37337664" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -744,7 +929,8 @@
     <MESSAGE value="Finalizado Mapa&#10;Criação inicio Firemonitor" />
     <MESSAGE value="Firemonitor Incorporado" />
     <MESSAGE value="Inclusão do Monitoramento" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inclusão do Monitoramento" />
+    <MESSAGE value="Ajustes GRAFICO" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustes GRAFICO" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -755,16 +941,12 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/scripts/member.py</url>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/teste/urls.py</url>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/monitor/prograph.py</url>
-          <line>475</line>
+          <line>473</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
@@ -775,7 +957,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="35" />
+      <option name="time" value="44" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -784,10 +966,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-          <folding>
-            <element signature="e#1#49#0" expanded="false" />
-            <marker date="1463604820953" expanded="true" signature="488:618" placeholder="SELECT &quot;CD_G... municipios" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -795,7 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -803,7 +980,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -811,7 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -819,7 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -827,7 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -835,7 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -843,7 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18377">
           <caret line="1081" column="0" selection-start-line="1081" selection-start-column="0" selection-end-line="1081" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -851,7 +1022,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -859,17 +1029,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="e#245#753#0" expanded="false" />
-            <element signature="e#789#1267#0" expanded="false" />
-            <element signature="e#1303#1792#0" expanded="false" />
-            <element signature="e#1831#2839#0" expanded="false" />
-            <element signature="e#2877#3860#0" expanded="false" />
-            <element signature="e#3900#4214#0" expanded="false" />
-            <element signature="e#4254#5043#0" expanded="false" />
-            <element signature="e#5080#5461#0" expanded="false" />
-            <element signature="e#5505#5943#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -877,7 +1036,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -885,12 +1043,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="87" column="29" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#36#0" expanded="false" />
-            <element signature="e#562#741#0" expanded="false" />
-            <element signature="e#793#2073#0" expanded="false" />
-            <element signature="e#2147#2680#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -898,7 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -906,7 +1057,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -914,7 +1064,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -922,7 +1071,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -930,7 +1078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -938,12 +1085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1463508515569" expanded="true" signature="9306:9321" placeholder="..." />
-            <marker date="1463508515569" expanded="true" signature="9359:9374" placeholder="..." />
-            <marker date="1463508515569" expanded="true" signature="16409:16424" placeholder="..." />
-            <marker date="1463508515569" expanded="true" signature="16952:16967" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -951,7 +1092,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -959,16 +1099,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
           <caret line="196" column="17" selection-start-line="196" selection-start-column="17" selection-end-line="196" selection-end-column="17" />
-          <folding>
-            <element signature="e#47#60#0" expanded="true" />
-            <marker date="1463681316231" expanded="true" signature="843:896" placeholder="SELECT codig... Clima_estacoes" />
-            <marker date="1463681316231" expanded="true" signature="1201:1250" placeholder="SELECT * FRO... Clima_estacoes" />
-            <marker date="1463681316231" expanded="true" signature="1802:2215" placeholder="SELECT date_... Clima_dadosestacao" />
-            <marker date="1463681316231" expanded="true" signature="2572:3063" placeholder="SELECT date_... Clima_dadosestacao" />
-            <marker date="1463681316231" expanded="true" signature="3452:3654" placeholder="SELECT &quot;Data... Clima_dadosestacao" />
-            <marker date="1463681316231" expanded="true" signature="3729:3977" placeholder="SELECT &quot;Data... Clima_dadosestacao" />
-            <marker date="1463681316231" expanded="true" signature="4342:4527" placeholder="SELECT &quot;Data... Clima_dadosestacao" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -976,7 +1106,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -984,7 +1113,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -992,9 +1120,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="754">
           <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
-          <folding>
-            <element signature="e#2#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1002,7 +1127,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1010,7 +1134,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1018,7 +1141,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1026,7 +1148,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="444">
           <caret line="422" column="0" selection-start-line="422" selection-start-column="0" selection-end-line="422" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1034,7 +1155,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-275">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1042,7 +1162,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
           <caret line="23" column="93" selection-start-line="23" selection-start-column="93" selection-end-line="23" selection-end-column="93" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,7 +1169,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="173" column="52" selection-start-line="173" selection-start-column="52" selection-end-line="173" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,7 +1176,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1066,7 +1183,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,7 +1190,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1082,17 +1197,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
           <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/member.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1100,7 +1204,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1108,7 +1211,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1116,7 +1218,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1124,7 +1225,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1132,9 +1232,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
           <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-          <folding>
-            <element signature="e#47#60#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1142,13 +1239,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/monitor/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="255">
           <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
           <folding>
             <element signature="e#47#75#0" expanded="true" />
@@ -1158,7 +1254,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/monitor/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
+        <state relative-caret-position="1190">
           <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
           <folding>
             <element signature="e#47#75#0" expanded="true" />
@@ -1168,7 +1264,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clima/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="459">
           <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
           <folding />
         </state>
@@ -1176,33 +1272,15 @@
     </entry>
     <entry file="file://C:/Python34/Lib/site-packages/docx/opc/phys_pkg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
+        <state relative-caret-position="374">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/monitor/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding>
-            <element signature="e#47#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/impacto/Lib/site-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="161" column="73" selection-start-line="161" selection-start-column="73" selection-end-line="161" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/monitor/frmGrafico.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
+        <state relative-caret-position="833">
           <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
           <folding />
         </state>
@@ -1218,16 +1296,42 @@
     </entry>
     <entry file="file://C:/Python34/Lib/site-packages/requests/api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
+        <state relative-caret-position="884">
           <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/impacto/Lib/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monitor/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding>
+            <element signature="e#47#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/member.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/monitor/prograph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="447" column="30" selection-start-line="447" selection-start-column="30" selection-end-line="447" selection-end-column="30" />
+        <state relative-caret-position="391">
+          <caret line="446" column="31" selection-start-line="446" selection-start-column="31" selection-end-line="446" selection-end-column="31" />
           <folding>
             <element signature="e#1#20#0" expanded="true" />
           </folding>

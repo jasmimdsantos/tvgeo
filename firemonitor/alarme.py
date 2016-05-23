@@ -21,10 +21,6 @@ def KelvinToCelcius(t):
 class AlarmeProc:
 
     def __init__(self):
-
-
-
-
         self.__Alarme = None
         self.__Projeto = None
 
@@ -93,8 +89,7 @@ class AlarmeProc:
 
                 for item in Equipe.\
                             objects.\
-                            filter(Projeto_FK_id = self.__Projeto.id): 
-                        
+                            filter(Projeto_FK_id = self.__Projeto.id):
                             destinatario = '{0} <{1}>'.\
                                         format(item.nome,\
                                                 item.email)

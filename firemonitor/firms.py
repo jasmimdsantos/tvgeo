@@ -2,15 +2,15 @@
 #!/usr/bin/env python 
 
 import django
-from monitor.models import FocoFIRMS
+from .models import FocoFIRMS
 from datetime import datetime, timedelta
 from dateutil import parser
 from ftplib import FTP
 import sys
 from os import path, walk,  remove
 import shutil
-from normais.models import Station
-from proj import settings
+from clima.models import Station
+import settings
 from django.contrib.gis.gdal import DataSource
 from django.contrib.gis.gdal import OGRGeometry
 
@@ -123,7 +123,7 @@ CQL_FILTER=regiao_id=4%20or%20id=1&outputFormat=application/json'
 
                 self.layer.spatial_filter = None 
 
-            # Se j· foi processado apaga 
+            # Se j√° foi processado apaga
             if path.isfile(arqsaida):
                 remove(arqsaida)
 
@@ -133,11 +133,6 @@ CQL_FILTER=regiao_id=4%20or%20id=1&outputFormat=application/json'
 def run():
     obj = FIRMS()
     obj.processa()
-
-if __name__ == "__main__":
-    obj = FIRMS()
-    obj.processa()
-
 
 
 

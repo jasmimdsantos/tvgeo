@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*- 
-#!/usr/bin/env python
 import ftplib
 
-import django
+
 from .models import FocoWFABBA
 from datetime import datetime, timedelta
 from ftplib import FTP
-import sys
 from os import path, walk
 import shutil
 import settings
@@ -22,12 +19,10 @@ class WFABBA:
                                     datetime.utcnow().timetuple().tm_yday)
 
         def processa(self):
-
             url = 'ftp.ssec.wisc.edu'
             caminho = 'pub/abba/v65/goes-13/text/' + self.diretorio()
             entrada = settings.WFABBA_PATH + '/entrada/'
             saida  =  settings.WFABBA_PATH + '/saida/'
-
             ftp = FTP(url)
             ftp.login()
             ftp.cwd (caminho)
@@ -48,9 +43,6 @@ class WFABBA:
                     gravar = entrada + arquivo
                     ftp.retrbinary('RETR ' +  arquivo, open(gravar, 'wb').write)
             ftp.quit()
-
-
-
 
     def __init__(self):
 

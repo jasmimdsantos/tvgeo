@@ -19,9 +19,9 @@ class sitemap(object):
             ('Mapa Estações', 'mapaestacoes', 1, False, True),
             ('Normais', 'normais', 1, False, True),
             ('Grafico Normais', 'grafnormais', 2, False, False),
-            ('Automáticas', 'automaticas', 2, False, True),
-            ('Grafico Linhas', 'graflinha', 3, False, False),
-            ('Grafico Total', 'grafautomaticatotal', 3, False, False),
+            ('Automáticas', 'automaticas', 1, False, True),
+            ('Grafico Linhas', 'grafautomatica', 2, False, False),
+            ('Grafico Total', 'grafautomaticatotal', 2, False, False),
 
           )
 

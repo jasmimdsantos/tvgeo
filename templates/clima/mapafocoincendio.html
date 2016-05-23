@@ -117,7 +117,7 @@ function urlencode(str) {
             
             map.on('popupopen', function(e) {
                 var id = e.popup._contentNode.lastElementChild.id;
-                $.get( "/focoCalor/" + id + "/", function( data ) { 
+                $.get( "clima/focoCalor/" + id + "/", function( data ) {
                         e.popup._contentNode.lastElementChild.innerHTML = data; 
                 });
             });

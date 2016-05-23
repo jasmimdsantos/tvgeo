@@ -13,13 +13,11 @@ import json
 from django.core import serializers
 from toolbox import sitetools
 
-
 @login_required ( )
-def clima ( request ):
+def clima( request ):
     context = sitetools.sitemap ( request.get_full_path ( ) ).context
     template = loader.get_template ( 'clima/clima.html' )
     return HttpResponse ( template.render ( context ) )
-
 
 @login_required ( )
 def normais ( request ):
@@ -57,7 +55,6 @@ def normais ( request ):
 
     return HttpResponse ( template.render ( context ) )
 
-
 @login_required ( )
 def grafnormais ( request , station , texto ):
     page = sitetools.sitemap ( request.get_full_path ( ) ).context
@@ -77,7 +74,6 @@ def grafnormais ( request , station , texto ):
     context.update( page )
 
     return HttpResponse ( template.render ( context ) )
-
 
 @login_required ( )
 def automaticas ( request ):
@@ -119,7 +115,6 @@ def automaticas ( request ):
 
     return HttpResponse ( template.render ( context ) )
 
-
 @login_required ( )
 def grafAutomatica ( request , station , ano , mes , texto ):
     page = sitetools.sitemap ( request.get_full_path ( ) ).context
@@ -143,17 +138,14 @@ def grafAutomatica ( request , station , ano , mes , texto ):
 
     return HttpResponse ( template.render ( context ) )
 
-
 def getautomaticajson ( request , station ):
     result = json.dumps ( {'dados': Medicao ( ).graficos ( station )} )
     return HttpResponse ( result , content_type='text/javascript' )
-
 
 def dadosAutomatica ( request , station ):
     result = json.dumps ( {'dados': Medicao ( ).graficos ( station )} )
 
     return HttpResponse ( result , content_type='text/javascript' )
-
 
 @login_required ( )
 def grafAutomaticaTotal ( request , station , texto ):
@@ -178,7 +170,6 @@ def grafAutomaticaTotal ( request , station , texto ):
 
     return HttpResponse ( template.render ( context ) )
 
-
 @login_required ( )
 def mapaestacoes ( request ):
     context = RequestContext ( request )
@@ -187,7 +178,6 @@ def mapaestacoes ( request ):
     context.update ( page )
     return HttpResponse ( template.render ( context ) )
 
-
 def mapafocoincendio ( request ):
     context = RequestContext ( request )
     template = loader.get_template ( 'clima/mapafocoincendio.html' )
@@ -195,7 +185,6 @@ def mapafocoincendio ( request ):
     context.update ( page )
 
     return HttpResponse ( template.render ( context ) )
-
 
 def focoCalor ( request , id ):
     reg = db.FocoItem.objects.get ( id=id )

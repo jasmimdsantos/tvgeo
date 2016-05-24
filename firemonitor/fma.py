@@ -1,14 +1,8 @@
-# -*- coding: utf-8 -*-
-#!/usr/bin/env python
 
-import django
 import psycopg2
 from   datetime import datetime, timedelta
-from   .models import KPI, KPI_Nivel, Projeto
 import math
 from toolbox.tools import  ObjectView
-from toolbox.maillib import Email
-
 
 HOST_CLIMA   = "host='10.3.0.26' \
                 dbname='clima'\

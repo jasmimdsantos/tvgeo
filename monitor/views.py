@@ -41,6 +41,7 @@ def proc_medicao(tipo, colusinas, colcampanha):
 
 
 # Create your views here.
+"""
 def viewGrafico(request):
 
     grafJson = ''
@@ -65,3 +66,4 @@ def viewGrafico(request):
 
     return render(request, 'monitor/frmGrafico.html', {'form': form, 'grafJson': grafJson, 'link': link} )
 
+"""

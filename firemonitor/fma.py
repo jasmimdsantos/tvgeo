@@ -25,10 +25,6 @@ FLOAT_ROUD_PLACES = 4
 
 
 class FMA:
-
-
-
-
     def __init__(self):
         try:
             connstring = HOST_CLIMA
@@ -328,11 +324,8 @@ ORDER BY "Data","Hora" """.format( codigo, data)
                 calcItemFMAP = 0
                 pressao = 0
 
-
             lblfma, colorfma     = self.Resultado(fma)
             lblfmap, colorfmap   = self.Resultado(fmap)
-
-
 
             values =[ fmaAnt,
                       fmaPAnt,
@@ -360,12 +353,6 @@ ORDER BY "Data","Hora" """.format( codigo, data)
             indice += 1
 
         return  self.colecao
-
-
-
-
-
-
 
 
 

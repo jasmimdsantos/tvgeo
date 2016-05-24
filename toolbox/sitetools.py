@@ -17,12 +17,12 @@ class sitemap(object):
     col = ( ('Home', 'home', 0, False, True),
             ('Clima', 'clima', 0, True, True),
             ('Mapa Estações', 'mapaestacoes', 1, False, True),
+            ('Foco Incêndio' , 'mapafocoincendio' , 1 , False , True) ,
             ('Normais', 'normais', 1, False, True),
             ('Grafico Normais', 'grafnormais', 2, False, False),
             ('Automáticas', 'automaticas', 1, False, True),
             ('Grafico Linhas', 'grafautomatica', 2, False, False),
             ('Grafico Total', 'grafautomaticatotal', 2, False, False),
-
           )
 
     def _breadgrumb(self, _path):

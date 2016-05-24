@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^fire.geojson/$', GeoJSONLayerView.as_view(model= FocoItem), name='data'),
     url(r'^mapaestacoes/$', views.mapaestacoes),
     url(r'^mapafocoincendio/$' , views.mapafocoincendio ) ,
+    url(r'^fire.geojson$' , GeoJSONLayerView.as_view ( model=FocoItem ) , name='data' ) ,
     url(r'^normais/$', views.normais),
     url(r'^focoCalor/(?P<id>\d+)/$', views.focoCalor),
     url(r'^$', views.clima),

@@ -1,35 +1,95 @@
 {% extends 'layout.html' %} {% load staticfiles %}
 
-
 {% block cssformat %}
-
     <link rel="stylesheet" href="/static/plugins/leaflet/MarkerCluster.css" />
     <link rel="stylesheet" href="/static/plugins/leaflet/MarkerCluster.Default.css" />
-
-    <style> 
+    <style>
         /* Map */
         #map {
             position: absolute;
             float: left;
-            top: 1%;
+            top: 14%;
             height: 800px;
             width: 100%;
             z-index: 1;
         }
+
         .leaflet-popup-content {
-            width:auto !important;
+            width: 500px;
         }
+
+        .leaflet-popup-wraper {
+            width: 510px;
+        }
+
+    table.popkxy {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 300px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 12px;
+    }
+
+    .popkxy td, .popkxy th {
+    border: 1px solid transparent;
+    height: 30px;
+    transition: all 0.3s;
+    }
+
+    .popkxy th {
+    background: #186C5C;
+    font-weight: bold;
+    color: #fff;
+    }
+
+    .popkxy td {
+    background: #FAFAFA;
+    text-align: center;
+    }
+
+
+    .popkxy tr:nth-child(even) td { background: #FEFEFE; }
+
+
+    .popkxy tr:nth-child(odd) td { background: #F1F1F1; }
+
+    .popkxy tr td:hover { background: #ccc; }
+
+
+    .popkxy .title-table{
+        font-weight: 800;
+        background-color: #000;
+
+    }
+
+    .popkxy tr.first-title{
+        background: #888;
+    }
+
+
+    .popkxy tr:first-child th:nth-child(1) {
+      border-radius: 5px 0 0 0;
+    }
+
+    .popkxy tr:first-child th:last-child {
+      border-radius: 0 5px 0 0;
+    }
+
+    .popkxy a.btngeral {
+        padding: 8px 12px;
+        margin-left: 9px;
+    }
+
+
+
+
     </style>
-
 {% endblock %}
-
-
 
 {% block content %}
        <div id="map"></div>
 {% endblock %}
-
-
 
 {% block scriptsJava %}   
 
@@ -96,7 +156,7 @@ function urlencode(str) {
             popupAnchor: [-3, -76],
         });
         //var dataurl = '{% url "data" %}';
-        var dataurl = '/fire.geojson';
+        var dataurl = '/clima/fire.geojson';
         // Download GeoJSON via Ajax
         $.getJSON(dataurl, function (data) {
             var focos = L.geoJson(data, {
@@ -117,7 +177,7 @@ function urlencode(str) {
             
             map.on('popupopen', function(e) {
                 var id = e.popup._contentNode.lastElementChild.id;
-                $.get( "clima/focoCalor/" + id + "/", function( data ) {
+                $.get( "/clima/focoCalor/" + id + "/", function( data ) {
                         e.popup._contentNode.lastElementChild.innerHTML = data; 
                 });
             });

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'firemonitor',
     'roi',
     'monitor',
+    'impacto',
     'django_extensions',
     'django_mptt_admin',
     'mptt',

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags%}
+{% block content %}
+    <h2 style="text-align: center">Questionário</h2>
+    {% for questao in questoes %}
+        <div class="questQuadrado questQuadroHide" id="quest-{{forloop.counter}}">
+         <h4>{{ questao.titulo }}</h4>
+            <input type="hidden" class="questId" value="{{questao.id}}">
+            {% for resposta in questao.respostas %}
+                <p>
+                    <input type="radio" id="resp-{{resposta.id}}" name="respQuadro-{{questao.id}}" value="{{resposta.id}}">
+                    <label for="resp-{{resposta.id}}">{{resposta.msg}}</label>
+                </p>
+            {% endfor %}
+         </div>
+        <br/>
+    {% endfor %}
+    <button id="toggle_questao">Iniciar Questionário</button>
+{% endblock %}

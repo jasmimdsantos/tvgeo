@@ -1,0 +1,167 @@
+{% extends 'layout.html' %} {% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-lg-12">
+          <h4>Cliente</h4>
+          <div class="col-lg-3">
+              Nome: {{ cliente.nome }}
+          </div>
+          <div class="col-lg-3">
+              CNPJ: {{ cliente.cnpj }}
+          </div>
+      </div>
+      <div class="col-lg-12">
+          <h4>Projeto</h4>
+          <div class="col-lg-3">
+              Nome: {{ projeto.nome }}
+          </div>
+          <div class="col-lg-3">
+              Codigo: {{ projeto.codigo }}
+          </div>
+      </div>
+    </div>
+     <div class="row">
+      <div class="col-lg-12">
+          </br>
+          <div class="col-lg-5">
+              <div class="panel">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionDetail" href="#collapseDetail">
+                            Mais Informações
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseDetail" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-lg-12">
+                              Descrição: {{ projeto.descricao }}
+                        </div>
+                        <div class="col-lg-12">
+                              Status: {{ projeto.status }}
+                        </div>
+                        <div class="col-lg-12">
+                              Data Início: {{ projeto.data_inicio }}
+                        </div>
+                        <div class="col-lg-12">
+                              Data Término: {{ projeto.data_termino }}
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+          <h4>Fases</h4>
+          <div class="col-lg-12">
+              <div class="col-lg-5">
+                  <div class="panel">
+                    <div class="panel-heading dark">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFases" href="#collapseImplant">
+                                Implantação
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseImplant" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-lg-12">
+                                Datatables
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="col-lg-5">
+              <div class="panel">
+                <div class="panel-heading dark">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFases" href="#collapseOperation">
+                            Operação
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOperation" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-lg-12">
+                            Datatables
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+              <div class="col-lg-5">
+                  <div class="panel">
+                    <div class="panel-heading dark">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFases" href="#collapseEnd">
+                                Fechamento
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEnd" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-lg-12">
+                                Datatables
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+
+
+      </div>
+    </div>
+{% endblock %}
+
+{% block scriptsJava %}
+
+<script >
+        $(document).ready(function() {
+           table =  $("#example").DataTable( {
+                "lengthMenu": [[100, -1], [100, "All"]],
+                "processing": true,
+                "serverSide": false,
+                "order": [[ 1, "desc" ]],
+                "ajax": '/impacto/api/get_projetos/'+{{ empresa_id }},
+                "columns": [
+                    { "data": "id", "visible":false },
+                    { "data": "nome" },
+                    { "data": "cod_projeto" },
+                    { "data": "status_FK__descricao" },
+                    { "data": "data_inicio" },
+                    { "data": "data_termino" }
+               ],
+                "language" : {
+                        "sProcessing":   "A processar...",
+                        "sLengthMenu":   "Mostrar _MENU_ registos",
+                        "sZeroRecords":  "Não foram encontrados resultados",
+                        "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+                        "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registos",
+                        "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
+                        "sInfoPostFix":  "",
+                        "sSearch":       "Procurar:",
+                        "sUrl":          "",
+                        "oPaginate": {
+                                        "sFirst":    "Primeiro",
+                                        "sPrevious": "Anterior",
+                                        "sNext":     "Seguinte",
+                                        "sLast":     "Último"
+                                    }
+                }
+            } );
+
+        } );
+    </script>
+
+{% endblock %}

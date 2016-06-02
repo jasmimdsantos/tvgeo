@@ -65,10 +65,16 @@
                       $(this).removeClass('selected');
                   }
                   else {
+                      var url = '/impacto/lst_projetos/';
                       table.$('tr.selected').removeClass('selected');
                       $(this).addClass('selected');
                       id = table.row('.selected').data()['id'];
-                      window.location.replace("/demandas/detalhe/" + id);
+                      var form = $('<form action="' + url + '" method="post">' +
+                                  '<input type="hidden" name="empresa" value="'+id+'" />' +
+                                  '</form>');
+                      console.log(id);
+                      $('body').append(form);
+                      form.submit();
                   }
            } );
 

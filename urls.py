@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^clima/', include('clima.urls')),
     url(r'^firemonitor/' , include ( 'firemonitor.urls' ) ) ,
     url ( r'^monitor/' , include ( 'monitor.urls' ) ) ,
+    url(r'^impacto/', include('impacto.urls')),
     url(r'^$', login.home, name='home'),
 
 

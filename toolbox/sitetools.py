@@ -12,7 +12,7 @@ class sitemap(object):
 
     # lista de registros
     # Cada novo registro deve ser cadastrado na lista abaixo para aparecer no menu
-    # (Nome do item,  caminho, existe subitem (True/False)
+    # (Nome do item,  caminho, existe subitem (True/False, Existe sub Item)
 
     col = ( ('Home', 'home', 0, False, True),
             ('Clima', 'clima', 0, True, True),
@@ -23,6 +23,10 @@ class sitemap(object):
             ('Automáticas', 'automaticas', 1, False, True),
             ('Grafico Linhas', 'grafautomatica', 2, False, False),
             ('Grafico Total', 'grafautomaticatotal', 2, False, False),
+            ('Impacto', 'impacto', 0, True, True),
+            ('Empresas', 'lst_empresa', 1, False, True),
+            ('Projetos', 'lst_projetos', 1, False, True),
+            ('Fase Projetos', 'lst_faseprojeto', 1, False, True),
           )
 
     def _breadgrumb(self, _path):
@@ -45,7 +49,6 @@ class sitemap(object):
                 continue
             registro = reg[0]
             path += '{0}/'.format(registro[1])
-            print(nivel)
             if len(campos)  == nivel+1 or nivel == 2:
                 key ='class ="active"'
                 path = ''

@@ -14,12 +14,7 @@
       </div>
       <div class="col-lg-12">
           <h4>Projeto</h4>
-          <div class="col-lg-3">
-              Nome: {{ projeto.nome }}
-          </div>
-          <div class="col-lg-3">
-              Codigo: {{ projeto.codigo }}
-          </div>
+
       </div>
     </div>
      <div class="row">
@@ -37,6 +32,12 @@
                 <div id="collapseDetail" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="col-lg-12">
+                              Nome: {{ projeto.nome }}
+                        </div>
+                        <div class="col-lg-12">
+                              Codigo: {{ projeto.codigo }}
+                        </div>
+                        <div class="col-lg-12">
                               Descrição: {{ projeto.descricao }}
                         </div>
                         <div class="col-lg-12">
@@ -48,6 +49,7 @@
                         <div class="col-lg-12">
                               Data Término: {{ projeto.data_termino }}
                         </div>
+
                     </div>
                 </div>
               </div>
@@ -58,67 +60,37 @@
     <div class="row">
       <div class="col-lg-12">
           <h4>Fases</h4>
-          <div class="col-lg-12">
-              <div class="col-lg-5">
-                  <div class="panel">
-                    <div class="panel-heading dark">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFases" href="#collapseImplant">
-                                Implantação
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseImplant" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="col-lg-12">
-                                Datatables
-                            </div>
+          <div class="col-lg-5">
+              <section class="panel">
+                <header class="panel-heading custom-tab dark-tab">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#implantacao" data-toggle="tab">Implantação</a>
+                        </li>
+                        <li class="">
+                            <a href="#operacao" data-toggle="tab">Operação</a>
+                        </li>
+                        <li class="">
+                            <a href="#fechamento" data-toggle="tab">Fechamento</a>
+                        </li>
+                    </ul>
+                </header>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="implantacao">
+                            Implantação
                         </div>
-                    </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-12">
-            <div class="col-lg-5">
-              <div class="panel">
-                <div class="panel-heading dark">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFases" href="#collapseOperation">
+                        <div class="tab-pane" id="operacao">
                             Operação
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOperation" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-lg-12">
-                            Datatables
                         </div>
+                        <div class="tab-pane" id="fechamento">
+                            Fechamento
+                        </div>
+                        <div class="tab-pane" id="contact2">Contact</div>
                     </div>
                 </div>
-              </div>
-            </div>
+            </section>
           </div>
-          <div class="col-lg-12">
-              <div class="col-lg-5">
-                  <div class="panel">
-                    <div class="panel-heading dark">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFases" href="#collapseEnd">
-                                Fechamento
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseEnd" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="col-lg-12">
-                                Datatables
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-              </div>
-          </div>
-
 
       </div>
     </div>

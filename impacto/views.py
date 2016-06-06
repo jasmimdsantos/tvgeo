@@ -110,57 +110,6 @@ def lst_faseprojeto(request):
     context.update ( page )
     return render(request, "impacto/lst_faseprojeto.html", context)
 
-## Corrigir valores do 'values' para as views abaixo
-
-def api_get_diagnosticos( request ):
-    query = Diagnostico.objects.values('id', 'nome', 'descricao', 'status_FK__descricao', 'data_inicio', 'data_termino')
-    saida = {"draw": 1 ,
-             "recordsTotal": len ( query ) ,
-             "recordsFiltered": len ( query ) ,
-             "data": list ( query )}
-    dados = json.dumps ( saida , cls=DjangoJSONEncoder )
-    return HttpResponse ( dados , content_type='application/json' )
-
-@login_required
-def lst_diagnosticos(request):
-    context = RequestContext(request)
-    page = sitetools.sitemap ( request.get_full_path ( ) ).context
-    context.update ( page )
-    return render(request, "impacto/lst_diagnosticos.html", context)
-
-def api_get_impactos( request ):
-    query = ImpactoProjeto.objects.values('id', 'nome', 'descricao', 'status_FK__descricao', 'data_inicio', 'data_termino')
-    saida = {"draw": 1 ,
-             "recordsTotal": len ( query ) ,
-             "recordsFiltered": len ( query ) ,
-             "data": list ( query )}
-    dados = json.dumps ( saida , cls=DjangoJSONEncoder )
-    return HttpResponse ( dados , content_type='application/json' )
-
-@login_required
-def lst_impactos(request):
-    context = RequestContext(request)
-    page = sitetools.sitemap ( request.get_full_path ( ) ).context
-    context.update ( page )
-    return render(request, "impacto/lst_impactos.html", context)
-
-def api_get_questionarios( request ):
-    query = Questionario.objects.values('id', 'nome', 'descricao', 'status_FK__descricao', 'data_inicio', 'data_termino')
-    saida = {"draw": 1 ,
-             "recordsTotal": len ( query ) ,
-             "recordsFiltered": len ( query ) ,
-             "data": list ( query )}
-    dados = json.dumps ( saida , cls=DjangoJSONEncoder )
-    return HttpResponse ( dados , content_type='application/json' )
-
-@login_required
-def lst_questionarios(request):
-    context = RequestContext(request)
-    page = sitetools.sitemap ( request.get_full_path ( ) ).context
-    context.update ( page )
-    return render(request, "impacto/lst_questionarios.html", context)
-
-# ---------
 @login_required
 def perfil_projeto(request, projeto):
     context = RequestContext(request)

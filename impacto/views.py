@@ -135,6 +135,8 @@ def create_area(request, projeto):
                           'data_inicio': projeto_FK.data_inicio,
                           'data_termino': projeto_FK.data_termino}
 
+    context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
+
     context['form'] = AreaForm()
     return render(request, "impacto/create_area.html", context)
 

@@ -1,0 +1,50 @@
+<div class="row">
+      <div class="col-lg-12">
+          <h4>Cliente</h4>
+          <div class="col-lg-3">
+              Nome: {{ cliente.nome }}
+          </div>
+          <div class="col-lg-3">
+              CNPJ: {{ cliente.cnpj }}
+          </div>
+      </div>
+    </div>
+<div class="row">
+  <div class="col-lg-12">
+      </br>
+      <div class="col-lg-5">
+          <div class="panel">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionDetail" href="#collapseDetail">
+                       Projeto: {{ projeto.codigo }} - {{ projeto.nome }}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseDetail" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="display dataTable" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                                <th>Data Início</th>
+                                <th>Data Término</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> {{ projeto.descricao }} </td>
+                                <td> {{ projeto.status }} </td>
+                                <td> {{ projeto.data_inicio }} </td>
+                                <td> {{ projeto.data_termino }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          </div>
+      </div>
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div>
+    <h5>Impacto</h5>
+    <table class="display dataTable" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Tipo Area</th>
+                <th>Meio</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td>ID</td>
+                <td>Descrição</td>
+                <td>Tipo Area</td>
+                <td>Meio</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for item in content_include %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.descricao }}</td>
+                    <td>{{ item.tipo_area_FK.descricao }}</td>
+                    <td>{{ item.meio_FK.descricao }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

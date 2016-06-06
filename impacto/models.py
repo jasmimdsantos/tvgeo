@@ -26,7 +26,7 @@ class TipoArea(models.Model):
         return self.descricao
 
 
-class Impacto(models.Model):
+class  Impacto(models.Model):
     """ tabela de status meios """
     meio_FK = models.ForeignKey(Meio, verbose_name='Meio')
     descricao = models.CharField(max_length=250, verbose_name=u'Nome')
@@ -95,10 +95,19 @@ class Projeto(models.Model):
         return self.descricao
 
 
+class Area(models.Model):
+    """ tabela de areas """
+    descricao = models.CharField(max_length=100, verbose_name=u'Descrição')
+    projeto_FK = models.ForeignKey(Projeto, verbose_name=u'Projeto')
+    def __str__(self):
+        return self.descricao
+
+
 class FaseProjeto(models.Model):
     """ tabela de projetos """
     projeto_FK = models.ForeignKey(Projeto, verbose_name='Projeto')
-    descricao = models.TextField(verbose_name=u'Descrição da Fase', default='')
+    TIPO_DESCRICAO = (('P', 'Planejamento'), ('O', 'Operação'), ('I', 'Implantação'), ('F', 'Fechamento'))
+    descricao = models.CharField(max_length=1, choices=TIPO_DESCRICAO, verbose_name=u'Descrição da Fase')
     status_FK = models.ForeignKey(Status_Projeto, verbose_name="Status")
     data_inclusao = models.DateTimeField(default=timezone.now, verbose_name=u'Inclusão', editable=False)
     data_inicio = models.DateField(verbose_name=u'Início')
@@ -106,11 +115,12 @@ class FaseProjeto(models.Model):
     data_encerramento = models.DateField(verbose_name='Encerramento', null=True, blank=True)
 
     def __str__(self):
-        return self.descricao
+        return self.get_descricao_display()
 
 
 class ImpactoProjeto(models.Model):
     """ tabela de status meios """
+    area_FK = models.ForeignKey(Area, verbose_name="Area")
     fase_projeto_FK = models.ForeignKey(FaseProjeto, verbose_name='Fase Projeto')
     impacto_FK = models.ForeignKey(Impacto, verbose_name="Impacto")
     tipo_area_FK = models.ForeignKey(TipoArea, verbose_name='Tipo Área')
@@ -122,6 +132,7 @@ class ImpactoProjeto(models.Model):
 
 
 class Diagnostico(models.Model):
+    area_FK = models.ForeignKey(Area, verbose_name="Area")
     fase_projeto_FK = models.ForeignKey(FaseProjeto, verbose_name='Fase Projeto')
     tipo_area_FK = models.ForeignKey(TipoArea, verbose_name='Tipo Área')
     meio_FK = models.ForeignKey(Meio, verbose_name='Meio')

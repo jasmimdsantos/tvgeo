@@ -1,0 +1,24 @@
+{% extends 'layout.html' %} {% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% include "impacto/include/fase_temp_header.html" %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+      <div class="box">
+          </br>
+          <h2>Criar area</h2>
+          <div class="col-lg-3">
+              <form action="/impacto/create_area/{{ projeto.id }}/" method="POST">
+                  <div class="col-lg-8">
+                      {% csrf_token %}
+                      {{ form|crispy }}
+                  </div>
+                  <div class="col-lg-4" style="padding-top: 10px">
+                      <input class="btn btn-action btn-lg" type="submit" value="Criar">
+                  </div>
+
+              </form>
+          </div>
+      </div>
+  </div>
+{% endblock %}

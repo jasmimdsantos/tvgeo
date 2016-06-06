@@ -16,7 +16,10 @@ urlpatterns = [
     url(r'^api/get_faseprojeto', views.api_get_faseprojeto),
     url(r'^lst_faseprojeto/$', views.lst_faseprojeto),
 
-    url(r'^perfil_projeto/(?P<projeto>\d+)/$$', views.perfil_projeto),
+    url(r'^perfil_projeto/(?P<projeto>\d+)/$', views.perfil_projeto),
+    url(r'^create_area/(?P<projeto>\d+)/$', views.create_area),
+    url(r'^create_impacto/(?P<projeto>\d+)/(?P<faseprojeto>\d+)/$', views.create_impacto),
+    url(r'^create_diagnostico/(?P<projeto>\d+)/(?P<faseprojeto>\d+)/$', views.create_diagnostico),
 
     url(r'^$', views.impacto),
 

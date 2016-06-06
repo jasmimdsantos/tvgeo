@@ -1,0 +1,31 @@
+<div>
+    <h5>Diagnostico</h5>
+    <table class="display dataTable" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo Area</th>
+                <th>Meio</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td>ID</td>
+                <td>Tipo Area</td>
+                <td>Meio</td>
+                <td>Descrição</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for item in content_include %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.tipo_area_FK.descricao }}</td>
+                    <td>{{ item.meio_FK.descricao }}</td>
+                    <td>{{ item.descricao }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

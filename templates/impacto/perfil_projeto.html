@@ -2,54 +2,40 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="row">
-      <div class="col-lg-12">
-          <h4>Cliente</h4>
-          <div class="col-lg-3">
-              Nome: {{ cliente.nome }}
-          </div>
-          <div class="col-lg-3">
-              CNPJ: {{ cliente.cnpj }}
-          </div>
-      </div>
-      <div class="col-lg-12">
-          <h4>Projeto</h4>
 
-      </div>
-    </div>
-     <div class="row">
+    {% include "impacto/include/fase_temp_header.html" %}
+    <div class="row">
       <div class="col-lg-12">
           </br>
           <div class="col-lg-5">
               <div class="panel">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionDetail" href="#collapseDetail">
-                            Mais Informações
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionDetail" href="#collapseAreas">
+                            Areas
                         </a>
                     </h4>
                 </div>
-                <div id="collapseDetail" class="panel-collapse collapse">
+                <div id="collapseAreas" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <div class="col-lg-12">
-                              Nome: {{ projeto.nome }}
-                        </div>
-                        <div class="col-lg-12">
-                              Codigo: {{ projeto.codigo }}
-                        </div>
-                        <div class="col-lg-12">
-                              Descrição: {{ projeto.descricao }}
-                        </div>
-                        <div class="col-lg-12">
-                              Status: {{ projeto.status }}
-                        </div>
-                        <div class="col-lg-12">
-                              Data Início: {{ projeto.data_inicio }}
-                        </div>
-                        <div class="col-lg-12">
-                              Data Término: {{ projeto.data_termino }}
-                        </div>
-
+                    <a href="/impacto/create_area/{{ projeto.id }}/">Criar Area</a>
+                        <table class="display dataTable" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% if not areas.is_true %}
+                                        <td> Não há nenhuma Area! </td>
+                                    {% endif %}
+                                    {% for item in areas.content %}
+                                        <tr>
+                                            <td> {{ item.descricao }} </td>
+                                        </tr>
+                                    {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
               </div>
@@ -64,76 +50,43 @@
               <section class="panel">
                 <header class="panel-heading custom-tab dark-tab">
                     <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#implantacao" data-toggle="tab">Implantação</a>
-                        </li>
-                        <li class="">
-                            <a href="#operacao" data-toggle="tab">Operação</a>
-                        </li>
-                        <li class="">
-                            <a href="#fechamento" data-toggle="tab">Fechamento</a>
-                        </li>
+                        <li class="active"> <a href="#planejamento" data-toggle="tab">Planejamento</a> </li>
+                        <li class=""> <a href="#operacao" data-toggle="tab">Operação</a> </li>
+                        <li class=""> <a href="#implantacao" data-toggle="tab">Implantação</a> </li>
+                        <li class=""> <a href="#fechamento" data-toggle="tab">Fechamento</a> </li>
                     </ul>
                 </header>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="implantacao">
-                            Implantação
+                        <div class="tab-pane active" id="planejamento">
+                            <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.P.id }}/">Criar Impacto</a>
+                            {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.P.content.impacto %}
+                            <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.P.id }}/">Criar Diagnóstico</a>
+                            {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.P.content.diagnostico %}
                         </div>
                         <div class="tab-pane" id="operacao">
-                            Operação
+                            <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.O.id }}/">Criar Impacto</a>
+                            {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.O.content.impacto %}
+                            <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.O.id }}/">Criar Diagnóstico</a>
+                            {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.O.content.diagnostico %}
+                        </div>
+                        <div class="tab-pane" id="implantacao">
+                            <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.I.id }}/">Criar Impacto</a>
+                            {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.I.content.impacto %}
+                            <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.I.id }}/">Criar Diagnóstico</a>
+                            {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.I.content.diagnostico %}
                         </div>
                         <div class="tab-pane" id="fechamento">
-                            Fechamento
+                            <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.F.id }}/">Criar Impacto</a>
+                            {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.F.content.impacto %}
+                            <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.F.id }}/">Criar Diagnóstico</a>
+                            {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.F.content.diagnostico %}
                         </div>
-                        <div class="tab-pane" id="contact2">Contact</div>
+
                     </div>
                 </div>
             </section>
           </div>
-
       </div>
     </div>
-{% endblock %}
-
-{% block scriptsJava %}
-
-<script >
-        $(document).ready(function() {
-           table =  $("#example").DataTable( {
-                "lengthMenu": [[100, -1], [100, "All"]],
-                "processing": true,
-                "serverSide": false,
-                "order": [[ 1, "desc" ]],
-                "ajax": '/impacto/api/get_projetos/'+{{ empresa_id }},
-                "columns": [
-                    { "data": "id", "visible":false },
-                    { "data": "nome" },
-                    { "data": "cod_projeto" },
-                    { "data": "status_FK__descricao" },
-                    { "data": "data_inicio" },
-                    { "data": "data_termino" }
-               ],
-                "language" : {
-                        "sProcessing":   "A processar...",
-                        "sLengthMenu":   "Mostrar _MENU_ registos",
-                        "sZeroRecords":  "Não foram encontrados resultados",
-                        "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registos",
-                        "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registos",
-                        "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
-                        "sInfoPostFix":  "",
-                        "sSearch":       "Procurar:",
-                        "sUrl":          "",
-                        "oPaginate": {
-                                        "sFirst":    "Primeiro",
-                                        "sPrevious": "Anterior",
-                                        "sNext":     "Seguinte",
-                                        "sLast":     "Último"
-                                    }
-                }
-            } );
-
-        } );
-    </script>
-
 {% endblock %}

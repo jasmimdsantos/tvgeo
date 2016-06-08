@@ -61,24 +61,28 @@
                         <div class="tab-pane active" id="planejamento">
                             <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.P.id }}/">Criar Impacto</a>
                             {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.P.content.impacto %}
+                            </br></br>
                             <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.P.id }}/">Criar Diagnóstico</a>
                             {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.P.content.diagnostico %}
                         </div>
                         <div class="tab-pane" id="operacao">
                             <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.O.id }}/">Criar Impacto</a>
                             {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.O.content.impacto %}
+                            </br></br>
                             <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.O.id }}/">Criar Diagnóstico</a>
                             {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.O.content.diagnostico %}
                         </div>
                         <div class="tab-pane" id="implantacao">
                             <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.I.id }}/">Criar Impacto</a>
                             {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.I.content.impacto %}
+                            </br></br>
                             <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.I.id }}/">Criar Diagnóstico</a>
                             {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.I.content.diagnostico %}
                         </div>
                         <div class="tab-pane" id="fechamento">
                             <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.F.id }}/">Criar Impacto</a>
                             {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.F.content.impacto %}
+                            </br></br>
                             <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.F.id }}/">Criar Diagnóstico</a>
                             {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.F.content.diagnostico %}
                         </div>

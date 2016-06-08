@@ -85,6 +85,7 @@ def lst_projetos(request):
     if request.POST:
         if 'empresa' in request.POST:
             context['form'] = Empresa_ProjetosForm(initial={'empresas': request.POST['empresa']})
+            context['empresa_id'] = request.POST['empresa']
         else:
             context['form'] = Empresa_ProjetosForm()
 
@@ -92,23 +93,8 @@ def lst_projetos(request):
             context['empresa_id'] = request.POST['empresas']
     else:
         context['form'] = Empresa_ProjetosForm()
+
     return render(request, "impacto/lst_projetos.html", context)
-
-def api_get_faseprojeto( request ):
-    query = FaseProjeto.objects.values('id', 'descricao', 'status_FK__descricao', 'data_inicio', 'data_termino')
-    saida = {"draw": 1 ,
-             "recordsTotal": len ( query ) ,
-             "recordsFiltered": len ( query ) ,
-             "data": list ( query )}
-    dados = json.dumps ( saida , cls=DjangoJSONEncoder )
-    return HttpResponse ( dados , content_type='application/json' )
-
-@login_required
-def lst_faseprojeto(request):
-    context = RequestContext(request)
-    page = sitetools.sitemap ( request.get_full_path ( ) ).context
-    context.update ( page )
-    return render(request, "impacto/lst_faseprojeto.html", context)
 
 
 @login_required
@@ -140,6 +126,7 @@ def create_area(request, projeto):
     context['form'] = AreaForm()
     return render(request, "impacto/create_area.html", context)
 
+
 @login_required
 def create_impacto(request, projeto, faseprojeto):
     context = RequestContext(request)
@@ -161,13 +148,31 @@ def create_impacto(request, projeto, faseprojeto):
         obj.save()
         return redirect('/impacto/perfil_projeto/'+projeto+"/")
 
+    projeto_FK = Projeto.objects.get(pk=projeto)
+    faseprojeto_FK = FaseProjeto.objects.get(pk=faseprojeto)
+
+    if not projeto_FK.data_termino:
+        projeto_FK.data_termino = "Não Determinado"
+
+    context['projeto'] = {'nome': projeto_FK.nome,
+                          'id': projeto,
+                          'descricao': projeto_FK.descricao,
+                          'codigo': projeto_FK.cod_projeto,
+                          'status': projeto_FK.status_FK,
+                          'data_inicio': projeto_FK.data_inicio,
+                          'data_termino': projeto_FK.data_termino}
+
+    context['fase'] = {'nome': faseprojeto_FK.get_descricao_display}
+
+    context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
+
     form = ImpactoProjetoForm()
     form.fields['area_FK'].queryset = Area.objects.filter(projeto_FK_id=projeto)
 
     context['form'] = form
     context['faseprojeto'] = faseprojeto
-    context['projeto'] = projeto
     return render(request, "impacto/create_impacto.html", context)
+
 
 @login_required
 def create_diagnostico(request, projeto, faseprojeto):
@@ -188,9 +193,26 @@ def create_diagnostico(request, projeto, faseprojeto):
         obj.save()
         return redirect('/impacto/perfil_projeto/'+projeto+"/")
 
+    projeto_FK = Projeto.objects.get(pk=projeto)
+    faseprojeto_FK = FaseProjeto.objects.get(pk=faseprojeto)
+
+    if not projeto_FK.data_termino:
+        projeto_FK.data_termino = "Não Determinado"
+
+    context['projeto'] = {'nome': projeto_FK.nome,
+                          'id': projeto,
+                          'descricao': projeto_FK.descricao,
+                          'codigo': projeto_FK.cod_projeto,
+                          'status': projeto_FK.status_FK,
+                          'data_inicio': projeto_FK.data_inicio,
+                          'data_termino': projeto_FK.data_termino}
+
+    context['fase'] = {'nome': faseprojeto_FK.get_descricao_display}
+
+    context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
+
     context['form'] = DiagnosticoForm()
     context['faseprojeto'] = faseprojeto
-    context['projeto'] = projeto
     return render(request, "impacto/create_diagnostico.html", context)
 
 
@@ -215,21 +237,90 @@ def perfil_projeto(request, projeto):
     areas_FK = Area.objects.filter(projeto_FK_id=projeto)
     if areas_FK:
         context['areas'] = {'is_true': True, 'content': areas_FK}
-    else:
-        context['areas'] = {'is_true': False}
 
     context['fase'] = {'P': {}, 'O': {}, 'I': {}, 'F': {}}
     faseprojeto_FK = FaseProjeto.objects.filter(projeto_FK_id=projeto)
 
     for item in faseprojeto_FK:
-        impactoprojeto_FK = ImpactoProjeto.objects.filter(fase_projeto_FK=item.id)
-        diagnostico_FK = Diagnostico.objects.filter(fase_projeto_FK_id=item.id)
+        impactoprojeto_FK = ImpactoProjeto.objects.filter(fase_projeto_FK=item.id).order_by('-meio_FK_id')
+        diagnostico_FK = Diagnostico.objects.filter(fase_projeto_FK_id=item.id).order_by('-meio_FK_id')
         fase = context['fase']
         impactos = fase[str(item.descricao)] = {'id': item.id, 'content': {'impacto': '', 'diagnostico': ''}}
         impactos['content']['impacto'] = impactoprojeto_FK
         impactos['content']['diagnostico'] = diagnostico_FK
 
+    return render(request, "impacto/perfil_projeto.html", context)
 
-    print(context['fase'])
+@login_required
+def view_area(request, area):
+    context = RequestContext(request)
+    page = sitetools.sitemap(request.get_full_path()).context
+    context.update(page)
+
+    area_FK = Area.objects.get(pk=area)
+    projeto_FK = Projeto.objects.get(pk=area.)
+    cliente_FK = Empresa.objects.get(pk=projeto_FK.cliente_FK_id)
+    if not projeto_FK.data_termino:
+        projeto_FK.data_termino = "Não Determinado"
+    context['cliente'] = {'nome': cliente_FK.nome, 'cnpj': cliente_FK.cnpj}
+    context['projeto'] = {'nome': projeto_FK.nome,
+                          'id': projeto_FK.id,
+                          'descricao': projeto_FK.descricao,
+                          'codigo': projeto_FK.cod_projeto,
+                          'status': projeto_FK.status_FK,
+                          'data_inicio': projeto_FK.data_inicio,
+                          'data_termino': projeto_FK.data_termino}
+
+    areas_FK = Area.objects.filter(projeto_FK_id=projeto)
+    if areas_FK:
+        context['areas'] = {'is_true': True, 'content': areas_FK}
+
+    context['fase'] = {'P': {}, 'O': {}, 'I': {}, 'F': {}}
+    faseprojeto_FK = FaseProjeto.objects.filter(projeto_FK_id=projeto)
+
+    for item in faseprojeto_FK:
+        impactoprojeto_FK = ImpactoProjeto.objects.filter(fase_projeto_FK=item.id).order_by('-meio_FK_id')
+        diagnostico_FK = Diagnostico.objects.filter(fase_projeto_FK_id=item.id).order_by('-meio_FK_id')
+        fase = context['fase']
+        impactos = fase[str(item.descricao)] = {'id': item.id, 'content': {'impacto': '', 'diagnostico': ''}}
+        impactos['content']['impacto'] = impactoprojeto_FK
+        impactos['content']['diagnostico'] = diagnostico_FK
 
     return render(request, "impacto/perfil_projeto.html", context)
+
+
+@login_required
+def view_impacto(request, impacto):
+    context = RequestContext(request)
+    page = sitetools.sitemap ( request.get_full_path ( ) ).context
+    context.update(page)
+    projeto_FK = Projeto.objects.get(pk=projeto)
+    cliente_FK = Empresa.objects.get(pk=projeto_FK.cliente_FK_id)
+    if not projeto_FK.data_termino:
+        projeto_FK.data_termino = "Não Determinado"
+    context['cliente'] = {'nome': cliente_FK.nome, 'cnpj': cliente_FK.cnpj}
+    context['projeto'] = {'nome': projeto_FK.nome,
+                          'id': projeto_FK.id,
+                          'descricao': projeto_FK.descricao,
+                          'codigo': projeto_FK.cod_projeto,
+                          'status': projeto_FK.status_FK,
+                          'data_inicio': projeto_FK.data_inicio,
+                          'data_termino': projeto_FK.data_termino}
+
+    areas_FK = Area.objects.filter(projeto_FK_id=projeto)
+    if areas_FK:
+        context['areas'] = {'is_true': True, 'content': areas_FK}
+
+    context['fase'] = {'P': {}, 'O': {}, 'I': {}, 'F': {}}
+    faseprojeto_FK = FaseProjeto.objects.filter(projeto_FK_id=projeto)
+
+    for item in faseprojeto_FK:
+        impactoprojeto_FK = ImpactoProjeto.objects.filter(fase_projeto_FK=item.id).order_by('-meio_FK_id')
+        diagnostico_FK = Diagnostico.objects.filter(fase_projeto_FK_id=item.id).order_by('-meio_FK_id')
+        fase = context['fase']
+        impactos = fase[str(item.descricao)] = {'id': item.id, 'content': {'impacto': '', 'diagnostico': ''}}
+        impactos['content']['impacto'] = impactoprojeto_FK
+        impactos['content']['diagnostico'] = diagnostico_FK
+
+    return render(request, "impacto/perfil_projeto.html", context)
+

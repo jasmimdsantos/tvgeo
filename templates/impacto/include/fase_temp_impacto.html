@@ -3,27 +3,30 @@
     <table class="display dataTable" width="100%">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Descrição</th>
-                <th>Tipo Area</th>
                 <th>Meio</th>
+                <th>Area</th>
+                <th>Tipo Area</th>
+                <th>Impacto</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <td>ID</td>
-                <td>Descrição</td>
-                <td>Tipo Area</td>
-                <td>Meio</td>
+                <th>Descrição</th>
+                <th>Meio</th>
+                <th>Area</th>
+                <th>Tipo Area</th>
+                <th>Impacto</th>
             </tr>
         </tfoot>
         <tbody>
             {% for item in content_include %}
                 <tr>
-                    <td>{{ item.id }}</td>
                     <td>{{ item.descricao }}</td>
-                    <td>{{ item.tipo_area_FK.descricao }}</td>
                     <td>{{ item.meio_FK.descricao }}</td>
+                    <td><a href="/impacto/area/{{ item.area_FK.id }}/" >{{ item.area_FK.descricao }}</a></td>
+                    <td>{{ item.tipo_area_FK.descricao }}</td>
+                    <td><a href="/impacto/impacto/{{ item.impacto_FK.id }}/">{{ item.impacto_FK.descricao }}</a> </td>
                 </tr>
             {% endfor %}
         </tbody>

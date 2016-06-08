@@ -26,7 +26,7 @@ class sitemap(object):
             ('Impacto', 'impacto', 0, True, True),
             ('Empresas', 'lst_empresa', 1, False, True),
             ('Projetos', 'lst_projetos', 1, False, True),
-            ('Fase Projetos', 'lst_faseprojeto', 1, False, True),
+            ('Perfil Projeto', 'perfil_projeto', 1, False, False),
           )
 
     def _breadgrumb(self, _path):

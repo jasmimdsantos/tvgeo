@@ -9,7 +9,7 @@
       <div class="box">
           <h4>Editar Impacto Projeto</h4>
           <div class="col-lg-3">
-              <form action="/impacto/editar/impacto_projeto/{{ impacto_id }}/" method="POST">
+              <form action="/impacto/projetos/perfil_projeto/editar_impacto_projeto/{{ impacto_id }}/" method="POST">
                   {% csrf_token %}
                   {{ form|crispy }}
                   <input class="btn btn-action btn-lg" type="submit" value="Editar">

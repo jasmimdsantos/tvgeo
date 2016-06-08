@@ -8,7 +8,7 @@
         </br>
       <div class="box">
           <div class="col-lg-3">
-              <form action="/impacto/create_diagnostico/{{ projeto.id }}/{{ faseprojeto }}/" method="POST">
+              <form action="/impacto/projetos/perfil_projeto/criar_diagnostico/{{ projeto.id }}/{{ faseprojeto }}/" method="POST">
                   <div class="col-lg-8">
                       {% csrf_token %}
                       {{ form|crispy }}

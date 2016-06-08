@@ -5,7 +5,7 @@
     <div class="row" xmlns="http://www.w3.org/1999/html">
       <div class="box">
           <div class="col-lg-3">
-              <form action="/impacto/lst_projetos/" method="POST">
+              <form action="/impacto/projetos/" method="POST">
                   <div class="col-lg-8">
                       {% csrf_token %}
                       {{ form|crispy }}
@@ -92,7 +92,7 @@
                       table.$('tr.selected').removeClass('selected');
                       $(this).addClass('selected');
                       id = table.row('.selected').data()['id'];
-                      window.location.replace("/impacto/perfil_projeto/" + id);
+                      window.location.replace("/impacto/projetos/perfil_projeto/" + id);
                   }
            } );
 

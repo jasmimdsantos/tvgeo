@@ -107,7 +107,7 @@ def create_area(request, projeto):
         descricao = request.POST['descricao']
         obj = Area(descricao=descricao, projeto_FK_id=projeto)
         obj.save()
-        return redirect('/impacto/perfil_projeto/'+projeto+"/")
+        return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
 
     projeto_FK = Projeto.objects.get(pk=projeto)
 
@@ -146,7 +146,7 @@ def create_impacto(request, projeto, faseprojeto):
                              meio_FK_id=meiofk,
                              impacto_FK_id=impactofk)
         obj.save()
-        return redirect('/impacto/perfil_projeto/'+projeto+"/")
+        return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
 
     projeto_FK = Projeto.objects.get(pk=projeto)
     faseprojeto_FK = FaseProjeto.objects.get(pk=faseprojeto)
@@ -191,7 +191,7 @@ def create_diagnostico(request, projeto, faseprojeto):
                              tipo_area_FK_id=tipoareafk,
                              meio_FK_id=meiofk)
         obj.save()
-        return redirect('/impacto/perfil_projeto/'+projeto+"/")
+        return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
 
     projeto_FK = Projeto.objects.get(pk=projeto)
     faseprojeto_FK = FaseProjeto.objects.get(pk=faseprojeto)
@@ -221,6 +221,7 @@ def perfil_projeto(request, projeto):
     context = RequestContext(request)
     page = sitetools.sitemap ( request.get_full_path ( ) ).context
     context.update(page)
+    print(context)
     projeto_FK = Projeto.objects.get(pk=projeto)
     cliente_FK = Empresa.objects.get(pk=projeto_FK.cliente_FK_id)
     if not projeto_FK.data_termino:
@@ -278,7 +279,7 @@ def edit_area(request, area):
         obj = Area.objects.get(pk=area)
         obj.descricao = descricao
         obj.save()
-        return redirect('/impacto/perfil_projeto/'+str(area_FK.projeto_FK_id)+"/")
+        return redirect('/impacto/projetos/perfil_projeto/'+str(area_FK.projeto_FK_id)+"/")
 
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
@@ -319,7 +320,7 @@ def edit_impacto_proj(request, impacto):
         obj.impacto_FK_id = impactoForm
         obj.area_FK_id = areaForm
         obj.save()
-        return redirect('/impacto/perfil_projeto/'+str(projeto_FK.id)+"/")
+        return redirect('/impacto/projetos/perfil_projeto/'+str(projeto_FK.id)+"/")
 
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
@@ -360,7 +361,7 @@ def edit_diagnostico(request, diagnostico):
         obj.tipo_area_FK_id = tipo_areaForm
         obj.area_FK_id = areaForm
         obj.save()
-        return redirect('/impacto/perfil_projeto/'+str(projeto_FK.id)+"/")
+        return redirect('/impacto/projetos/perfil_projeto/'+str(projeto_FK.id)+"/")
 
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"

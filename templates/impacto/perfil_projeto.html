@@ -18,7 +18,7 @@
                 </div>
                 <div id="collapseAreas" class="panel-collapse collapse">
                     <div class="panel-body">
-                    <a href="/impacto/create_area/{{ projeto.id }}/">Criar Area</a>
+                    <a href="/impacto/projetos/perfil_projeto/criar_area/{{ projeto.id }}/">Criar Area</a>
                         <table class="display dataTable" width="100%">
                             <thead>
                                 <tr>
@@ -31,7 +31,7 @@
                                     {% endif %}
                                     {% for item in areas.content %}
                                         <tr>
-                                            <td><a href="/impacto/editar/area/{{ item.id }}/">{{ item.descricao }}</a></td>
+                                            <td><a href="/impacto/projetos/perfil_projeto/editar_area/{{ item.id }}/">{{ item.descricao }}</a></td>
                                         </tr>
                                     {% endfor %}
                             </tbody>
@@ -59,31 +59,31 @@
                 <div class="panel-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="planejamento">
-                            <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.P.id }}/">Criar Impacto</a>
+                            <a href="/impacto/projetos/perfil_projeto/criar_impacto_projeto/{{ projeto.id }}/{{ fase.P.id }}/">Criar Impacto</a>
                             {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.P.content.impacto %}
                             </br></br>
-                            <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.P.id }}/">Criar Diagnóstico</a>
+                            <a href="/impacto/projetos/perfil_projeto/criar_diagnostico/{{ projeto.id }}/{{ fase.P.id }}/">Criar Diagnóstico</a>
                             {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.P.content.diagnostico %}
                         </div>
                         <div class="tab-pane" id="operacao">
-                            <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.O.id }}/">Criar Impacto</a>
+                            <a href="/impacto/projetos/perfil_projeto/criar_impacto_projeto/{{ projeto.id }}/{{ fase.O.id }}/">Criar Impacto</a>
                             {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.O.content.impacto %}
                             </br></br>
-                            <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.O.id }}/">Criar Diagnóstico</a>
+                            <a href="/impacto/projetos/perfil_projeto/criar_diagnostico/{{ projeto.id }}/{{ fase.O.id }}/">Criar Diagnóstico</a>
                             {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.O.content.diagnostico %}
                         </div>
                         <div class="tab-pane" id="implantacao">
-                            <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.I.id }}/">Criar Impacto</a>
+                            <a href="/impacto/projetos/perfil_projeto/criar_impacto_projeto/{{ projeto.id }}/{{ fase.I.id }}/">Criar Impacto</a>
                             {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.I.content.impacto %}
                             </br></br>
-                            <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.I.id }}/">Criar Diagnóstico</a>
+                            <a href="/impacto/projetos/perfil_projeto/criar_diagnostico/{{ projeto.id }}/{{ fase.I.id }}/">Criar Diagnóstico</a>
                             {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.I.content.diagnostico %}
                         </div>
                         <div class="tab-pane" id="fechamento">
-                            <a href="/impacto/create_impacto/{{ projeto.id }}/{{ fase.F.id }}/">Criar Impacto</a>
+                            <a href="/impacto/projetos/perfil_projeto/criar_impacto_projeto/{{ projeto.id }}/{{ fase.F.id }}/">Criar Impacto</a>
                             {% include "impacto/include/fase_temp_impacto.html" with content_include=fase.F.content.impacto %}
                             </br></br>
-                            <a href="/impacto/create_diagnostico/{{ projeto.id }}/{{ fase.F.id }}/">Criar Diagnóstico</a>
+                            <a href="/impacto/projetos/perfil_projeto/criar_diagnostico/{{ projeto.id }}/{{ fase.F.id }}/">Criar Diagnóstico</a>
                             {% include "impacto/include/fase_temp_diagnostico.html" with content_include=fase.F.content.diagnostico %}
                         </div>
 

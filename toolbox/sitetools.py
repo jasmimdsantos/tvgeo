@@ -12,21 +12,28 @@ class sitemap(object):
 
     # lista de registros
     # Cada novo registro deve ser cadastrado na lista abaixo para aparecer no menu
-    # (Nome do item,  caminho, existe subitem (True/False, Existe sub Item)
+    # (Nome do item,  caminho, existe subitem (True/False), visível, possue link diâmico (True/False).
 
-    col = ( ('Home', 'home', 0, False, True),
-            ('Clima', 'clima', 0, True, True),
-            ('Mapa Estações', 'mapaestacoes', 1, False, True),
-            ('Foco Incêndio' , 'mapafocoincendio' , 1 , False , True) ,
-            ('Normais', 'normais', 1, False, True),
-            ('Grafico Normais', 'grafnormais', 2, False, False),
-            ('Automáticas', 'automaticas', 1, False, True),
-            ('Grafico Linhas', 'grafautomatica', 2, False, False),
-            ('Grafico Total', 'grafautomaticatotal', 2, False, False),
-            ('Impacto', 'impacto', 0, True, True),
-            ('Empresas', 'lst_empresa', 1, False, True),
-            ('Projetos', 'lst_projetos', 1, False, True),
-            ('Perfil Projeto', 'perfil_projeto', 1, False, False),
+    col = ( ('Home', 'home', 0, False, True, False),
+            ('Clima', 'clima', 0, True, True, False),
+            ('Mapa Estações', 'mapaestacoes', 1, False, True, False),
+            ('Foco Incêndio' , 'mapafocoincendio' , 1 , False , True, False),
+            ('Normais', 'normais', 1, False, True, False),
+            ('Grafico Normais', 'grafnormais', 2, False, False, False),
+            ('Automáticas', 'automaticas', 1, False, True, False),
+            ('Grafico Linhas', 'grafautomatica', 2, False, False, False),
+            ('Grafico Total', 'grafautomaticatotal', 2, False, False, False),
+            ('Impacto', 'impacto', 0, True, True, False),
+            ('Empresas', 'lst_empresa', 1, False, True, False),
+            ('Projetos', 'projetos', 1, False, True, False),
+            ('Perfil Projeto', 'perfil_projeto', 2, False, False, True),
+            ('Editar Area', 'editar_area', 3, False, False, True),
+            ('Criar Area', 'criar_area', 3, False, False, True),
+            ('Editar Impacto', 'editar_impacto_projeto', 3, False, False, True),
+            ('Criar Impacto', 'criar_impacto_projeto', 3, False, False, True),
+            ('Editar Diagnostico', 'editar_diagnostico', 3, False, False, True),
+            ('Criar Diagnostico', 'criar_diagnostico', 3, False, False, True),
+            ('Ver Impacto', 'ver_impacto', 3, False, False, True),
           )
 
     def _breadgrumb(self, _path):
@@ -37,27 +44,35 @@ class sitemap(object):
         """
 
         campos = [item for item in _path.split('/') if item != '']
-        markup =  '<li {2} ><a href="{0}">{1}</a></li>'
+        key ='class ="active"'
 
         path = '/'
         html = ''
         nivel = 0
         titulo = ''
-        for item in campos:
-            reg = [it  for it in self.col if it[1]== item and it[2] == nivel]
+        for i, item in enumerate(campos):
+            reg = [it for it in self.col if it[1] == item and it[2] == nivel]
             if not reg:
                 continue
             registro = reg[0]
-            path += '{0}/'.format(registro[1])
-            if len(campos)  == nivel+1 or nivel == 2:
-                key ='class ="active"'
-                path = ''
-                titulo = registro[0]
-            else:
-                key = ''
-            html += markup.format(path, registro[0], key)
-            nivel +=1
 
+            path += '{0}/'.format(registro[1])
+
+            if len(campos) >= nivel+1 or nivel == 2:
+                titulo = registro[0]
+                if (len(campos)-2) == i:
+                    key ='class="active"'
+                else:
+                    key = ''
+
+            if registro[5]:
+                markup = '<li {0}><a>{2}</a></li>'
+            else:
+                markup = '<li {0}><a href="{1}">{2}</a></li>'
+
+            html += markup.format(key, path, registro[0])
+
+            nivel += 1
 
         return html, titulo
 

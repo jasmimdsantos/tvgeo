@@ -19,8 +19,11 @@ urlpatterns = [
     url(r'^create_impacto/(?P<projeto>\d+)/(?P<faseprojeto>\d+)/$', views.create_impacto),
     url(r'^create_diagnostico/(?P<projeto>\d+)/(?P<faseprojeto>\d+)/$', views.create_diagnostico),
 
-    url(r'^area/(?P<area>\d+)/$', views.view_area),
     url(r'^impacto/(?P<impacto>\d+)/$', views.view_impacto),
+
+    url(r'^editar/area/(?P<area>\d+)/$', views.edit_area),
+    url(r'^editar/impacto_projeto/(?P<impacto>\d+)/$', views.edit_impacto_proj),
+    url(r'^editar/diagnostico/(?P<diagnostico>\d+)/$', views.edit_diagnostico),
 
     url(r'^$', views.impacto),
 

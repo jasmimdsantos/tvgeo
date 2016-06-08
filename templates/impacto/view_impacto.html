@@ -1,0 +1,15 @@
+{% extends 'layout.html' %} {% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+        </br>
+      <div class="box">
+          <div class="col-lg-6">
+              <p>Descrição: {{ impacto.descricao }}</p>
+              <p>Meio: {{ impacto.meio_FK.descricao }}</p>
+              <p>Conceito: {{ impacto.conceito }}</p>
+          </div>
+      </div>
+  </div>
+{% endblock %}

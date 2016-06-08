@@ -31,7 +31,7 @@
                                     {% endif %}
                                     {% for item in areas.content %}
                                         <tr>
-                                            <td> {{ item.descricao }} </td>
+                                            <td><a href="/impacto/editar/area/{{ item.id }}/">{{ item.descricao }}</a></td>
                                         </tr>
                                     {% endfor %}
                             </tbody>

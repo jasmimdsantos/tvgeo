@@ -20,9 +20,9 @@
         <tbody>
             {% for item in content_include %}
                 <tr>
-                    <td>{{ item.descricao }}</td>
+                    <td><a href="/impacto/editar/diagnostico/{{ item.id }}/">{{ item.descricao }}</a></td>
                     <td>{{ item.meio_FK.descricao }}</td>
-                    <td><a href="/impacto/area/{{ item.area_FK.id }}/" >{{ item.area_FK.descricao }}</a></td>
+                    <td><a href="/impacto/editar/area/{{ item.area_FK.id }}/" >{{ item.area_FK.descricao }}</a></td>
                     <td>{{ item.tipo_area_FK.descricao }}</td>
                 </tr>
             {% endfor %}

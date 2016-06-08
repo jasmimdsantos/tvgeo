@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Quadro, QuadroItem, Empresa, Projeto, FaseProjeto, ImpactoProjeto, Questionario, Diagnostico, TipoArea, Area
+from .models import Quadro, QuadroItem, Empresa, Projeto, FaseProjeto, ImpactoProjeto, Questionario, Diagnostico, TipoArea, Area, Impacto
 from .forms import QuadroForm, Empresa_ProjetosForm, AreaForm, ImpactoProjetoForm , DiagnosticoForm
 from django.http import HttpResponse
 from django.template import RequestContext , loader
@@ -225,43 +225,7 @@ def perfil_projeto(request, projeto):
     cliente_FK = Empresa.objects.get(pk=projeto_FK.cliente_FK_id)
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
-    context['cliente'] = {'nome': cliente_FK.nome, 'cnpj': cliente_FK.cnpj}
-    context['projeto'] = {'nome': projeto_FK.nome,
-                          'id': projeto_FK.id,
-                          'descricao': projeto_FK.descricao,
-                          'codigo': projeto_FK.cod_projeto,
-                          'status': projeto_FK.status_FK,
-                          'data_inicio': projeto_FK.data_inicio,
-                          'data_termino': projeto_FK.data_termino}
 
-    areas_FK = Area.objects.filter(projeto_FK_id=projeto)
-    if areas_FK:
-        context['areas'] = {'is_true': True, 'content': areas_FK}
-
-    context['fase'] = {'P': {}, 'O': {}, 'I': {}, 'F': {}}
-    faseprojeto_FK = FaseProjeto.objects.filter(projeto_FK_id=projeto)
-
-    for item in faseprojeto_FK:
-        impactoprojeto_FK = ImpactoProjeto.objects.filter(fase_projeto_FK=item.id).order_by('-meio_FK_id')
-        diagnostico_FK = Diagnostico.objects.filter(fase_projeto_FK_id=item.id).order_by('-meio_FK_id')
-        fase = context['fase']
-        impactos = fase[str(item.descricao)] = {'id': item.id, 'content': {'impacto': '', 'diagnostico': ''}}
-        impactos['content']['impacto'] = impactoprojeto_FK
-        impactos['content']['diagnostico'] = diagnostico_FK
-
-    return render(request, "impacto/perfil_projeto.html", context)
-
-@login_required
-def view_area(request, area):
-    context = RequestContext(request)
-    page = sitetools.sitemap(request.get_full_path()).context
-    context.update(page)
-
-    area_FK = Area.objects.get(pk=area)
-    projeto_FK = Projeto.objects.get(pk=area.)
-    cliente_FK = Empresa.objects.get(pk=projeto_FK.cliente_FK_id)
-    if not projeto_FK.data_termino:
-        projeto_FK.data_termino = "Não Determinado"
     context['cliente'] = {'nome': cliente_FK.nome, 'cnpj': cliente_FK.cnpj}
     context['projeto'] = {'nome': projeto_FK.nome,
                           'id': projeto_FK.id,
@@ -292,13 +256,32 @@ def view_area(request, area):
 @login_required
 def view_impacto(request, impacto):
     context = RequestContext(request)
-    page = sitetools.sitemap ( request.get_full_path ( ) ).context
+    page = sitetools.sitemap(request.get_full_path()).context
     context.update(page)
-    projeto_FK = Projeto.objects.get(pk=projeto)
-    cliente_FK = Empresa.objects.get(pk=projeto_FK.cliente_FK_id)
+
+    impacto_FK = Impacto.objects.get(pk=impacto)
+    context['impacto'] = impacto_FK
+
+    return render(request, "impacto/view_impacto.html", context)
+
+@login_required
+def edit_area(request, area):
+    context = RequestContext(request)
+    page = sitetools.sitemap(request.get_full_path()).context
+    context.update(page)
+
+    area_FK = Area.objects.get(pk=area)
+    projeto_FK = Projeto.objects.get(pk=area_FK.projeto_FK_id)
+
+    if request.POST:
+        descricao = request.POST['descricao']
+        obj = Area.objects.get(pk=area)
+        obj.descricao = descricao
+        obj.save()
+        return redirect('/impacto/perfil_projeto/'+str(area_FK.projeto_FK_id)+"/")
+
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
-    context['cliente'] = {'nome': cliente_FK.nome, 'cnpj': cliente_FK.cnpj}
     context['projeto'] = {'nome': projeto_FK.nome,
                           'id': projeto_FK.id,
                           'descricao': projeto_FK.descricao,
@@ -307,20 +290,92 @@ def view_impacto(request, impacto):
                           'data_inicio': projeto_FK.data_inicio,
                           'data_termino': projeto_FK.data_termino}
 
-    areas_FK = Area.objects.filter(projeto_FK_id=projeto)
-    if areas_FK:
-        context['areas'] = {'is_true': True, 'content': areas_FK}
+    context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
+    context['area_id'] = area_FK.id
+    context['form'] = AreaForm(instance=area_FK)
 
-    context['fase'] = {'P': {}, 'O': {}, 'I': {}, 'F': {}}
-    faseprojeto_FK = FaseProjeto.objects.filter(projeto_FK_id=projeto)
+    return render(request, "impacto/edit_area.html", context)
 
-    for item in faseprojeto_FK:
-        impactoprojeto_FK = ImpactoProjeto.objects.filter(fase_projeto_FK=item.id).order_by('-meio_FK_id')
-        diagnostico_FK = Diagnostico.objects.filter(fase_projeto_FK_id=item.id).order_by('-meio_FK_id')
-        fase = context['fase']
-        impactos = fase[str(item.descricao)] = {'id': item.id, 'content': {'impacto': '', 'diagnostico': ''}}
-        impactos['content']['impacto'] = impactoprojeto_FK
-        impactos['content']['diagnostico'] = diagnostico_FK
+@login_required
+def edit_impacto_proj(request, impacto):
+    context = RequestContext(request)
+    page = sitetools.sitemap(request.get_full_path()).context
+    context.update(page)
 
-    return render(request, "impacto/perfil_projeto.html", context)
+    impactoProj_FK = ImpactoProjeto.objects.get(pk=impacto)
+    projeto_FK = impactoProj_FK.fase_projeto_FK.projeto_FK
+    projeto_FK = Projeto.objects.get(pk=projeto_FK.id)
 
+    if request.POST:
+        descricaoForm = request.POST['descricao']
+        meioForm = request.POST['meio_FK']
+        tipo_areaForm = request.POST['tipo_area_FK']
+        impactoForm = request.POST['impacto_FK']
+        areaForm = request.POST['area_FK']
+        obj = ImpactoProjeto.objects.get(pk=impacto)
+        obj.descricao = descricaoForm
+        obj.meio_FK_id = meioForm
+        obj.tipo_area_FK_id = tipo_areaForm
+        obj.impacto_FK_id = impactoForm
+        obj.area_FK_id = areaForm
+        obj.save()
+        return redirect('/impacto/perfil_projeto/'+str(projeto_FK.id)+"/")
+
+    if not projeto_FK.data_termino:
+        projeto_FK.data_termino = "Não Determinado"
+
+    context['projeto'] = {'nome': projeto_FK.nome,
+                          'id': projeto_FK.id,
+                          'descricao': projeto_FK.descricao,
+                          'codigo': projeto_FK.cod_projeto,
+                          'status': projeto_FK.status_FK,
+                          'data_inicio': projeto_FK.data_inicio,
+                          'data_termino': projeto_FK.data_termino}
+
+    context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
+    context['impacto_id'] = impacto
+    context['fase'] = {'nome': impactoProj_FK.fase_projeto_FK.get_descricao_display}
+    context['form'] = ImpactoProjetoForm(instance=impactoProj_FK)
+
+    return render(request, "impacto/edit_impacto_projeto.html", context)
+
+@login_required
+def edit_diagnostico(request, diagnostico):
+    context = RequestContext(request)
+    page = sitetools.sitemap(request.get_full_path()).context
+    context.update(page)
+
+    diagnostico_FK = Diagnostico.objects.get(pk=diagnostico)
+    projeto_FK = diagnostico_FK.fase_projeto_FK.projeto_FK
+    projeto_FK = Projeto.objects.get(pk=projeto_FK.id)
+
+    if request.POST:
+        descricaoForm = request.POST['descricao']
+        meioForm = request.POST['meio_FK']
+        tipo_areaForm = request.POST['tipo_area_FK']
+        areaForm = request.POST['area_FK']
+        obj = Diagnostico.objects.get(pk=diagnostico)
+        obj.descricao = descricaoForm
+        obj.meio_FK_id = meioForm
+        obj.tipo_area_FK_id = tipo_areaForm
+        obj.area_FK_id = areaForm
+        obj.save()
+        return redirect('/impacto/perfil_projeto/'+str(projeto_FK.id)+"/")
+
+    if not projeto_FK.data_termino:
+        projeto_FK.data_termino = "Não Determinado"
+
+    context['projeto'] = {'nome': projeto_FK.nome,
+                          'id': projeto_FK.id,
+                          'descricao': projeto_FK.descricao,
+                          'codigo': projeto_FK.cod_projeto,
+                          'status': projeto_FK.status_FK,
+                          'data_inicio': projeto_FK.data_inicio,
+                          'data_termino': projeto_FK.data_termino}
+
+    context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
+    context['diagnostico_id'] = diagnostico
+    context['fase'] = {'nome': diagnostico_FK.fase_projeto_FK.get_descricao_display}
+    context['form'] = DiagnosticoForm(instance=diagnostico_FK)
+
+    return render(request, "impacto/edit_diagnostico.html", context)

@@ -21,7 +21,11 @@ def quadro(request):
         respostas = []
         quadro_item_FK = QuadroItem.objects.filter(quadro_FK=quadro)
         for item in quadro_item_FK:
-            resposta = {'msg': item.descricao, 'id': item.id}
+            resposta = {'msg': item.descricao,
+                        'msg2':item.descricao1,
+                        'id': item.id,
+                        'classe': item.classe,
+                        'escala': item.escala}
             respostas.append(resposta)
 
         quest['respostas'] = respostas

@@ -145,7 +145,8 @@ class Diagnostico(models.Model):
 class QuestionarioInterno(models.Model):
     impacto_projeto_FK = models.ForeignKey(ImpactoProjeto, verbose_name='Impacto')
     pessoa_FK = models.ForeignKey(Pessoa, verbose_name="Pessoa")
-    quadro_item_FK = models.ForeignKey(QuadroItem, verbose_name='Resposta')
+    resp_provavel = models.ForeignKey(QuadroItem, verbose_name='Resposta Provável', related_name='RespProv')
+    resp_potencial = models.ForeignKey(QuadroItem, verbose_name='Resposta Potencial', related_name='RespPot')
 
     def __str__(self):
         return "---"

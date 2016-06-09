@@ -26,11 +26,14 @@ urlpatterns = [
     url(r'^mudasenha/', login.mudasenha, name="mudasenha"),
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('login.urls')),
+    url(r'^webhome/', include('login.urls')),
+    url(r'^accounts/login/', include('login.urls')),
     url(r'^clima/', include('clima.urls')),
     url(r'^firemonitor/' , include ( 'firemonitor.urls' ) ) ,
     url ( r'^monitor/' , include ( 'monitor.urls' ) ) ,
     url(r'^impacto/', include('impacto.urls')),
     url(r'^$', login.home, name='home'),
+
 
 
 ]

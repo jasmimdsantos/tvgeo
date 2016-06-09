@@ -143,5 +143,7 @@ def home(request):
     @param request:
     @return:
     """
+    request.session.items = []
+    request.session.modified = True
     logout(request)
     return render(request, 'login/home.html')

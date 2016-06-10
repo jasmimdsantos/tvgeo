@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags%}
+{% block cssformat %}
+    <link rel="stylesheet" href="/static/assets/css/quadro.css">
+{% endblock %}
+
+{% block content %}
+    <h2 style="text-align: center">AVALIAÇÃO DE IMPACTO AMBIENTAL</h2>
+    <div>
+        <table>
+          <tr>
+            <th>Critério</th>
+            <th>Impacto Potencial</th>
+            <th>Mitigação / Controle / Potencialização</th>
+            <th>Impacto Provável</th>
+          </tr>
+            {% for resposta in respostas %}
+            <tr>
+                <th>{{ resposta.criterio }}</th>
+                <th>{{ resposta.potencial }}</th>
+                <th></th>
+                <th>{{ resposta.provavel }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

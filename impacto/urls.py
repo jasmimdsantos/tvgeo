@@ -5,7 +5,9 @@ from impacto import views
 
 urlpatterns = [
 
-    url(r'^quadro/', views.quadro),
+    url(r'^api/set_quadro/(?P<impacto>\d+)/$', views.quadro),
+    url(r'^quadro/(?P<impacto>\d+)/$', views.quadro),
+    url(r'^quadro/$', views.quadro_post),
 
     url(r'^api/get_empresas', views.api_get_empresas),
     url(r'^lst_empresa/$', views.lst_empresas),

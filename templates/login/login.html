@@ -57,29 +57,33 @@
                         </span>
                     </label>
                 </div>
+                </form>
 
                 <!-- Modal -->
+
                 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
                     <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Esqueceu sua senha?</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Digite seu e-mail abaixo para resetar sua senha</p>
-                                <input type="text" name="email-reset" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                        <form class="form-reset"  method="post" action="/login/">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Esqueceu sua senha?</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Digite seu e-mail abaixo para resetar sua senha</p>
+                                    <input type="text" id="email-reset" name="email-reset" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
 
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button class="btn btn-primary btn-send-reset" type="submit">Enviar</button>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
-                                <button class="btn btn-primary" type="submit">Enviar</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-                <!-- modal -->
-            </form>
+            <!-- modal -->
+
         </div>
 
         <!-- Placed js at the end of the document so the pages load faster -->
@@ -88,6 +92,9 @@
         <script src="/static/assets/js/vendor/jquery-1.12.0.min.js"></script>
         <script src="/static/assets/js/vendor/bootstrap.min.js"></script>
         <script src="/static/assets/js/vendor/modernizr.min.js"></script>
+        <script src="/static/assets/js/vendor/bootbox.min.js"></script>
+        <script src="/static/assets/js/login.js"></script>
+
 
     </body>
 </html>

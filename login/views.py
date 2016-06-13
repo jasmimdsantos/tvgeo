@@ -28,11 +28,11 @@ def loginusr(request):
 
     context = {}
     if request.POST:
-        reset_mail = request.POST['email-reset']
         username = request.POST['mail']
         password = request.POST['password']
 
-        if reset_mail:
+        if 'email-reset' in request.POST:
+            reset_mail = request.POST['email-reset']
             try:
                 user_reset = User.objects.get(username__exact=reset_mail)
                 if user_reset:

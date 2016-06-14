@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import Quadro, QuadroItem, Empresa, Projeto, FaseProjeto, ImpactoProjeto, Questionario, Diagnostico, TipoArea, Area, Impacto
+from .models import Quadro, QuadroItem, Empresa, Projeto, FaseProjeto, ImpactoProjeto, QuestionarioInterno, Diagnostico, TipoArea, Area, Impacto, Pessoa
 from .forms import QuadroForm, Empresa_ProjetosForm, AreaForm, ImpactoProjetoForm , DiagnosticoForm
 from django.http import HttpResponse
 from django.template import RequestContext , loader
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 from toolbox import sitetools
 import json
+import requests
 from django.core.serializers.json import DjangoJSONEncoder
 
-def quadro(request):
+@login_required
+def quadro(request, impacto):
     context = {}
     context['page'] = 'Quadro Questões'
     questoes = []
@@ -17,21 +20,86 @@ def quadro(request):
     quadro_FK = Quadro.objects.all()
 
     for quadro in quadro_FK:
-        quest = {'titulo': quadro.descricao, 'id': quadro.id, 'respostas': []}
+        quest = {'titulo': quadro.descricao,
+                 'id': quadro.id,
+                 'respostas': []}
+
         respostas = []
         quadro_item_FK = QuadroItem.objects.filter(quadro_FK=quadro)
         for item in quadro_item_FK:
-            resposta = {'msg': item.descricao, 'id': item.id}
+            resposta = {'msg': item.descricao,
+                        'msg2':item.descricao1,
+                        'id': item.id,
+                        'classe': item.classe,
+                        'escala': item.escala}
             respostas.append(resposta)
 
         quest['respostas'] = respostas
         questoes.append(quest)
 
-    form = QuadroForm()
-    context['form'] = form
     context['questoes'] = questoes
-    
+    context['impacto'] = impacto
+
     return render(request, 'impacto/quadro.html', context)
+
+@csrf_exempt
+@login_required
+def quadro_gab(request, impacto):
+    criterios = ['Efeito',
+                 'Incidência',
+                 'Prazo de ocorrência',
+                 'Partes Interessadas',
+                 'Enquadramento legal',
+                 'Duração do impacto na fase',
+                 'Duração da fase',
+                 'Forma de atuação',
+                 'Intensidade',
+                 'Temporalidade',
+                 'Abrangência',
+                 'Reversibilidade',
+                 'Tendência',
+                 'Significância',
+                 'Cumulativo']
+    context = {}
+    questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto).order_by('id')
+    context['respostas'] = []
+    for i, quest in enumerate(questionarios):
+        if i == 6:
+            quest.resp_potencial.classe = quest.resp_potencial.descricao
+            quest.resp_provavel.classe = quest.resp_provavel.descricao
+
+        mont = {'potencial': quest.resp_potencial.classe,
+                'provavel': quest.resp_provavel.classe,
+                'criterio': criterios[i]}
+
+        context['respostas'].append(mont)
+
+    return render(request, 'impacto/quadro_post.html', context)
+
+@csrf_exempt
+@login_required
+def quadro_post(request):
+    if request.method == "POST":
+        json_receive = json.loads(request.body.decode("utf-8"))
+        impacto = json_receive['impacto']
+        user = Pessoa.objects.get(usuario_id=request.user.id).id
+        respostas = json_receive['respostas']
+
+        questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto)
+        if questionarios:
+            questionarios.delete()
+
+        for resposta in respostas:
+            qry = QuestionarioInterno(pessoa_FK_id=user,
+                                      impacto_projeto_FK_id=impacto,
+                                      resp_potencial_id=resposta['potencial'],
+                                      resp_provavel_id=resposta['provavel'])
+            qry.save()
+
+        return redirect("/quadro/gab/"+impacto+"/")
+    else:
+        return HttpResponse(status=403)
+
 
 @login_required
 def impacto(request):

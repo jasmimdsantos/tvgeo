@@ -1,0 +1,15 @@
+.questQuadrado label {
+    display:inline-block;
+    background-color:#ddd;
+    padding:4px 11px;
+    font-family:Arial;
+    font-size:16px;
+}
+
+.questQuadroHide, .PPSelect { display: none; }
+
+.questQuadrado input[type="radio"] { display:none; }
+
+.questQuadrado input[type="radio"]:checked + label  { background-color:#bbb; }
+
+.PPSelected {background-color: #1b6d85; color: white}

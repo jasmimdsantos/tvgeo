@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+    <h2 style="text-align: center">AVALIAÇÃO DE IMPACTO AMBIENTAL - GABARITO</h2>
+    <div>
+        <table width="100%" class="dataTable">
+          <tr>
+            <th>Critério</th>
+            <th>Impacto Potencial</th>
+            <th>Mitigação / Controle / Potencialização</th>
+            <th>Impacto Provável</th>
+          </tr>
+            {% for resposta in respostas %}
+                <tr>
+                    <td>{{ resposta.criterio }}</td>
+                    <td>{{ resposta.potencial }}</td>
+                    <td>--------------</td>
+                    <td>{{ resposta.provavel }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

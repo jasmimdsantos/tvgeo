@@ -1,19 +1,77 @@
 {% extends "layout.html" %}
 {% load crispy_forms_tags%}
+{% block cssformat %}
+    <link rel="stylesheet" href="/static/assets/css/quadro.css">
+{% endblock %}
+
 {% block content %}
-    <h2 style="text-align: center">Questionário</h2>
+    <h2 style="text-align: center">AVALIAÇÃO DE IMPACTO AMBIENTAL</h2>
+    <input type="hidden" id="impactoId" value="{{impacto}}"/>
     {% for questao in questoes %}
         <div class="questQuadrado questQuadroHide" id="quest-{{forloop.counter}}">
-         <h4>{{ questao.titulo }}</h4>
-            <input type="hidden" class="questId" value="{{questao.id}}">
-            {% for resposta in questao.respostas %}
-                <p>
-                    <input type="radio" id="resp-{{resposta.id}}" name="respQuadro-{{questao.id}}" value="{{resposta.id}}">
-                    <label for="resp-{{resposta.id}}">{{resposta.msg}}</label>
-                </p>
-            {% endfor %}
+            <h4>{{ questao.titulo }}</h4>
+            <input type="hidden" class="questId" value="{{questao.id}}"/>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        {% if questao.respostas.0.classe and questao.respostas.0.classe.strip %}<th>Classe</th>{% endif %}
+                        {% if questao.respostas.0.msg and questao.respostas.0.msg.strip and questao.respostas.0.msg2 and questao.respostas.0.msg2.strip %}
+                            <th>Definição - Impacto Negativo</th>
+                            <th>Definição - Impacto Positivo</th>
+                        {% elif questao.respostas.0.msg and questao.respostas.0.msg.strip %}
+                            <th>Definição</th>
+                        {% endif %}
+                        {% if questao.respostas.0.escala and questao.respostas.0.escala.strip %}
+                            <th>Escala</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resposta in questao.respostas %}
+                        <tr>
+                            {% if resposta.classe and resposta.classe.strip %}
+                                <td>
+                                    <input class="respostas" type="radio" id="resp-{{resposta.id}}" name="respQuadro-{{questao.id}}" value="{{resposta.id}}">
+                                    <label id="respLabel-{{resposta.id}}" for="resp-{{resposta.id}}">{{ resposta.classe }}</label>
+                                </td>
+                            {% endif %}
+
+                            {% if resposta.msg and resposta.msg.strip and resposta.msg2 and resposta.msg2.strip %}
+                                <td><label for="resp-{{resposta.id}}">{{resposta.msg}}</label></td>
+                                <td><label for="resp-{{resposta.id}}">{{resposta.msg2}}</label></td>
+                            {% elif resposta.msg and resposta.msg.strip and not resposta.classe and not resposta.classe.strip %}
+                                <td>
+                                    <input class="respostas" type="radio" id="resp-{{resposta.id}}" name="respQuadro-{{questao.id}}" value="{{resposta.id}}">
+                                    <label id="respLabel-{{resposta.id}}" for="resp-{{resposta.id}}">{{resposta.msg}}</label>
+                                </td>
+                            {% elif resposta.msg and resposta.msg.strip %}
+                                <td><label for="resp-{{resposta.id}}">{{resposta.msg}}</label></td>
+                            {% endif %}
+
+                            {% if resposta.escala and resposta.escala.strip %}
+                                <td><label for="resp-{{resposta.id}}">{{resposta.escala}}</label></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
          </div>
-        <br/>
     {% endfor %}
-    <button id="toggle_questao">Iniciar Questionário</button>
+    <div class="PPSelect">
+        <table border="1" style="width:20%">
+            <tr id="pot-tr">
+                <td>Impacto Potencial</td>
+                <td><div id="pot-value">Nenhum Selecionado</div></td>
+            </tr>
+            <tr id="prov-tr">
+                <td>Impacto Provável</td>
+                <td><div id="prov-value">Nenhum Selecionado</div></td>
+            </tr>
+        </table>
+    </div>
+    <button class="btn btn btn-primary" id="toggle_questao">Iniciar Questionário</button>
+{% endblock %}
+
+{% block scriptsJava %}
+    <script language="JavaScript" type="text/javascript" src="/static/assets/js/quadro.js"></script>
 {% endblock %}

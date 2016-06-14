@@ -33,7 +33,7 @@ class ImpactoProjetoForm(ModelForm):
 
     class Meta():
         model = ImpactoProjeto
-        fields = ['descricao', 'impacto_FK', 'tipo_area_FK', 'meio_FK', 'area_FK']
+        fields = ['descricao',  'meio_FK', 'impacto_FK', 'tipo_area_FK',  'area_FK']
 
 
 class DiagnosticoForm(ModelForm):

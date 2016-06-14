@@ -4,7 +4,7 @@
 {% block content %}
     <h2 style="text-align: center">AVALIAÇÃO DE IMPACTO AMBIENTAL - GABARITO</h2>
     <div>
-        <form action="/impacto/quadro/" method="post">
+        <form action="/impacto/quadro/" onsubmit="return selectAll();" method="post">
             <input type="hidden" name="impacto" value="{{ impacto }}">
             {% include "impacto/include/quadro_post.html" %}
             <button class="btn btn btn-primary">Concluir</button>
@@ -12,4 +12,19 @@
         </br>
         </br>
     </div>
+{% endblock %}
+
+{% block scriptsJava %}
+    <script language="JavaScript" type="text/javascript" src="/static/assets/js/multiselect.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('#multiselect').multiselect();
+        });
+        function selectAll(){
+            for (var i = 0; i < document.getElementById("multiselect_to").options.length; i++){
+                document.getElementById("multiselect_to").options[i].selected = true;
+            }
+            return true;
+        }
+    </script>
 {% endblock %}

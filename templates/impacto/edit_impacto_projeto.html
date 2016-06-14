@@ -20,7 +20,7 @@
                     <div id="questionariointerno" class="panel-collapse collapse">
                         <div class="panel-body">
                             {% if aia.respostas|length >= 5  %}
-                                {% include "impacto/include/quadro_post.html" with respostas=aia.respostas aia=aia.aia_gab%}
+                                {% include "impacto/include/quadro_post.html" with respostas=aia.respostas aia=aia.aia_gab programas=aia.programas_gab %}
                             {% else %}
                                 Você não respondeu ao formulário.
                             {% endif %}

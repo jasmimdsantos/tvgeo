@@ -5,6 +5,33 @@
     <div class="row" xmlns="http://www.w3.org/1999/html">
     {% include "impacto/include/fase_temp_header_fase.html" %}
     {% include "impacto/include/fase_temp_header.html" %}
+        <div class="row">
+          <div class="col-lg-12">
+              </br>
+              <div class="col-lg-8">
+                  <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#questionariointerno" href="#questionariointerno">
+                               Questionário Interno
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="questionariointerno" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            {% if aia.respostas|length >= 5  %}
+                                {% include "impacto/include/quadro_post.html" with respostas=aia.respostas aia=aia.aia_gab%}
+                            {% else %}
+                                Você não respondeu ao formulário.
+                            {% endif %}
+
+                            <a class="btn btn btn-primary" href="/impacto/quadro/{{ impacto_id }}/">Responder Questionário</a>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
         </br>
       <div class="box">
           <h4>Editar Impacto Projeto</h4>

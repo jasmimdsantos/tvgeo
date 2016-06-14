@@ -25,13 +25,13 @@ class QuestaoAdmin(admin.ModelAdmin):
 
 class QuadroItemDetailInline(admin.TabularInline):
     model = QuadroItem
-    fields =  ['classe', 'descricao', ]
+    fields =  ['classe', 'descricao', 'descricao1', 'escala', ]
     show_change_link = True
     extra = 0
 
 class QuadroAdmin(admin.ModelAdmin):
     fieldsets = [
-                 (None, {'fields': ['ordem','descricao', ]}),
+                 (None, {'fields': ['ordem','descricao','descricao_curta', ]}),
                 ]
     inlines = [ QuadroItemDetailInline, ]
 

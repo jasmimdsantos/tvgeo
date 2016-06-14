@@ -42,9 +42,7 @@ def quadro(request, impacto):
 
     return render(request, 'impacto/quadro.html', context)
 
-@csrf_exempt
-@login_required
-def quadro_gab(request, impacto):
+def respostas_gab(impacto):
     criterios = ['Efeito',
                  'Incidência',
                  'Prazo de ocorrência',
@@ -63,6 +61,7 @@ def quadro_gab(request, impacto):
     context = {}
     questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto).order_by('id')
     context['respostas'] = []
+    context['impacto'] = impacto
     for i, quest in enumerate(questionarios):
         if i == 6:
             quest.resp_potencial.classe = quest.resp_potencial.descricao
@@ -74,29 +73,46 @@ def quadro_gab(request, impacto):
 
         context['respostas'].append(mont)
 
-    return render(request, 'impacto/quadro_post.html', context)
+    return context
+
+@csrf_exempt
+@login_required
+def quadro_gab(request, impacto):
+    context = {'rec': True}
+    context.update(respostas_gab(impacto))
+    return render(request, 'impacto/quadro_gab.html', context)
 
 @csrf_exempt
 @login_required
 def quadro_post(request):
     if request.method == "POST":
-        json_receive = json.loads(request.body.decode("utf-8"))
-        impacto = json_receive['impacto']
-        user = Pessoa.objects.get(usuario_id=request.user.id).id
-        respostas = json_receive['respostas']
+        if 'respGab' in request.POST:
+            resp_gabarito = request.POST['respGab']
+            impacto_gab = request.POST['impacto']
 
-        questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto)
-        if questionarios:
-            questionarios.delete()
-
-        for resposta in respostas:
-            qry = QuestionarioInterno(pessoa_FK_id=user,
-                                      impacto_projeto_FK_id=impacto,
-                                      resp_potencial_id=resposta['potencial'],
-                                      resp_provavel_id=resposta['provavel'])
+            qry = ImpactoProjeto.objects.get(pk=impacto_gab)
+            qry.aia = resp_gabarito
             qry.save()
+            return redirect("/impacto/projetos/perfil_projeto/editar_impacto_projeto/"+impacto_gab+"/")
 
-        return redirect("/quadro/gab/"+impacto+"/")
+        else:
+            json_receive = json.loads(request.body.decode("utf-8"))
+            impacto = json_receive['impacto']
+            user = Pessoa.objects.get(usuario_id=request.user.id).id
+            respostas = json_receive['respostas']
+
+            questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto)
+            if questionarios:
+                questionarios.delete()
+
+            for resposta in respostas:
+                qry = QuestionarioInterno(pessoa_FK_id=user,
+                                          impacto_projeto_FK_id=impacto,
+                                          resp_potencial_id=resposta['potencial'],
+                                          resp_provavel_id=resposta['provavel'])
+                qry.save()
+
+            return HttpResponse(status=201)
     else:
         return HttpResponse(status=403)
 
@@ -405,7 +421,8 @@ def edit_impacto_proj(request, impacto):
     context['impacto_id'] = impacto
     context['fase'] = {'nome': impactoProj_FK.fase_projeto_FK.get_descricao_display}
     context['form'] = ImpactoProjetoForm(instance=impactoProj_FK)
-
+    context['aia'] = {'aia_gab': impactoProj_FK.aia}
+    context['aia'].update(respostas_gab(impacto))
     return render(request, "impacto/edit_impacto_projeto.html", context)
 
 @login_required

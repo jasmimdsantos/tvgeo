@@ -100,7 +100,6 @@ $(document).ready(function() {
         type_pot = 1;
         selectRadio(val_pot);
         enableRadio();
-
     }
 
     function processProv(){

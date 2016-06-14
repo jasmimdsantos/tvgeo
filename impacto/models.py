@@ -39,6 +39,7 @@ class  Impacto(models.Model):
 class Quadro(models.Model):
     ordem = models.IntegerField(verbose_name='Ordem')
     descricao = models.TextField(verbose_name=u'Descrição')
+    descricao_curta = models.CharField(max_length=30, verbose_name=u'Descrição Curta *Máximo 30 caracteres')
 
     class Meta:
         ordering = ['ordem', ]
@@ -49,10 +50,10 @@ class Quadro(models.Model):
 
 class QuadroItem(models.Model):
     quadro_FK = models.ForeignKey(Quadro, verbose_name='Quadro')
-    classe    = models.TextField(verbose_name=u'Classe')
+    classe    = models.TextField(verbose_name=u'Classe', blank=True)
     descricao = models.TextField(verbose_name=u'Descrição')
-    descricao1 = models.TextField(verbose_name=u'Descrição Secundária')
-    escala = models.TextField(verbose_name=u'Escala')
+    descricao1 = models.TextField(verbose_name=u'Descrição Secundária', blank=True)
+    escala = models.TextField(verbose_name=u'Escala', blank=True)
 
     def __str__(self):
         return self.descricao
@@ -126,6 +127,7 @@ class ImpactoProjeto(models.Model):
     tipo_area_FK = models.ForeignKey(TipoArea, verbose_name='Tipo Área')
     meio_FK = models.ForeignKey(Meio, verbose_name='Meio')
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
+    aia = models.CharField(max_length=50, verbose_name=u'AIA')
 
     def __str__(self):
         return self.descricao

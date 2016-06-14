@@ -1,0 +1,20 @@
+<table width="100%" class="dataTable">
+  <tr>
+    <th>Critério</th>
+    <th>Impacto Potencial</th>
+    <th>Mitigação / Controle / Potencialização</th>
+    <th>Impacto Provável</th>
+  </tr>
+    {% for resposta in respostas %}
+        <tr>
+            <td>{{ resposta.criterio }}</td>
+            <td>{{ resposta.potencial }}</td>
+            {% if forloop.first %}
+                <td rowspan="{{ respostas | length }}">
+                    <textarea rows="4" cols="50" name="respGab" {% if aia %} disabled>{{ aia }}</textarea> {% else %}></textarea>{% endif %}
+                </td>
+            {% endif %}
+            <td>{{ resposta.provavel }}</td>
+        </tr>
+    {% endfor %}
+</table>

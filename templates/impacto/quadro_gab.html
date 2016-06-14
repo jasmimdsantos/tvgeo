@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+    <h2 style="text-align: center">AVALIAÇÃO DE IMPACTO AMBIENTAL - GABARITO</h2>
+    <div>
+        <form action="/impacto/quadro/" method="post">
+            <input type="hidden" name="impacto" value="{{ impacto }}">
+            {% include "impacto/include/quadro_post.html" %}
+            <button class="btn btn btn-primary">Concluir</button>
+        </form>
+        </br>
+        </br>
+    </div>
+{% endblock %}

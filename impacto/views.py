@@ -1,5 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import Quadro, QuadroItem, Empresa, Projeto, FaseProjeto, ImpactoProjeto, QuestionarioInterno, Diagnostico, TipoArea, Area, Impacto, Pessoa
+from .models import Quadro, \
+    QuadroItem, \
+    Empresa, \
+    Projeto,\
+    FaseProjeto, \
+    ImpactoProjeto, \
+    QuestionarioInterno, \
+    Diagnostico, \
+    Programa, \
+    ProgramaImpacto, \
+    Area, \
+    Impacto,\
+    Pessoa
+
 from .forms import QuadroForm, Empresa_ProjetosForm, AreaForm, ImpactoProjetoForm , DiagnosticoForm
 from django.http import HttpResponse
 from django.template import RequestContext , loader
@@ -63,7 +76,12 @@ def respostas_gab(impacto):
 @csrf_exempt
 @login_required
 def quadro_gab(request, impacto):
-    context = {'rec': True}
+    context = {'rec': True, 'programas': []}
+    programas_FK = Programa.objects.all()
+    for programa in programas_FK:
+        mont = {'descricao': programa.descricao, 'id': programa.id}
+        context['programas'].append(mont)
+
     context.update(respostas_gab(impacto))
     return render(request, 'impacto/quadro_gab.html', context)
 
@@ -72,11 +90,22 @@ def quadro_gab(request, impacto):
 def quadro_post(request):
     if request.method == "POST":
         if 'respGab' in request.POST:
-            resp_gabarito = request.POST['respGab']
+            resp_gabarito = request.POST.getlist('respGab')
             impacto_gab = request.POST['impacto']
+            string_respGab = request.POST['respGabText']
+
+            programa_inpacto_FK = ProgramaImpacto.objects.filter(impacto_projeto_FK_id=impacto_gab)
+            if programa_inpacto_FK:
+                programa_inpacto_FK.delete()
+
+            for prog in resp_gabarito:
+                qry1 = ProgramaImpacto(impacto_projeto_FK_id=impacto_gab,
+                                       pessoa_FK_id=request.user.id,
+                                       programa_FK_id=prog)
+                qry1.save()
 
             qry = ImpactoProjeto.objects.get(pk=impacto_gab)
-            qry.aia = resp_gabarito
+            qry.aia = string_respGab
             qry.save()
             return redirect("/impacto/projetos/perfil_projeto/editar_impacto_projeto/"+impacto_gab+"/")
 
@@ -407,7 +436,14 @@ def edit_impacto_proj(request, impacto):
     context['fase'] = {'nome': impactoProj_FK.fase_projeto_FK.get_descricao_display}
     context['form'] = ImpactoProjetoForm(instance=impactoProj_FK)
     context['aia'] = {'aia_gab': impactoProj_FK.aia}
+
+    programa_json = {'programas_gab': []}
+    programas_Resp = ProgramaImpacto.objects.filter(impacto_projeto_FK_id=impacto)
+    for programa in programas_Resp:
+        programa_json['programas_gab'].append(programa.programa_FK.descricao)
+
     context['aia'].update(respostas_gab(impacto))
+    context['aia'].update(programa_json)
     return render(request, "impacto/edit_impacto_projeto.html", context)
 
 @login_required

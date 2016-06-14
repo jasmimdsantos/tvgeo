@@ -25,6 +25,13 @@ class TipoArea(models.Model):
     def __str__(self):
         return self.descricao
 
+class Programa(models.Model):
+    """ tabela de programas e mitigação """
+    descricao = models.TextField(verbose_name=u'Descrição')
+
+    def __str__(self):
+        return self.descricao
+
 
 class  Impacto(models.Model):
     """ tabela de status meios """
@@ -119,6 +126,9 @@ class FaseProjeto(models.Model):
         return self.get_descricao_display()
 
 
+
+
+
 class ImpactoProjeto(models.Model):
     """ tabela de status meios """
     area_FK = models.ForeignKey(Area, verbose_name="Area")
@@ -152,6 +162,16 @@ class QuestionarioInterno(models.Model):
 
     def __str__(self):
         return "---"
+
+class ProgramaImpacto(models.Model):
+    impacto_projeto_FK = models.ForeignKey(ImpactoProjeto, verbose_name='Impacto')
+    pessoa_FK = models.ForeignKey(Pessoa, verbose_name="Pessoa")
+    programa_FK = models.ForeignKey(Programa)
+
+    def __str__(self):
+        return "---"
+
+
 
 
 class Questionario(models.Model):

@@ -6,7 +6,7 @@ from django.contrib import admin
 from .models import (Empresa, Meio, TipoArea, Projeto,
                      Status_Projeto, Pessoa, Impacto,
                     Quadro, QuadroItem, Questao, QuestaoItem,
-                     Questionario, FaseProjeto)
+                     Questionario, FaseProjeto, Programa)
 
 class QuestaoItemDetailInline(admin.TabularInline):
     model = QuestaoItem
@@ -42,6 +42,7 @@ admin.site.register(Quadro, QuadroAdmin)
 admin.site.register(Meio)
 admin.site.register(TipoArea)
 admin.site.register(Status_Projeto)
+admin.site.register(Programa)
 admin.site.register(Pessoa)
 admin.site.register(Projeto)
 admin.site.register(FaseProjeto)

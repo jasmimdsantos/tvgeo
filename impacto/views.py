@@ -43,21 +43,6 @@ def quadro(request, impacto):
     return render(request, 'impacto/quadro.html', context)
 
 def respostas_gab(impacto):
-    criterios = ['Efeito',
-                 'Incidência',
-                 'Prazo de ocorrência',
-                 'Partes Interessadas',
-                 'Enquadramento legal',
-                 'Duração do impacto na fase',
-                 'Duração da fase',
-                 'Forma de atuação',
-                 'Intensidade',
-                 'Temporalidade',
-                 'Abrangência',
-                 'Reversibilidade',
-                 'Tendência',
-                 'Significância',
-                 'Cumulativo']
     context = {}
     questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto).order_by('id')
     context['respostas'] = []
@@ -69,7 +54,7 @@ def respostas_gab(impacto):
 
         mont = {'potencial': quest.resp_potencial.classe,
                 'provavel': quest.resp_provavel.classe,
-                'criterio': criterios[i]}
+                'criterio': quest.resp_potencial.quadro_FK.descricao_curta}
 
         context['respostas'].append(mont)
 

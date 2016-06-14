@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from toolbox import sitetools
 import json
+import requests
 from django.core.serializers.json import DjangoJSONEncoder
 
 @login_required
@@ -41,51 +42,61 @@ def quadro(request, impacto):
 
     return render(request, 'impacto/quadro.html', context)
 
+@csrf_exempt
+@login_required
+def quadro_gab(request, impacto):
+    criterios = ['Efeito',
+                 'Incidência',
+                 'Prazo de ocorrência',
+                 'Partes Interessadas',
+                 'Enquadramento legal',
+                 'Duração do impacto na fase',
+                 'Duração da fase',
+                 'Forma de atuação',
+                 'Intensidade',
+                 'Temporalidade',
+                 'Abrangência',
+                 'Reversibilidade',
+                 'Tendência',
+                 'Significância',
+                 'Cumulativo']
+    context = {}
+    questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto).order_by('id')
+    context['respostas'] = []
+    for i, quest in enumerate(questionarios):
+        if i == 6:
+            quest.resp_potencial.classe = quest.resp_potencial.descricao
+            quest.resp_provavel.classe = quest.resp_provavel.descricao
+
+        mont = {'potencial': quest.resp_potencial.classe,
+                'provavel': quest.resp_provavel.classe,
+                'criterio': criterios[i]}
+
+        context['respostas'].append(mont)
+
+    return render(request, 'impacto/quadro_post.html', context)
 
 @csrf_exempt
 @login_required
 def quadro_post(request):
     if request.method == "POST":
         json_receive = json.loads(request.body.decode("utf-8"))
-        if 'rec' in json_receive:
-            criterios = ['Efeito',
-                         'Incidência',
-                         'Prazo de ocorrência',
-                         'Partes Interessadas',
-                         'Enquadramento legal',
-                         'Duração do impacto na fase',
-                         'Duração da fase',
-                         'Forma de atuação',
-                         'Intensidade',
-                         'Temporalidade',
-                         'Abrangência',
-                         'Reversibilidade',
-                         'Tendência',
-                         'Significância',
-                         'Cumulativo']
-            context = {}
-            questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK=request['impacto_id']).order_by('id')
-            context['respostas'] = {}
-            for i, quest in enumerate(questionarios):
-                mont = {'potencial': quest.resp_potencial,
-                        'provavel': quest.resp_provavel,
-                        'criterio': criterios[i]}
-                context['respostas'].push(mont)
+        impacto = json_receive['impacto']
+        user = Pessoa.objects.get(usuario_id=request.user.id).id
+        respostas = json_receive['respostas']
 
-            return render(request, 'impacto/quadro_post.html', context)
-        else:
-            impacto = json_receive['impacto']
-            user = Pessoa.objects.get(usuario_id=request.user.id).id
-            respostas = json_receive['respostas']
+        questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto)
+        if questionarios:
+            questionarios.delete()
 
-            for resposta in respostas:
-                qry = QuestionarioInterno(pessoa_FK_id=user,
-                                          impacto_projeto_FK_id=impacto,
-                                          resp_potencial_id=resposta['potencial'],
-                                          resp_provavel_id=resposta['provavel'])
-                qry.save()
+        for resposta in respostas:
+            qry = QuestionarioInterno(pessoa_FK_id=user,
+                                      impacto_projeto_FK_id=impacto,
+                                      resp_potencial_id=resposta['potencial'],
+                                      resp_provavel_id=resposta['provavel'])
+            qry.save()
 
-            return HttpResponse(status=201)
+        return redirect("/quadro/gab/"+impacto+"/")
     else:
         return HttpResponse(status=403)
 

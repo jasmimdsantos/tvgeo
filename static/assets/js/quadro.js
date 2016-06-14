@@ -35,13 +35,6 @@ $(document).ready(function() {
         }
     }
 
-    function redirectGab(impacto){
-        str_json = {'impacto': impacto, 'rec': true};
-        xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-        xmlhttp.open("POST", "/impacto/quadro_post/");
-        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xmlhttp.send(JSON.stringify(str_json));
-    }
     function writeRespDB(){
         impacto = $("#impactoId").val();
         str_json = {'impacto': impacto, 'respostas': respostas};
@@ -50,7 +43,7 @@ $(document).ready(function() {
         xmlhttp.open("POST", "/impacto/quadro/");
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.send(JSON.stringify(str_json));
-        redirectGab(impacto);
+        window.location.href = "/impacto/quadro/gabarito/"+impacto+"/";
     }
 
     function saveResp(value_prov, value_pot){

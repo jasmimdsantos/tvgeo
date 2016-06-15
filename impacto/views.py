@@ -14,16 +14,25 @@ from .models import Quadro, \
     Pessoa
 
 from .forms import QuadroForm, Empresa_ProjetosForm, AreaForm, ImpactoProjetoForm , DiagnosticoForm
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext , loader
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from toolbox import sitetools
 import json
-import requests
 from django.core.serializers.json import DjangoJSONEncoder
 
+@csrf_exempt
+def api_get_impacto(request, meio):
+    context = {'impactos':[]}
+    impactos_FK = Impacto.objects.filter(meio_FK_id=meio)
+
+    for impacto in impactos_FK:
+        mont = {'nome': impacto.descricao, 'id': impacto.id}
+        context['impactos'].append(mont)
+
+    return JsonResponse(context)
 @login_required
 def quadro(request, impacto):
     context = {}

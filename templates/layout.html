@@ -1,7 +1,11 @@
 {% load staticfiles %}
+{% load leaflet_tags %}
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
+        {% leaflet_js %}
+        {% leaflet_css %}
+
         {% include 'head.html' %}
         {% block cssformat %}{% endblock %}
     </head>

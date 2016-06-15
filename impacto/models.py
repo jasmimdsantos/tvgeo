@@ -175,7 +175,7 @@ class ProgramaImpacto(models.Model):
 
 
 class Questionario(models.Model):
-    fase_projeto_FK = models.ForeignKey(FaseProjeto, verbose_name='Fase Projeto')
+    projeto_FK = models.ForeignKey(Projeto, verbose_name='Projeto')
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
     data_inclusao = models.DateTimeField(default=timezone.now, verbose_name=u'Inclusão', editable=False)
     data_inicio = models.DateField(verbose_name=u'Início')
@@ -187,7 +187,7 @@ class Questionario(models.Model):
 
 class Questao(models.Model):
 
-    TIPO_QUESTAO = (('A', 'Aberta'), ('F', 'Fechada'),)
+    TIPO_QUESTAO = (('A', 'Aberta'), ('M', 'Multipla'), ('U', 'Única'))
 
     questionario_FK = models.ForeignKey(Questionario, verbose_name='Questionario')
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
@@ -200,23 +200,30 @@ class Questao(models.Model):
 class QuestaoItem(models.Model):
     questao_FK = models.ForeignKey(Questao, verbose_name='Questao')
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
-
     def __str__(self):
         return self.descricao
 
 
-class QuestResp(models.Model):
+class Usuario_Questionario(models.Model):
     questionario_FK = models.ForeignKey(Questionario, verbose_name='Questionario')
     data_inclusao = models.DateTimeField(default=timezone.now, verbose_name=u'Inclusão', editable=False)
     nome = models.CharField(max_length=50, verbose_name=u'Descrição')
+    endereco = models.CharField(max_length=50, verbose_name=u'Endereço')
+    compl = models.CharField(max_length=10, verbose_name=u'Compl')
+    bairro = models.CharField(max_length=40, verbose_name=u'Bairro')
+    cidade = models.CharField(max_length=50, verbose_name=u'Cidade')
+    uf = models.CharField(max_length=2, verbose_name=u'Estado')
+    cep = models.CharField(max_length=9, verbose_name=u'CEP')
+    telefone = models.CharField(max_length=9, verbose_name=u'Telefone')
     email = models.CharField(max_length=50, verbose_name=u'Descrição')
 
     def __str__(self):
-        return self.descricao
+        return self.nome
 
 
 class QuestRespItem(models.Model):
-    quest_comunid_resp_item_FK = models.ForeignKey(QuestaoItem, verbose_name='Resposta')
+    usuario = models.ForeignKey(Usuario_Questionario, verbose_name='Usuario')
+    quest__item_FK = models.ForeignKey(QuestaoItem, verbose_name='Resposta')
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
 
     def __str__(self):

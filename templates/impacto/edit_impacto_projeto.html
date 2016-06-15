@@ -65,6 +65,11 @@
          $( "#id_meio_FK" ).change(function() {
             changeImpacto();
         });
-        changeImpacto();
+
+        $(document).ready(function() {
+            valOld = $('#id_impacto_FK option:selected').val();
+            changeImpacto();
+        });
+
     </script>
 {% endblock %}

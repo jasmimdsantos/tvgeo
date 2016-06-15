@@ -211,10 +211,14 @@ def create_area(request, projeto):
     context.update ( page )
 
     if request.POST:
-        descricao = request.POST['descricao']
-        obj = Area(descricao=descricao, projeto_FK_id=projeto)
-        obj.save()
-        return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
+        form = AreaForm(request.POST)
+        if form.is_valid():
+            descricao = request.POST['descricao']
+            obj = Area(descricao=descricao, projeto_FK_id=projeto)
+            obj.save()
+            return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
+    else:
+        form = AreaForm()
 
     projeto_FK = Projeto.objects.get(pk=projeto)
 
@@ -230,7 +234,8 @@ def create_area(request, projeto):
 
     context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
 
-    context['form'] = AreaForm()
+    context['form'] = form
+
     return render(request, "impacto/create_area.html", context)
 
 
@@ -241,19 +246,24 @@ def create_impacto(request, projeto, faseprojeto):
     context.update ( page )
 
     if request.POST:
-        descricao = request.POST['descricao']
-        areafk = request.POST['area_FK']
-        tipoareafk = request.POST['tipo_area_FK']
-        meiofk = request.POST['meio_FK']
-        impactofk = request.POST['impacto_FK']
-        obj = ImpactoProjeto(descricao=descricao,
-                             fase_projeto_FK_id=faseprojeto,
-                             area_FK_id=areafk,
-                             tipo_area_FK_id=tipoareafk,
-                             meio_FK_id=meiofk,
-                             impacto_FK_id=impactofk)
-        obj.save()
-        return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
+        form = ImpactoProjetoForm(request.POST)
+        if form.is_valid():
+            descricao = request.POST['descricao']
+            areafk = request.POST['area_FK']
+            tipoareafk = request.POST['tipo_area_FK']
+            meiofk = request.POST['meio_FK']
+            impactofk = request.POST['impacto_FK']
+            obj = ImpactoProjeto(descricao=descricao,
+                                 fase_projeto_FK_id=faseprojeto,
+                                 area_FK_id=areafk,
+                                 tipo_area_FK_id=tipoareafk,
+                                 meio_FK_id=meiofk,
+                                 impacto_FK_id=impactofk)
+            obj.save()
+            return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
+
+    else:
+        form = ImpactoProjetoForm()
 
     projeto_FK = Projeto.objects.get(pk=projeto)
     faseprojeto_FK = FaseProjeto.objects.get(pk=faseprojeto)
@@ -273,7 +283,6 @@ def create_impacto(request, projeto, faseprojeto):
 
     context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
 
-    form = ImpactoProjetoForm()
     form.fields['area_FK'].queryset = Area.objects.filter(projeto_FK_id=projeto)
 
     context['form'] = form
@@ -288,17 +297,21 @@ def create_diagnostico(request, projeto, faseprojeto):
     context.update ( page )
 
     if request.POST:
-        descricao = request.POST['descricao']
-        areafk = request.POST['area_FK']
-        tipoareafk = request.POST['tipo_area_FK']
-        meiofk = request.POST['meio_FK']
-        obj = Diagnostico(descricao=descricao,
-                             fase_projeto_FK_id=faseprojeto,
-                             area_FK_id=areafk,
-                             tipo_area_FK_id=tipoareafk,
-                             meio_FK_id=meiofk)
-        obj.save()
-        return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
+        form = DiagnosticoForm(request.POST)
+        if form.is_valid():
+            descricao = request.POST['descricao']
+            areafk = request.POST['area_FK']
+            tipoareafk = request.POST['tipo_area_FK']
+            meiofk = request.POST['meio_FK']
+            obj = Diagnostico(descricao=descricao,
+                                 fase_projeto_FK_id=faseprojeto,
+                                 area_FK_id=areafk,
+                                 tipo_area_FK_id=tipoareafk,
+                                 meio_FK_id=meiofk)
+            obj.save()
+            return redirect('/impacto/projetos/perfil_projeto/'+projeto+"/")
+    else:
+        form = DiagnosticoForm()
 
     projeto_FK = Projeto.objects.get(pk=projeto)
     faseprojeto_FK = FaseProjeto.objects.get(pk=faseprojeto)
@@ -318,7 +331,7 @@ def create_diagnostico(request, projeto, faseprojeto):
 
     context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
 
-    context['form'] = DiagnosticoForm()
+    context['form'] = form
     context['faseprojeto'] = faseprojeto
     return render(request, "impacto/create_diagnostico.html", context)
 
@@ -382,11 +395,15 @@ def edit_area(request, area):
     projeto_FK = Projeto.objects.get(pk=area_FK.projeto_FK_id)
 
     if request.POST:
-        descricao = request.POST['descricao']
-        obj = Area.objects.get(pk=area)
-        obj.descricao = descricao
-        obj.save()
-        return redirect('/impacto/projetos/perfil_projeto/'+str(area_FK.projeto_FK_id)+"/")
+        form =AreaForm(request.POST)
+        if form.is_valid():
+            descricao = request.POST['descricao']
+            obj = Area.objects.get(pk=area)
+            obj.descricao = descricao
+            obj.save()
+            return redirect('/impacto/projetos/perfil_projeto/'+str(area_FK.projeto_FK_id)+"/")
+    else:
+        form = AreaForm(instance=area_FK)
 
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
@@ -400,7 +417,7 @@ def edit_area(request, area):
 
     context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
     context['area_id'] = area_FK.id
-    context['form'] = AreaForm(instance=area_FK)
+    context['form'] = form
 
     return render(request, "impacto/edit_area.html", context)
 
@@ -415,20 +432,23 @@ def edit_impacto_proj(request, impacto):
     projeto_FK = Projeto.objects.get(pk=projeto_FK.id)
 
     if request.POST:
-        descricaoForm = request.POST['descricao']
-        meioForm = request.POST['meio_FK']
-        tipo_areaForm = request.POST['tipo_area_FK']
-        impactoForm = request.POST['impacto_FK']
-        areaForm = request.POST['area_FK']
-        obj = ImpactoProjeto.objects.get(pk=impacto)
-        obj.descricao = descricaoForm
-        obj.meio_FK_id = meioForm
-        obj.tipo_area_FK_id = tipo_areaForm
-        obj.impacto_FK_id = impactoForm
-        obj.area_FK_id = areaForm
-        obj.save()
-        return redirect('/impacto/projetos/perfil_projeto/'+str(projeto_FK.id)+"/")
-
+        form = ImpactoProjetoForm(request.POST)
+        if form.is_valid():
+            descricaoForm = request.POST['descricao']
+            meioForm = request.POST['meio_FK']
+            tipo_areaForm = request.POST['tipo_area_FK']
+            impactoForm = request.POST['impacto_FK']
+            areaForm = request.POST['area_FK']
+            obj = ImpactoProjeto.objects.get(pk=impacto)
+            obj.descricao = descricaoForm
+            obj.meio_FK_id = meioForm
+            obj.tipo_area_FK_id = tipo_areaForm
+            obj.impacto_FK_id = impactoForm
+            obj.area_FK_id = areaForm
+            obj.save()
+            return redirect('/impacto/projetos/perfil_projeto/'+str(projeto_FK.id)+"/")
+    else:
+        form = ImpactoProjetoForm(instance=impactoProj_FK)
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
 
@@ -443,7 +463,7 @@ def edit_impacto_proj(request, impacto):
     context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
     context['impacto_id'] = impacto
     context['fase'] = {'nome': impactoProj_FK.fase_projeto_FK.get_descricao_display}
-    context['form'] = ImpactoProjetoForm(instance=impactoProj_FK)
+    context['form'] = form
     context['aia'] = {'aia_gab': impactoProj_FK.aia}
 
     programa_json = {'programas_gab': []}
@@ -466,17 +486,21 @@ def edit_diagnostico(request, diagnostico):
     projeto_FK = Projeto.objects.get(pk=projeto_FK.id)
 
     if request.POST:
-        descricaoForm = request.POST['descricao']
-        meioForm = request.POST['meio_FK']
-        tipo_areaForm = request.POST['tipo_area_FK']
-        areaForm = request.POST['area_FK']
-        obj = Diagnostico.objects.get(pk=diagnostico)
-        obj.descricao = descricaoForm
-        obj.meio_FK_id = meioForm
-        obj.tipo_area_FK_id = tipo_areaForm
-        obj.area_FK_id = areaForm
-        obj.save()
-        return redirect('/impacto/projetos/perfil_projeto/'+str(projeto_FK.id)+"/")
+        form = DiagnosticoForm(request.POST)
+        if form.is_valid():
+            descricaoForm = request.POST['descricao']
+            meioForm = request.POST['meio_FK']
+            tipo_areaForm = request.POST['tipo_area_FK']
+            areaForm = request.POST['area_FK']
+            obj = Diagnostico.objects.get(pk=diagnostico)
+            obj.descricao = descricaoForm
+            obj.meio_FK_id = meioForm
+            obj.tipo_area_FK_id = tipo_areaForm
+            obj.area_FK_id = areaForm
+            obj.save()
+            return redirect('/impacto/projetos/perfil_projeto/'+str(projeto_FK.id)+"/")
+    else:
+        form = DiagnosticoForm(instance=diagnostico_FK)
 
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
@@ -492,6 +516,6 @@ def edit_diagnostico(request, diagnostico):
     context['cliente'] = {'nome': projeto_FK.cliente_FK.nome, 'cnpj': projeto_FK.cliente_FK.cnpj}
     context['diagnostico_id'] = diagnostico
     context['fase'] = {'nome': diagnostico_FK.fase_projeto_FK.get_descricao_display}
-    context['form'] = DiagnosticoForm(instance=diagnostico_FK)
+    context['form'] = form
 
     return render(request, "impacto/edit_diagnostico.html", context)

@@ -74,7 +74,6 @@ def loginusr(request):
     return HttpResponse(template.render(req_context))
 
 
-
 def pass_generator(size=8, chars=string.ascii_uppercase + string.digits):
     """
     Gera senha para usuários no sistema.

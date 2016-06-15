@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^projetos/perfil_projeto/editar_impacto_projeto/(?P<impacto>\d+)/$', views.edit_impacto_proj),
     url(r'^projetos/perfil_projeto/editar_diagnostico/(?P<diagnostico>\d+)/$', views.edit_diagnostico),
 
+    url(r'^api/get_impactos/(?P<meio>\d+)/$', views.api_get_impacto),
+
     url(r'^$', views.impacto),
 
 ]

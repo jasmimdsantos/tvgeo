@@ -39,7 +39,11 @@
               <form action="/impacto/projetos/perfil_projeto/editar_impacto_projeto/{{ impacto_id }}/" method="POST">
                   {% csrf_token %}
                   {{ form|crispy }}
-                  <input class="btn btn-action btn-lg" type="submit" value="Editar">
+                  <br/>
+                  <br/>
+                  <input class="btn btn btn-primary" type="submit" value="Editar">
+                  <br/>
+                  <br/>
               </form>
           </div>
       </div>
@@ -69,7 +73,10 @@
         $(document).ready(function() {
             valOld = $('#id_impacto_FK option:selected').val();
             changeImpacto();
-        });
+            var element2 = document.getElementById("id_impacto_FK");
+            console.log(element2);
+            element2.value = "92";
 
+        });
     </script>
 {% endblock %}

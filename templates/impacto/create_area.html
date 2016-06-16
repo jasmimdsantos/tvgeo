@@ -9,19 +9,15 @@
           <h2>Criar area</h2>
           <div class="col-lg-3">
               <form action="/impacto/projetos/perfil_projeto/criar_area/{{ projeto.id }}/" method="POST">
-                  <div class="col-lg-8">
-                      {% csrf_token %}
-                      {{ form|crispy }}
-                  </div>
-                  <div class="col-lg-4" style="padding-top: 10px">
-                      <input class="btn btn-action btn-lg" type="submit" value="Criar">
-                  </div>
-
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                  <p>Para converter os formatos, utilize o website <a href="https://ogre.adc4gis.com/" target="_blank">OGRE</a> </p>
+                  <br/>
+                  <input class="btn btn btn-primary" type="submit" value="Criar">
               </form>
           </div>
       </div>
   </div>
-  <p>Para converter os formatos, utilize o website <a href="https://ogre.adc4gis.com/" target="_blank">OGRE</a> </p>
 
 {% endblock %}
 

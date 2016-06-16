@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d54ab57-0c74-47a6-a9c5-b710f9296989" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/camada/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/assets/images/invoice-logo.jpg" afterPath="$PROJECT_DIR$/static/assets/images/invoice-logo.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/assets/images/login-firemonitor.png" afterPath="$PROJECT_DIR$/static/assets/images/login-firemonitor.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/assets/images/logo.png" afterPath="$PROJECT_DIR$/static/assets/images/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/assets/images/logo_icon.png" afterPath="$PROJECT_DIR$/static/assets/images/logo_icon.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/camada/models.py" afterPath="$PROJECT_DIR$/camada/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/impacto/create_area.html" afterPath="$PROJECT_DIR$/templates/impacto/create_area.html" />
     </list>
     <ignored path="core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -898,7 +891,14 @@
       <option name="project" value="LOCAL" />
       <updated>1466028492410</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Ajustes LOGIN">
+      <created>1466100662939</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1466100662939</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView">

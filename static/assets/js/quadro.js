@@ -40,10 +40,15 @@ $(document).ready(function() {
         str_json = {'impacto': impacto, 'respostas': respostas};
 
         xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-        xmlhttp.open("POST", "/impacto/quadro/");
+        xmlhttp.open("POST", "/impacto/quadro/", false);
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.send(JSON.stringify(str_json));
-        window.location.href = "/impacto/quadro/gabarito/"+impacto+"/";
+        if (xmlhttp.status === 200) {
+          window.location.href = "/impacto/quadro/gabarito/"+impacto+"/";
+        } else {
+            alert("Ocorreu um erro ao tentar gravar o formulário. Tente novamente.");
+            window.location.href = "/impacto/projetos/perfil_projeto/editar_impacto_projeto/"+impacto+"/";
+        }
     }
 
     function saveResp(value_prov, value_pot){

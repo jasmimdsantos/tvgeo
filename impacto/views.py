@@ -117,25 +117,27 @@ def quadro_post(request):
             qry.aia = string_respGab
             qry.save()
             return redirect("/impacto/projetos/perfil_projeto/editar_impacto_projeto/"+impacto_gab+"/")
-
         else:
-            json_receive = json.loads(request.body.decode("utf-8"))
-            impacto = json_receive['impacto']
-            user = Pessoa.objects.get(usuario_id=request.user.id).id
-            respostas = json_receive['respostas']
+            try:
+                json_receive = json.loads(request.body.decode("utf-8"))
+                impacto = json_receive['impacto']
+                user = Pessoa.objects.get(usuario_id=request.user.id).id
+                respostas = json_receive['respostas']
 
-            questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto)
-            if questionarios:
-                questionarios.delete()
+                questionarios = QuestionarioInterno.objects.filter(impacto_projeto_FK_id=impacto)
+                if questionarios:
+                    questionarios.delete()
 
-            for resposta in respostas:
-                qry = QuestionarioInterno(pessoa_FK_id=user,
-                                          impacto_projeto_FK_id=impacto,
-                                          resp_potencial_id=resposta['potencial'],
-                                          resp_provavel_id=resposta['provavel'])
-                qry.save()
+                for resposta in respostas:
+                    qry = QuestionarioInterno(pessoa_FK_id=user,
+                                              impacto_projeto_FK_id=impacto,
+                                              resp_potencial_id=resposta['potencial'],
+                                              resp_provavel_id=resposta['provavel'])
+                    qry.save()
 
-            return HttpResponse(status=201)
+                return HttpResponse(status=200)
+            except:
+                return HttpResponse(status=400)
     else:
         return HttpResponse(status=403)
 

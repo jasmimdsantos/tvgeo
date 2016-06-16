@@ -1,77 +1,61 @@
 {% extends 'layout.html' %} {% load staticfiles %}
 
 {% block cssformat %}
-	<link href="/static/plugins/typeahead/typeahead.css" rel="stylesheet">
+<link href="/static/plugins/typeahead/typeahead.css" rel="stylesheet">
 {% endblock %}
-
 
 
 {% block content %}
 
 <div class="row">
     <div class="col-xs-12 col-sm-6">
-        <div class="box">
-            <div class="box-header">
-                <div class="box-name">
-                    <i class="fa fa-cloud"></i>
-                    <span>Estações Automáticas</span>
-                </div>
-                <div class="box-icons">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="expand-link">
-                        <i class="fa fa-expand"></i>
-                    </a>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-                <div class="no-move"></div>
-            </div>
-            <div class="box-content">
-            
-                <form  method="POST">
+
+        <section class="panel">
+            <header class="panel-heading">
+                Estações Automáticas
+            </header>
+            <div class="panel-body">
+
+
+                <form method="POST">
                     {% csrf_token %}
                     <div class="row form-group">
                         <div class="col-sm-3">
-                            <h4 class="page-header">{{ form.nomeEstacao.label }}</h4>	
+                            <h4 class="page-header">{{ form.nomeEstacao.label }}</h4>
                             {{ form.nomeEstacao}}
                         </div>
                         <div class="col-sm-3">
-                            <h4 class="page-header">{{ form.mes.label }}</h4>	
+                            <h4 class="page-header">{{ form.mes.label }}</h4>
                             {{ form.mes}}
                         </div>
-                         <div class="col-sm-3">
-                            <h4 class="page-header">{{ form.ano.label }}</h4>	
+                        <div class="col-sm-3">
+                            <h4 class="page-header">{{ form.ano.label }}</h4>
                             {{ form.ano}}
                         </div>
                     </div>
-                   <div class="row form-group">
-                        <div class="col-sm-3">
-                            <h4 class="page-header">{{ form.nomeTexto.label }}</h4>	
-                            {{ form.nomeTexto}}
-                        </div>
-		    </div>
                     <div class="row form-group">
                         <div class="col-sm-3">
-                                <button class="btn btn-default" type="submit" ><i class="fa fa-cog"></i> Processar</button>
-                        <div>
+                            <h4 class="page-header">{{ form.nomeTexto.label }}</h4>
+                            {{ form.nomeTexto}}
+                        </div>
                     </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-cog"></i> Processar</button>
+                            <div>
                             </div>
-               </form>
-           </div>
-        </div>
+                        </div>
+                </form>
+            </div>
+        </section>
     </div>
 </div>
-
 {% endblock %}
 
 
-
 {% block scriptsJava %}
-    <script  type="text/javascript" src="/static/plugins/typeahead/typeahead.jquery.min.js"></script>
-	<script>
+<script type="text/javascript" src="/static/plugins/typeahead/typeahead.jquery.min.js"></script>
+<script>
 
 
 function Select2Test(){
@@ -114,5 +98,8 @@ $(document).ready(function() {
       source: substringMatcher(states)
     });
 });
+
+
+
 </script>
 {% endblock %}

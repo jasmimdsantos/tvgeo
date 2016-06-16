@@ -21,5 +21,4 @@ class Linha(models.Model):
 class Ponto(models.Model):
     local_FK = models.ForeignKey(Local)
     campo = models.PointField()
-
     objects = models.GeoManager()

@@ -2,45 +2,50 @@
 
 
 {% block cssformat %}
-	<link href="/static/plugins/typeahead/typeahead.css" rel="stylesheet">
+<link href="/static/plugins/typeahead/typeahead.css" rel="stylesheet">
 {% endblock %}
-
 
 
 {% block content %}
 
+<div class="row">
+    <div class="col-xs-6">
 
-    <form  method="POST">
-                {% csrf_token %}
-                <div class="row form-group">
-                    <div class="col-sm-6">
-                        <h4 class="page-header">{{ form.nomeEstacao.label }}</h4>
-                        {{ form.nomeEstacao}}
+
+        <section class="panel">
+            <header class="panel-heading">
+                Filtro
+            </header>
+            <div class="panel-body">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <h4 class="page-header">{{ form.nomeEstacao.label }}</h4>
+                            {{ form.nomeEstacao }}
+                        </div>
                     </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-3">
-                        <h4 class="page-header">{{ form.nomeTexto.label }}</h4>
-                        {{ form.nomeTexto}}
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <h4 class="page-header">{{ form.nomeTexto.label }}</h4>
+                            {{ form.nomeTexto}}
+                        </div>
                     </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-6">
-                        <button class="btn btn-default" type="submit" ><i class="fa fa-cog"></i> Processar</button>
-                    <div>
-                </div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-cog"></i> Processar</button>
                         </div>
                     </div>
                 </form>
+            </div>
+
+            {% endblock %}
 
 
-{% endblock %}
-
-
-
-{% block scriptsJava %}
-    <script  type="text/javascript" src="/static/plugins/typeahead/typeahead.jquery.min.js"></script>
-	<script>
+            {% block scriptsJava %}
+            <script type="text/javascript" src="/static/plugins/typeahead/typeahead.jquery.min.js"></script>
+            <script>
 
 
 function Select2Test(){
@@ -84,5 +89,6 @@ $(document).ready(function() {
       source: substringMatcher(states)
     });
 });
-</script>
-{% endblock %}a
+
+            </script>
+            {% endblock %}a

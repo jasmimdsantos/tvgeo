@@ -1,41 +1,70 @@
 {% extends "layout.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-     <div id="page_cadastro">
-        <section class="centralizar">
-            <div class="breadcumb">
-                <a href="/">Home</a> » <a href="/">local</a> » <a href="/">local</a> » <span>local</span>
+<div id="page_cadastro">
+    <section class="centralizar">
+        <div class="page-heading">
+            <h3>{{ page }}</h3>
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active"> Alteração de senha</li>
+            </ul>
+        </div>
+
+        <div class="container-fluid">
+            {% if state %}
+            {% if state.mode == "sucess" %}
+            <div class="alert alert-success">{{ state.msg }}</div>
+            {% elif state.mode == "error" %}
+            <div class="alert alert-danger">{{ state.msg }}</div>
+            {% elif state.mode == "warning" %}
+            <div class="alert alert-warning">{{ state.msg }}</div>
+            {% endif %}
+            {% endif %}
+
+            <div class="content">
+                <div class="container-login">
+
+                    <div class="row">
+                        <div class="col-xs-6">
+
+
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    Altera a senha para, {{ request.user.username }}
+                                </header>
+                                <div class="panel-body">
+
+                                    <form role="form" id="postform" action="/mudasenha/" method="POST">
+                                        {% csrf_token %}
+                                        {{ form|crispy }}
+                                        <p id="default-buttons-0" class="default-buttons">
+                                            <button class="btn btn btn-primary" type="submit"><i class="fa fa-save"></i> alterar senha</button>
+                                        </p>
+                                    </form>
+                                </div>
+                            </section>
+
+                        </div>
+                        <div class="col-xs-6">
+                            <h3>Ajuda</h3>
+                            <p>Para alterar sua senha, digite sua senha atual e preencha a nova senha duas vezes e clique em <i class="fa fa-save"></i> alterar senha</p>
+                            <h4>Esqueceu sua senha?</h4>
+                            <p>Caso já tenha esquecido sua senha atual, clique em <a href="/webhome/">Sair</a>, e na tela de login clique em <strong>Esqueci minha senha.</strong></p>
+                            <h4>Dicas para uma senha mais segura!</h4>
+                            <p>Para garantir uma senha mais segura nós recomendamos que você tenha sempre:</p>
+                            <ul>
+                                <li>Pelo menos 6 digitos</li>
+                                <li>Misture letras e números</li>
+                                <li>Coloque algum caracter diferente como #$!@</li>
+                                <li>Altere sua senha a cada 6 meses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--FIM container-login -->
+                <div class="clear"></div>
             </div>
-            <div class="container-fluid">
-                <h1 class="titulo_interno">{{ page }}</h1>
-                {% if state %}
-                    {% if state.mode == "sucess" %}
-                        <div class="alert alert-success">{{ state.msg }}</div>
-                    {% elif state.mode == "error" %}
-                        <div class="alert alert-danger">{{ state.msg }}</div>
-                    {% elif state.mode == "warning" %}
-                        <div class="alert alert-warning">{{ state.msg }}</div>
-                    {% endif %}
-                {% endif %}
-
-                <div class="content">
-                    <div class="container-login">
-                        <h3>Altera a senha para, {{  request.user.username }}</h3>
-                        <br>
-
-                         <form role="form" id="postform" action="/mudasenha/" method="POST">
-                            {% csrf_token %}
-                             {{ form|crispy }}
-                             <div class="row panel-body">
-                                <p>
-                                   <button class="btn btn btn-primary" type="submit">Enviar</button>
-                                </p>
-                            </div>
-                    </form>
-                    </div><!--FIM container-login -->
-                    <div class="clear"></div>
-                </div>
-            </div><!--FIM container-login-user -->
-        </section>
-    </div>
+        </div><!--FIM container-login-user -->
+    </section>
+</div>
 {% endblock %}

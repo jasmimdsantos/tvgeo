@@ -4,7 +4,7 @@
 {% block content %}
     <h2 style="text-align: center">AVALIAÇÃO DE IMPACTO AMBIENTAL - GABARITO</h2>
     <div>
-        <form action="/impacto/quadro/" onsubmit="return selectAll();" method="post">
+        <form id="impactoGabForm" action="/impacto/quadro/" method="post">
             <input type="hidden" name="impacto" value="{{ impacto }}">
             {% include "impacto/include/quadro_post.html" %}
             <button class="btn btn btn-primary">Concluir</button>
@@ -20,11 +20,11 @@
         jQuery(document).ready(function($) {
             $('#multiselect').multiselect();
         });
-        function selectAll(){
-            for (var i = 0; i < document.getElementById("multiselect_to").options.length; i++){
-                document.getElementById("multiselect_to").options[i].selected = true;
+        $('#impactoGabForm').submit(function() {
+            if ($("#multiselect_to").children('option').length === 0|| $.trim($("#respGabText").val()) === "") {
+                alert('Você precisa preencher todos os campos.');
+                return false;
             }
-            return true;
-        }
+        });
     </script>
 {% endblock %}

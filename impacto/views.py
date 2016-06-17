@@ -343,7 +343,7 @@ def perfil_projeto(request, projeto):
     context = RequestContext(request)
     page = sitetools.sitemap ( request.get_full_path ( ) ).context
     context.update(page)
-    print(context)
+
     projeto_FK = Projeto.objects.get(pk=projeto)
     cliente_FK = Empresa.objects.get(pk=projeto_FK.cliente_FK_id)
     if not projeto_FK.data_termino:
@@ -450,7 +450,9 @@ def edit_impacto_proj(request, impacto):
             obj.save()
             return redirect('/impacto/projetos/perfil_projeto/'+str(projeto_FK.id)+"/")
     else:
-        form = ImpactoProjetoForm(instance=impactoProj_FK)
+        form = ImpactoProjetoForm(instance=impactoProj_FK,
+                                  id_meio=impactoProj_FK.meio_FK_id)
+
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
 

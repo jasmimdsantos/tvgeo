@@ -1,6 +1,6 @@
 from django.forms import ModelForm , Form
 
-from .models import Quadro, Empresa, Area, ImpactoProjeto, Diagnostico
+from .models import Quadro, Empresa, Area, ImpactoProjeto, Diagnostico, Impacto
 from django import forms
 
 
@@ -30,11 +30,17 @@ class AreaForm(ModelForm):
         fields = ['descricao',]
 
 class ImpactoProjetoForm(ModelForm):
-
     class Meta():
         model = ImpactoProjeto
         fields = ['descricao',  'meio_FK', 'impacto_FK', 'tipo_area_FK',  'area_FK']
 
+    def __init__(self, *args, **kwargs):
+        id_meio = 0
+        if 'id_meio' in kwargs:
+            id_meio = kwargs.pop('id_meio')
+        super(ImpactoProjetoForm, self).__init__(*args, **kwargs)
+        if id_meio:
+            self.fields['impacto_FK'].queryset = Impacto.objects.filter(meio_FK_id=id_meio)
 
 class DiagnosticoForm(ModelForm):
     class Meta():

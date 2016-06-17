@@ -11,14 +11,18 @@ from .models import Quadro, \
     ProgramaImpacto, \
     Area, \
     Impacto,\
-    Pessoa
+    Pessoa, \
+    Questao, \
+    Questionario, \
+    QuestaoItem, \
+    Usuario_Questionario, \
+    QuestRespItem
 
 from .forms import QuadroForm, Empresa_ProjetosForm, AreaForm, ImpactoProjetoForm , DiagnosticoForm
 from django.http import HttpResponse, JsonResponse
-from django.template import RequestContext , loader
+from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
 from toolbox import sitetools
 import json
 from django.core.serializers.json import DjangoJSONEncoder
@@ -387,6 +391,7 @@ def view_impacto(request, impacto):
 
     return render(request, "impacto/view_impacto.html", context)
 
+
 @login_required
 def edit_area(request, area):
     context = RequestContext(request)
@@ -422,6 +427,7 @@ def edit_area(request, area):
     context['form'] = form
 
     return render(request, "impacto/edit_area.html", context)
+
 
 @login_required
 def edit_impacto_proj(request, impacto):
@@ -479,6 +485,7 @@ def edit_impacto_proj(request, impacto):
     context['aia'].update(programa_json)
     return render(request, "impacto/edit_impacto_projeto.html", context)
 
+
 @login_required
 def edit_diagnostico(request, diagnostico):
     context = RequestContext(request)
@@ -523,3 +530,88 @@ def edit_diagnostico(request, diagnostico):
     context['form'] = form
 
     return render(request, "impacto/edit_diagnostico.html", context)
+
+
+@login_required
+def questionario(request, projeto):
+    context = RequestContext(request)
+    page = sitetools.sitemap(request.get_full_path()).context
+    context.update(page)
+
+    quest = {'questoes': []}
+
+    questionario_FK = Questionario.objects.get(projeto_FK_id=projeto)
+    questoes_FK = Questao.objects.filter(questionario_FK_id=questionario_FK.id)
+
+    for questao in questoes_FK:
+        mont = {'pergunta': questao.descricao,
+                'tipo': questao.tipo,
+                'respostas': []}
+
+        for resposta in QuestaoItem.objects.filter(questao_FK=questao.id):
+            mont_resp = {'id': resposta.id, 'descricao': resposta.descricao}
+            mont['respostas'].append(mont_resp)
+
+        quest['questoes'].append(mont)
+
+    context['questionario'] = questionario_FK.id
+    context.update(quest)
+    return render(request, "impacto/questionario.html", context)
+
+@csrf_exempt
+@login_required
+def questionario_post(request):
+    if request.POST:
+        is_quest = True
+        quest_count = 1
+
+        questionario_id = request.POST['quest-id']
+        cnome = request.POST['client-nome']
+        cendereco = request.POST['client-endereco']
+        ccomp = request.POST['client-comp']
+        cbairro = request.POST['client-bairro']
+        ccidade = request.POST['client-cidade']
+        cuf = request.POST['client-uf']
+        ctel = request.POST['client-tel']
+        cemail = request.POST['client-email']
+        ccep = request.POST['client-cep']
+
+        qry_user = Usuario_Questionario(nome=cnome,
+                                        endereco=cendereco,
+                                        compl=ccomp,
+                                        bairro=cbairro,
+                                        cidade=ccidade,
+                                        uf=cuf,
+                                        telefone=ctel,
+                                        email=cemail,
+                                        cep=ccep,
+                                        questionario_FK_id=questionario_id)
+        qry_user.save()
+
+        while(is_quest):
+            if 'QA-'+str(quest_count) in request.POST:
+                resp_questao = request.POST['QA-'+str(quest_count)]
+                qry_resp = QuestRespItem(usuario=qry_user,
+                                         descricao=resp_questao,
+                                         )
+                qry_resp.save()
+
+            elif 'QM-'+str(quest_count) in request.POST:
+                resp_questao = request.POST.getlist('QM-'+str(quest_count))
+                for resp in resp_questao:
+                    qry_resp = QuestRespItem(usuario=qry_user,
+                                             quest_item_FK_id=resp)
+                    qry_resp.save()
+
+            elif 'QU-'+str(quest_count) in request.POST:
+                resp_questao = request.POST['QU-'+str(quest_count)]
+                qry_resp = QuestRespItem(usuario=qry_user,
+                                         quest_item_FK_id=resp_questao)
+                qry_resp.save()
+
+            else:
+                is_quest = False
+
+            quest_count += 1
+
+    return redirect("/impacto/projetos/")

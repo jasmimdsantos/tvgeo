@@ -29,6 +29,9 @@ class Programa(models.Model):
     """ tabela de programas e mitigação """
     descricao = models.TextField(verbose_name=u'Descrição')
 
+    class Meta:
+        ordering = ['descricao']
+
     def __str__(self):
         return self.descricao
 

@@ -27,6 +27,7 @@ class sitemap(object):
             ('Empresas', 'lst_empresa', 1, False, True, False),
             ('Projetos', 'projetos', 1, False, True, False),
             ('Perfil Projeto', 'perfil_projeto', 2, False, False, True),
+            ('Questionario', 'questionario', 3, False, False, True),
             ('Editar Area', 'editar_area', 3, False, False, True),
             ('Criar Area', 'criar_area', 3, False, False, True),
             ('Editar Impacto', 'editar_impacto_projeto', 3, False, False, True),

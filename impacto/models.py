@@ -29,6 +29,9 @@ class Programa(models.Model):
     """ tabela de programas e mitigação """
     descricao = models.TextField(verbose_name=u'Descrição')
 
+    class Meta:
+        ordering = ['descricao']
+
     def __str__(self):
         return self.descricao
 
@@ -223,7 +226,7 @@ class Usuario_Questionario(models.Model):
 
 class QuestRespItem(models.Model):
     usuario = models.ForeignKey(Usuario_Questionario, verbose_name='Usuario')
-    quest_item_FK = models.ForeignKey(QuestaoItem, verbose_name='Resposta')
+    quest_item_FK = models.ForeignKey(QuestaoItem, verbose_name='Resposta', null=True)
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
 
     def __str__(self):

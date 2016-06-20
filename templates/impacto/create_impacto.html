@@ -19,3 +19,24 @@
       </div>
   </div>
 {% endblock %}
+{% block scriptsJava %}
+    <script>
+        function changeImpacto(){
+            $('#id_impacto_FK option[value!=""]').remove();
+             meio_id = $( "#id_meio_FK option:selected").val();
+             $.get( "/impacto/api/get_impactos/"+meio_id+"/", function( data ) {
+                $.each(data, function (i, item) {
+                    $.each( item, function( index, value ){
+                        $('#id_impacto_FK').append($('<option>', {
+                            value: value.id,
+                            text : value.nome
+                        }));
+                    });
+                });
+             });
+        }
+         $( "#id_meio_FK" ).change(function() {
+            changeImpacto();
+        });
+    </script>
+{% endblock %}

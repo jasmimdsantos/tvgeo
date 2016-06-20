@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+    <div>
+        <form action="/impacto/projetos/perfil_projeto/questionario/" method="post" id="formQuestionario">
+            <div>
+                Nome:<input type="text" name="client-nome"><br/>
+                <br/>
+                Endereço: <input type="text" name="client-endereco">
+                Complemento: <input type="text" name="client-comp"><br/><br/>
+                Bairro: <input type="text" name="client-bairro"><br/><br/>
+                Cidade: <input type="text" name="client-cidade">
+                UF: <input type="text" name="client-uf">
+                CEP: <input type="text" name="client-cep"><br/><br/>
+                Telefone: <input type="text" name="client-tel"><br/><br/>
+                Email: <input type="text" name="client-email"><br/>
+                <input type="hidden" name="quest-id" value="{{ questionario }}"><br/>
+            </div>
+           {% for questao in questoes %}
+               <h2>{{ questao.pergunta }}</h2>
+               {% with forcounter=forloop.counter %}
+                   {% if questao.tipo == 'A' %}
+                       <input type="text" name="QA-{{ forcounter }}">
+                   {% elif questao.tipo == 'M' %}
+                           {% for resposta in questao.respostas %}
+                               <input type="checkbox" name="QM-{{ forcounter }}" value="{{ resposta.id }}" /> {{ resposta.descricao }}<br/>
+                           {% endfor %}
+                   {% else %}
+                       {% for resposta in questao.respostas %}
+                           <input type="radio" name="QU-{{ forcounter }}" value="{{ resposta.id }}"> {{ resposta.descricao }}<br/>
+                       {% endfor %}
+                   {% endif %}
+               {% endwith %}
+           {% endfor %}
+        <br/>
+            <input type="submit" value="Enviar">
+        </form>
+    <br/>
+    <br/>
+    </div>
+{% endblock %}

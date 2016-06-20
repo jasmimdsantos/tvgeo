@@ -70,14 +70,5 @@
          $( "#id_meio_FK" ).change(function() {
             changeImpacto();
         });
-
-        $(document).ready(function() {
-            valOld = $('#id_impacto_FK option:selected').val();
-            changeImpacto();
-            var element2 = document.getElementById("id_impacto_FK");
-            console.log(element2);
-            element2.value = "92";
-
-        });
     </script>
 {% endblock %}

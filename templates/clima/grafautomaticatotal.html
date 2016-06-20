@@ -1,7 +1,7 @@
 {% extends 'layout.html' %} {% load staticfiles %}
 
 {% block cssformat %}
-     <style>
+<style>
         .bloco
         {
         height: 100%; /*Specify Height*/
@@ -9,56 +9,47 @@
         border: 1px solid black; /*Add 1px solid border, use any color you want*/
         text-align:center; /*Align the text to the center*/
         }
-    </style>
+
+
+
+</style>
 {% endblock %}
 
 
 {% block content %}
 
 <div class="col-xs-12 col-sm-12">
-        <div class="box">
-            <div class="box-header">
-                <div class="box-name">
-                    <i class="fa fa-search"></i>
-                    <span>Dados Históricos das Estações Automáticas</span>
-                </div>
-                <div class="box-icons pull-right">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="expand-link">
-                        <i class="fa fa-expand"></i>
-                    </a>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-                <div class="no-move"></div>
-            </div>
-            <div class="box-content">
-                <div id="grafico">
-                    <ul>
-                        <li><a href="#grafico01">Temperatura</a></li>
-                        <li><a href="#grafico01a">Umidade</a></li>
-                        <li><a href="#grafico02">Pressão</a></li>
-                        <li><a href="#grafico03">Ponto de Orvalho</a></li>
-                        <li><a href="#grafico04">Radiação</a></li>
-                        <li><a href="#grafico05">Precipitação</a></li>
-                        <li><a href="#grafico06">Direção do Vento</a></li>
-                        <li><a href="#grafico07">Velocidade do Vento</a></li>
-                    </ul>
-                    <div id='grafico01'  style='height: 530px; width: 80%'></div>
-                    <div id='grafico01a' style='height: 530px; width: 80%'></div>
-                    <div id='grafico02'  style='height: 530px; width: 80%'></div>
-                    <div id='grafico03'  style='height: 530px; width: 80%'></div>
-                    <div id='grafico04'  style='height: 530px; width: 80%'></div>
-                    <div id='grafico05'  style='height: 530px; width: 80%'></div>
-                    <div id='grafico06'  style='height: 530px; width: 80%'></div>
-                    <div id='grafico07'  style='height: 530px; width: 80%'></div>
-               </div>
+
+
+    <h3>Dados Históricos das Estações Automáticas</h3>
+    <section class="panel">
+        <header class="panel-heading custom-tab">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#grafico01">Temperatura</a></li>
+                <li><a data-toggle="tab" href="#grafico01a">Umidade</a></li>
+                <li><a data-toggle="tab" href="#grafico02">Pressão</a></li>
+                <li><a data-toggle="tab" href="#grafico03">Ponto de Orvalho</a></li>
+                <li><a data-toggle="tab" href="#grafico04">Radiação</a></li>
+                <li><a data-toggle="tab" href="#grafico05">Precipitação</a></li>
+                <li><a data-toggle="tab" href="#grafico06">Direção do Vento</a></li>
+                <li><a data-toggle="tab" href="#grafico07">Velocidade do Vento</a></li>
+            </ul>
+        </header>
+        <div class="panel-body">
+
+            <div id="grafico">
+
+                <div class="tab-pane active" id='grafico01' style='height: 530px; width: 80%'></div>
+                <div class="tab-pane" id='grafico01a' style='height: 530px; width: 80%'></div>
+                <div class="tab-pane" id='grafico02' style='height: 530px; width: 80%'></div>
+                <div class="tab-pane" id='grafico03' style='height: 530px; width: 80%'></div>
+                <div class="tab-pane" id='grafico04' style='height: 530px; width: 80%'></div>
+                <div class="tab-pane" id='grafico05' style='height: 530px; width: 80%'></div>
+                <div class="tab-pane" id='grafico06' style='height: 530px; width: 80%'></div>
+                <div class="tab-pane" id='grafico07' style='height: 530px; width: 80%'></div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
 
 
@@ -69,7 +60,7 @@
 
 $(function() {
 
-    $( "#grafico" ).tabs();
+   // $( "#grafico" ).tabs();
 
 	vlrEstacaoText = '{{ texto|safe }}';
 
@@ -709,6 +700,9 @@ $(function() {
          }); 
         
 });
+
+
+
 </script>
 
 {% endblock %}

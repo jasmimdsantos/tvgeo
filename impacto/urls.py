@@ -4,8 +4,6 @@ from impacto import views
 
 
 urlpatterns = [
-
-    url(r'^api/set_quadro/(?P<impacto>\d+)/$', views.quadro),
     url(r'^quadro/(?P<impacto>\d+)/$', views.quadro),
     url(r'^quadro/$', views.quadro_post),
     url(r'^quadro/gabarito/(?P<impacto>\d+)/$', views.quadro_gab),
@@ -30,8 +28,13 @@ urlpatterns = [
 
     url(r'^projetos/perfil_projeto/questionario/(?P<projeto>\d+)/$', views.questionario),
     url(r'^projetos/perfil_projeto/questionario/$', views.questionario_post),
+    url(r'^projetos/lst_questionarios/$', views.lst_questionarios),
+    url(r'^api/get_questionarios/$', views.api_get_questionarios),
 
     url(r'^api/get_impactos/(?P<meio>\d+)/$', views.api_get_impacto),
+
+    url(r'^projetos/perfil_projeto/admin_grupo/(?P<projeto>\d+)/$', views.admin_grupo),
+    url(r'^projetos/perfil_projeto/admin_grupo/$', views.admin_grupo_post),
 
     url(r'^$', views.impacto),
 

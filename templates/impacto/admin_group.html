@@ -1,0 +1,15 @@
+{% extends 'layout.html' %} {% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="row">
+  <form action="/impacto/projetos/perfil_projeto/admin_grupo/" method="POST">
+  <input type="hidden" name="projeto" value="{{ projeto_id }}">
+      {% for user in usersform %}
+          <input type="checkbox" name="users" value="{{ user.id }}" {% if user.checked %} checked{% endif %}>{{ user.nome }}<br>
+      {% endfor %}
+      <br/>
+      <input class="btn btn btn-primary" type="submit" value="Salvar">
+  </form>
+  </div>
+{% endblock %}

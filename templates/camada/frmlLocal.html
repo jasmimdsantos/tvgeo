@@ -1,0 +1,26 @@
+
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+      <div class="box">
+          </br>
+          <h2>Criar area</h2>
+          <div class="col-lg-3">
+              <form action="/camada/cadlocal/" method="POST">
+                  {% csrf_token %}
+                  {{ form }}
+
+
+                  <input class="btn btn btn-primary" type="submit" value="Criar">
+
+              </form>
+          </div>
+      </div>
+  </div>
+
+{% endblock %}
+
+
+

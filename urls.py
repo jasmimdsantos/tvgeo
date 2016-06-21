@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^firemonitor/' , include ( 'firemonitor.urls' ) ) ,
     url ( r'^monitor/' , include ( 'monitor.urls' ) ) ,
     url(r'^impacto/', include('impacto.urls')),
+    url(r'^camada/', include('camada.urls')),
     url(r'^$', login.home, name='home'),
 
 

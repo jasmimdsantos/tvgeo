@@ -18,7 +18,7 @@
                   {% csrf_token %}
                   {{ form|crispy }}
                   <br/>
-
+                  {% leaflet_map "yourmap" %}
                   <br/>
                   <input class="btn btn btn-primary" type="submit" value="Editar">
               </form>

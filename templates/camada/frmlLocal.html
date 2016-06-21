@@ -1,6 +1,11 @@
-
 {% extends 'layout.html' %}
+{% load leaflet_tags %}
+{% load geojson_tags %}
 
+{% block cssformat %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
 
 {% block content %}
     <div class="row" xmlns="http://www.w3.org/1999/html">
@@ -11,8 +16,6 @@
               <form action="/camada/cadlocal/" method="POST">
                   {% csrf_token %}
                   {{ form }}
-
-
                   <input class="btn btn btn-primary" type="submit" value="Criar">
 
               </form>

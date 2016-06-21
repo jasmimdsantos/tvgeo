@@ -71,12 +71,31 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'urls'
 
+
 LEAFLET_CONFIG = {
-    'PLUGINS': {
+    'DEFAULT_CENTER': (-15.621326, -49.777372),
+     'PLUGINS': {
         'forms': {
             'auto-include': True
         }
-    }
+    },
+    'DEFAULT_ZOOM': 5,
+    'MIN_ZOOM': 3,
+    'MAX_ZOOM': 18,
+    'SCALE': 'both',
+    'TILES': [('OpenTopoMap', 'http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {'maxZoom': 17,
+                                                                                  'attribution': 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'}),
+              ('Esri_WorldImagery',
+               'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+               {'maxZoom': 17,
+                'attribution': 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'}),
+              ('OpenStreetMap_Mapnik', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {'maxZoom': 19,
+                                                                                             'attribution': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}),
+              ('Esri_WorldStreetMap',
+               'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+               {'maxZoom': 17,
+                'attribution': 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'})]
+
 }
 
 TEMPLATES = [

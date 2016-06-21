@@ -24,7 +24,7 @@ def local(request):
             regLocal.save()
 
             if geometria['type'] == "MultiPolygon":
-                reg = models.Poligono(local_FK = regLocal, campo=wktexto)
+                reg = models.Poligono(local_FK=regLocal, campo=wktexto)
                 reg.save()
     else:
         form = FrmLocal()

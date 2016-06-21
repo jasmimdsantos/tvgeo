@@ -5,7 +5,7 @@ from leaflet.forms.fields import MultiPolygonField
 class FrmLocal(forms.Form):
 
     descricao = forms.CharField(widget=forms.Textarea(attrs={'cols': 80, 'rows': 4}))
-    geojson = forms.CharField(widget=forms.Textarea(attrs={'cols': 80, 'rows': 20}))
+    geojson = forms.CharField(widget=forms.Textarea(attrs={'cols': 80, 'rows': 20}), required=False)
     poligono = MultiPolygonField()
 
 

@@ -109,6 +109,9 @@ def admin_grupo_post(request):
         projeto_id = request.POST['projeto']
         users = request.POST.getlist('users')
 
+        if not check_group(request.user.id, projeto_id):
+            return HttpResponse('User out of project group', status=401)
+
         cod_projeto = Projeto.objects.get(pk=projeto_id).cod_projeto
         group_FK = Group.objects.get(name=cod_projeto)
         users_in_group = User.objects.filter(groups__name=cod_projeto)
@@ -120,10 +123,9 @@ def admin_grupo_post(request):
 
         users_in_group = User.objects.filter(groups__name=cod_projeto)
 
-        for user in users:
-            for user_group in users_in_group:
-                if not int(user) == int(user_group.id):
-                    group_FK.user_set.remove(user_group)
+        for user_group in users_in_group:
+            if not str(user_group.id) in users:
+                group_FK.user_set.remove(user_group.id)
 
         return redirect("/impacto/projetos/perfil_projeto/"+projeto_id+"/")
 
@@ -133,6 +135,9 @@ def admin_grupo(request, projeto):
     context = RequestContext(request)
     page = sitetools.sitemap ( request.get_full_path ( ) ).context
     context.update ( page )
+
+    if not check_group(request.user.id, projeto):
+            return HttpResponse('User out of project group', status=401)
 
     context['usersform'] = []
     context['projeto_id'] = projeto
@@ -309,6 +314,9 @@ def create_area(request, projeto):
     page = sitetools.sitemap ( request.get_full_path ( ) ).context
     context.update ( page )
 
+    if not check_group(request.user.id, projeto):
+        return HttpResponse('User out of project group', status=401)
+
     if request.POST:
         form = AreaForm(request.POST)
         if form.is_valid():
@@ -343,6 +351,9 @@ def create_impacto(request, projeto, faseprojeto):
     context = RequestContext(request)
     page = sitetools.sitemap ( request.get_full_path ( ) ).context
     context.update ( page )
+
+    if not check_group(request.user.id, projeto):
+         return HttpResponse('User out of project group', status=401)
 
     if request.POST:
         form = ImpactoProjetoForm(request.POST)
@@ -395,6 +406,9 @@ def create_diagnostico(request, projeto, faseprojeto):
     page = sitetools.sitemap ( request.get_full_path ( ) ).context
     context.update ( page )
 
+    if not check_group(request.user.id, projeto):
+        return HttpResponse('User out of project group', status=401)
+
     if request.POST:
         form = DiagnosticoForm(request.POST)
         if form.is_valid():
@@ -445,7 +459,7 @@ def perfil_projeto(request, projeto):
     cliente_FK = Empresa.objects.get(pk=projeto_FK.cliente_FK_id)
 
     if not check_group(request.user.id, projeto):
-        return HttpResponse('User out of project group', status=401)
+         return HttpResponse('User out of project group', status=401)
 
     if not projeto_FK.data_termino:
         projeto_FK.data_termino = "Não Determinado"
@@ -474,6 +488,9 @@ def perfil_projeto(request, projeto):
         impactos['content']['impacto'] = impactoprojeto_FK
         impactos['content']['diagnostico'] = diagnostico_FK
 
+    if request.user.is_superuser:
+        context['is_superuser'] = True
+
     return render(request, "impacto/perfil_projeto.html", context)
 
 
@@ -497,6 +514,9 @@ def edit_area(request, area):
 
     area_FK = Area.objects.get(pk=area)
     projeto_FK = Projeto.objects.get(pk=area_FK.projeto_FK_id)
+
+    if not check_group(request.user.id, projeto_FK.id):
+         return HttpResponse('User out of project group', status=401)
 
     if request.POST:
         form =AreaForm(request.POST)
@@ -535,6 +555,9 @@ def edit_impacto_proj(request, impacto):
     impactoProj_FK = ImpactoProjeto.objects.get(pk=impacto)
     projeto_FK = impactoProj_FK.fase_projeto_FK.projeto_FK
     projeto_FK = Projeto.objects.get(pk=projeto_FK.id)
+
+    if not check_group(request.user.id, projeto_FK.id):
+         return HttpResponse('User out of project group', status=401)
 
     if request.POST:
         form = ImpactoProjetoForm(request.POST)
@@ -593,6 +616,9 @@ def edit_diagnostico(request, diagnostico):
     projeto_FK = diagnostico_FK.fase_projeto_FK.projeto_FK
     projeto_FK = Projeto.objects.get(pk=projeto_FK.id)
 
+    if not check_group(request.user.id, projeto_FK.id):
+         return HttpResponse('User out of project group', status=401)
+
     if request.POST:
         form = DiagnosticoForm(request.POST)
         if form.is_valid():
@@ -633,6 +659,9 @@ def edit_diagnostico(request, diagnostico):
 def questionario(request, projeto):
     context = {}
     quest = {'questoes': []}
+
+    if not check_group(request.user.id, projeto):
+         return HttpResponse('User out of project group', status=401)
 
     questionario_FK = Questionario.objects.get(projeto_FK_id=projeto)
     questoes_FK = Questao.objects.filter(questionario_FK_id=questionario_FK.id)

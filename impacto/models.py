@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.contrib.auth.models import Group
 
 class Status_Projeto(models.Model):
     """ tabela de status do projeto """
@@ -101,6 +102,10 @@ class Projeto(models.Model):
     data_inicio = models.DateField(verbose_name=u'Início')
     data_termino = models.DateField(verbose_name='Termino', null=True, blank=True)
     data_encerramento = models.DateField(verbose_name='Encerramento',   null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        Group.objects.create(name=self.cod_projeto)
+        super(Projeto, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.descricao

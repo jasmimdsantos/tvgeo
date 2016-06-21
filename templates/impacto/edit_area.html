@@ -1,5 +1,11 @@
 {% extends 'layout.html' %} {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load leaflet_tags %}
+
+{% block cssformat %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
 
 {% block content %}
     <div class="row" xmlns="http://www.w3.org/1999/html">
@@ -12,6 +18,7 @@
                   {% csrf_token %}
                   {{ form|crispy }}
                   <br/>
+
                   <br/>
                   <input class="btn btn btn-primary" type="submit" value="Editar">
               </form>

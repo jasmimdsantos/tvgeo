@@ -5,7 +5,7 @@ from . import  models
 # add to the top
 from .forms import FrmLocal
 import json
-from geomet import wkt
+
 
 
 # add to your views
@@ -22,7 +22,7 @@ def local(request):
             else:
                 data = json.loads(request.POST['geojson'])
                 geometria = data['features'][0]['geometry']
-                wktexto = wkt.dumps(geometria, decimals=4)
+                wktexto = ''
 
             regLocal = models.Local(descricao=form_descricao)
             regLocal.save()

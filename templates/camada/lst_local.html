@@ -22,6 +22,7 @@
                     <th>Opções</th>
                 </tr>
             </tfoot>
+            <a href="/camada/local/criar/" class="btn btn btn-primary">Criar Local</a>
 	    </table>
       </div>
     </div>
@@ -31,22 +32,20 @@
 {% block scriptsJava %}
 
 <script >
-
+        function popupMap(map_id) {
+            url = '/camada/local/ver/' + map_id + '/';
+            newW = 980;
+            newH = 450;
+            left = (screen.width - newW) / 2;
+            top = (screen.height - newH) / 2;
+            newwindow = window.open(url, 'name', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, ' +
+                    'width=' + newW + ',height=' + newH + ',left=' + left + ',top=' + top);
+            newwindow.resizeTo(newW, newH);
+            newwindow.moveTo(left, top);
+            newwindow.focus();
+        }
         $(document).ready(function() {
-            var is_popup = true;
-            function buttonAction() { is_popup = false; }
-            function popupMap(map_id){
-                url = '/camada/local/ver/'+map_id+'/';
-                newW = 980;
-                newH = 450;
-                left = (screen.width-newW)/2;
-                top = (screen.height-newH)/2;
-                newwindow = window.open(url, 'name', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, ' +
-                      'width='+newW+',height='+newH+',left='+left+',top='+top);
-                newwindow.resizeTo(newW, newH);
-                newwindow.moveTo(left, top);
-                newwindow.focus();
-            }
+
            table =  $("#example").DataTable( {
                 "lengthMenu": [[100, -1], [100, "All"]],
                 "processing": true,
@@ -59,8 +58,8 @@
                     { "data": "geometria" },
                     { "data": "id",
                             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                                $(nTd).html("<a class='btn btn-info btn-sm' onclick='buttonAction();' href='/camada/local/editar/"+oData.id+"/'>" +
-                                        " Editar </a> <a class='btn btn-primary btn-sm'  onclick='popupMap("+oData.id+");' href='#"
+                                $(nTd).html("<a class='btn btn-info btn-sm' href='/camada/local/editar/"+oData.id+"/'>" +
+                                        " Editar </a> <a class='btn btn-primary btn-sm' onclick='popupMap("+oData.id+");' href='#"
                                         +oData.id+"/'> Ver Mapa </a>");
 
                     } }
@@ -83,19 +82,6 @@
                                     }
                 }
             } );
-
-             $('#example tbody').on( 'click', 'tr', function () {
-                  if ( $(this).hasClass('selected') ) {
-                      $(this).removeClass('selected');
-                  } else {
-                      if (is_popup) {
-                          table.$('tr.selected').removeClass('selected');
-                          $(this).addClass('selected');
-                          id = table.row('.selected').data()['id'];
-                          popupMap(id);
-                      }
-                  }
-           } );
         } );
     </script>
 

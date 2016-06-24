@@ -12,7 +12,7 @@ class sitemap(object):
 
     # lista de registros
     # Cada novo registro deve ser cadastrado na lista abaixo para aparecer no menu
-    # (Nome do item,  caminho, existe subitem (True/False), visível, possue link diâmico (True/False).
+    # Nome do item,  caminho, nivel do link, existe subitem (True/False), visível no menu, possue link dinâmico (True/False).
 
     col = ( ('Home', 'home', 0, False, True, False),
             ('Clima', 'clima', 0, True, True, False),
@@ -38,6 +38,10 @@ class sitemap(object):
             ('Editar Diagnostico', 'editar_diagnostico', 3, False, False, True),
             ('Criar Diagnostico', 'criar_diagnostico', 3, False, False, True),
             ('Ver Impacto', 'ver_impacto', 3, False, False, True),
+            ('Camada', 'camada', 0, True, True, False),
+            ('Lista de Locais', 'local', 1, False, True, False),
+            ('Criar Local', 'criar', 2, False, False, False),
+            ('Editar Local', 'editar', 2, False, False, True),
           )
 
     def _breadgrumb(self, _path):

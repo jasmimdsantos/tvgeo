@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Local
 from .forms import FrmLocal
+from django.template import RequestContext
+from toolbox import sitetools
 import json
 from django.core.serializers.json import DjangoJSONEncoder
-#from geomet import wkt
+from geomet import wkt
 
 def create_or_update_local(req):
     form_descricao = req['descricao']
@@ -96,12 +98,18 @@ def api_editar_local(request):
 
 
 def criar_local(request):
-    form = FrmLocal()
-    return render(request, 'camada/frmlLocal.html', {'form': form, })
+    context = RequestContext(request)
+    page = sitetools.sitemap(request.get_full_path()).context
+    context.update(page)
+    context['form'] = FrmLocal()
+    return render(request, 'camada/frmlLocal.html', context)
 
 
 def editar_local(request, id_local):
-    context = {}
+    context = RequestContext(request)
+    page = sitetools.sitemap(request.get_full_path()).context
+    context.update(page)
+
     local_FK = Local.objects.get(pk=id_local)
 
     initial_form = {}
@@ -122,7 +130,10 @@ def remover_local(request, id_local):
 
 
 def lista_local(request):
-    context = {}
+    context = RequestContext(request)
+    page = sitetools.sitemap(request.get_full_path()).context
+    context.update(page)
+
     return render(request, 'camada/lst_local.html', context)
 
 
@@ -149,6 +160,9 @@ def ver_local(request, id_local):
 
     geojson = wkt.loads(obj)
     print(geojson)
-    context = {'obj': geojson}
+    context = {'obj': {
+        'type': geojson['type'],
+        'coordinates': geojson['coordinates']
+    }}
 
     return render(request, 'camada/ver_local.html', context)

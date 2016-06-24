@@ -1,20 +1,25 @@
 {% load leaflet_tags %}
+{% load geojson_tags %}
 
-{% block cssformat %}
-    {% leaflet_js %}
-    {% leaflet_css %}
-{% endblock %}
+{% leaflet_js %}
+{% leaflet_css %}
 
-{% block content %}
-    {% leaflet_map "yourmap" callback="main_map_init" %}
-{% endblock %}
+<input id="poligono_tipo" type="hidden" value="{{ obj.type }}">
+{% leaflet_map "yourmap" callback="main_map_init" %}
 
 
-{% block scriptsJava %}
-    <script>
-        var collection = {{ obj }};
-        function main_map_init(map, options) {
-          L.geoJson(collection).addTo(map);
-        }
-    </script>
-{% endblock %}
+<script src="/static/assets/js/vendor/jquery-1.12.0.min.js"></script>
+<script>
+    var type_geojson = $('#poligono_tipo').val();
+    var geojson = {
+            "type": "Feature",
+            "geometry": {
+                "type": type_geojson,
+                "coordinates": {{ obj.coordinates }}
+            }
+    };
+
+    function main_map_init(map, options) {
+        L.geoJson(geojson).addTo(map);
+    }
+</script>

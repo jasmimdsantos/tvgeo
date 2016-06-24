@@ -11,41 +11,39 @@
     <div class="row" xmlns="http://www.w3.org/1999/html">
       <div class="box">
           </br>
-          <h2>Criar Local</h2>
+          <h2>Editar Local</h2>
           <form action="/camada/api/local/criar_editar/" method="POST">
             {% csrf_token %}
+            <input type="hidden" name="local_id" value="{{ local_id }}">
             <div class="col-lg-3">
                 {{ form.descricao.label_tag}}
                 {{ form.descricao }}
                 {{ form.descricao.errors }}
                 <br/>
             </div>
-
                   <div class="row">
                       <div class="col-lg-12">
                           <div class="col-lg-5">
                               <section class="panel">
                                 <header class="panel-heading custom-tab dark-tab">
                                     <ul class="nav nav-tabs">
-                                        <li class="active"> <a href="#multipoligono" data-toggle="tab">Poligono</a> </li>
-                                        <li class=""> <a href="#ponto" data-toggle="tab">Ponto</a> </li>
-                                        <li class=""> <a href="#linha" data-toggle="tab">Linha</a> </li>
+                                        <li class="active"> <a href="#{{ type }}" data-toggle="tab">{{ type }}</a> </li>
                                         <li class=""> <a href="#geojson" data-toggle="tab">GeoJson</a> </li>
                                     </ul>
                                 </header>
                                 <div class="panel-body">
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="multipoligono">
-                                            {{ form.poligono }}
-                                            {{ form.poligono.errors }}
-                                        </div>
-                                        <div class="tab-pane" id="ponto">
-                                            {{ form.ponto }}
-                                            {{ form.ponto.errors }}
-                                        </div>
-                                        <div class="tab-pane" id="linha">
-                                            {{ form.linha}}
-                                            {{ form.linha.errors }}
+                                        <div class="tab-pane active" id="{{ type }}">
+                                            {% if type == 'poligono' %}
+                                                {{ form.poligono }}
+                                                {{ form.poligono.errors }}
+                                            {% elif type == 'ponto' %}
+                                                {{ form.ponto }}
+                                                {{ form.ponto.errors }}
+                                            {% elif type == 'linha' %}
+                                                {{ form.linha }}
+                                                {{ form.linha.errors }}
+                                            {% endif %}
                                         </div>
                                         <div class="tab-pane" id="geojson">
                                             {{ form.geojson }}
@@ -59,7 +57,8 @@
                      </div>
                   </div>
 
-                <input class="btn btn btn-primary" type="submit" value="Criar">
+                <input class="btn btn btn-primary" type="submit" value="Salvar">
+                <a class="btn btn btn-primary" href="/camada/local/remover/{{ local_id }}/">Remover</a>
             </form>
       </div>
   </div>

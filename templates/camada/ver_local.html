@@ -1,0 +1,20 @@
+{% load leaflet_tags %}
+
+{% block cssformat %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
+
+{% block content %}
+    {% leaflet_map "yourmap" callback="main_map_init" %}
+{% endblock %}
+
+
+{% block scriptsJava %}
+    <script>
+        var collection = {{ obj }};
+        function main_map_init(map, options) {
+          L.geoJson(collection).addTo(map);
+        }
+    </script>
+{% endblock %}

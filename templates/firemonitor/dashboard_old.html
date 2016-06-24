@@ -472,8 +472,7 @@ $(document).ready(function() {
     $(".box").resize(function(event){
         event.preventDefault();
     });
-    // Add Drag-n-Drop action for .box
-    WinMove();
+
 
     plot = [];
     {% for item in result.graphFMA.plotBands %}

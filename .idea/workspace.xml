@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9d54ab57-0c74-47a6-a9c5-b710f9296989" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/camada/views.py" afterPath="$PROJECT_DIR$/camada/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firemonitor/views.py" afterPath="$PROJECT_DIR$/firemonitor/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/firemonitor/dashboard_old.html" afterPath="$PROJECT_DIR$/templates/firemonitor/dashboard_old.html" />
     </list>
     <ignored path="core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,107 +43,39 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.py">
+      <file leaf-file-name="fma.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/firemonitor/fma.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="120" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/camada/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="12" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="12" />
+            <state relative-caret-position="200">
+              <caret line="215" column="0" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <marker date="1465500407889" expanded="true" signature="698:751" ph="SELECT codig... Clima_estacoes" />
+                <marker date="1465500407889" expanded="true" signature="1056:1105" ph="SELECT * FRO... Clima_estacoes" />
+                <marker date="1465500407889" expanded="true" signature="1657:2070" ph="SELECT date_... Clima_dadosestacao" />
+                <marker date="1465500407889" expanded="true" signature="2427:2918" ph="SELECT date_... Clima_dadosestacao" />
+                <marker date="1465500407889" expanded="true" signature="3307:3509" ph="SELECT &quot;Data... Clima_dadosestacao" />
+                <marker date="1465500407889" expanded="true" signature="3584:3832" ph="SELECT &quot;Data... Clima_dadosestacao" />
+                <marker date="1465500407889" expanded="true" signature="4197:4382" ph="SELECT &quot;Data... Clima_dadosestacao" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/camada/models.py">
+      <file leaf-file-name="dashboard_old.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/firemonitor/dashboard_old.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="3723">
+              <caret line="474" column="0" selection-start-line="474" selection-start-column="0" selection-end-line="474" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/camada/views.py">
+        <entry file="file://$PROJECT_DIR$/firemonitor/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/clima/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="speedtest-cli.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/toolbox/speedtest-cli.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sitetools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/toolbox/sitetools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="0014_auto_20160617_1825.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/impacto/migrations/0014_auto_20160617_1825.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="19" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/camada/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="10" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+            <state relative-caret-position="153">
+              <caret line="162" column="35" selection-start-line="162" selection-start-column="35" selection-end-line="162" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -166,7 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/member.py" />
         <option value="$PROJECT_DIR$/firemonitor/fmagrafico.py" />
         <option value="$PROJECT_DIR$/firemonitor/wfabba.py" />
         <option value="$PROJECT_DIR$/firemonitor/alarme.py" />
@@ -177,7 +109,6 @@
         <option value="$PROJECT_DIR$/clima/urls.py" />
         <option value="$PROJECT_DIR$/templates/clima/mapafocoincendio.html" />
         <option value="$PROJECT_DIR$/docs/muda.sh" />
-        <option value="$PROJECT_DIR$/firemonitor/views.py" />
         <option value="$PROJECT_DIR$/firemonitor/fma.py" />
         <option value="$PROJECT_DIR$/monitor/urls.py" />
         <option value="$PROJECT_DIR$/monitor/views.py" />
@@ -217,6 +148,8 @@
         <option value="$PROJECT_DIR$/camada/models.py" />
         <option value="$PROJECT_DIR$/camada/forms.py" />
         <option value="$PROJECT_DIR$/camada/views.py" />
+        <option value="$PROJECT_DIR$/templates/firemonitor/dashboard_old.html" />
+        <option value="$PROJECT_DIR$/firemonitor/views.py" />
       </list>
     </option>
   </component>
@@ -1038,7 +971,14 @@
       <option name="project" value="LOCAL" />
       <updated>1466544136931</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Remoção da Biblioteca geomet">
+      <created>1466774654554</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1466774654554</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1138,7 +1078,8 @@
     <MESSAGE value="Implantação Impacto" />
     <MESSAGE value="Ajustes LOGIN" />
     <MESSAGE value="Alterações" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alterações" />
+    <MESSAGE value="Remoção da Biblioteca geomet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remoção da Biblioteca geomet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1162,6 +1103,16 @@
           <line>183</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/firemonitor/fma.py</url>
+          <line>277</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/firemonitor/views.py</url>
+          <line>169</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -1170,41 +1121,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="56" />
+      <option name="time" value="60" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/impacto/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/impacto/migrations/0001_initial.py" />
-    <entry file="file://$USER_HOME$/teste01/Lib/site-packages/django/conf/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/scripts/load_programas.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/load_impacto.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2516">
-          <caret line="148" column="3" selection-start-line="148" selection-start-column="3" selection-end-line="148" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/firemonitor/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
@@ -1475,7 +1396,7 @@
         <state relative-caret-position="102">
           <caret line="8" column="12" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="12" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1511,8 +1432,64 @@
         <state relative-caret-position="68">
           <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firemonitor/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/firemonitor/mailalertafoco.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/firemonitor/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="1048" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firemonitor/fma.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="215" column="0" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+          <folding>
+            <marker date="1465500407889" expanded="true" signature="698:751" ph="SELECT codig... Clima_estacoes" />
+            <marker date="1465500407889" expanded="true" signature="1056:1105" ph="SELECT * FRO... Clima_estacoes" />
+            <marker date="1465500407889" expanded="true" signature="1657:2070" ph="SELECT date_... Clima_dadosestacao" />
+            <marker date="1465500407889" expanded="true" signature="2427:2918" ph="SELECT date_... Clima_dadosestacao" />
+            <marker date="1465500407889" expanded="true" signature="3307:3509" ph="SELECT &quot;Data... Clima_dadosestacao" />
+            <marker date="1465500407889" expanded="true" signature="3584:3832" ph="SELECT &quot;Data... Clima_dadosestacao" />
+            <marker date="1465500407889" expanded="true" signature="4197:4382" ph="SELECT &quot;Data... Clima_dadosestacao" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/firemonitor/dashboard_old.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3723">
+          <caret line="474" column="0" selection-start-line="474" selection-start-column="0" selection-end-line="474" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firemonitor/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="162" column="35" selection-start-line="162" selection-start-column="35" selection-end-line="162" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>

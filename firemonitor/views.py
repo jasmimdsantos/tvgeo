@@ -156,9 +156,8 @@ def wfabbaLayer(request, start, end):
 @login_required()
 def dashboard(request, idProjeto):
 
-
     data = datetime(2015,10,18)
-    data = datetime.today()
+    #data = datetime.today()
 
     start =data.strftime('%d-%m-%Y')
     end = data.strftime('%d-%m-%Y')
@@ -174,7 +173,7 @@ def dashboard(request, idProjeto):
                                     'start' : start,
                                     'end' : end} )
 
-    template = loader.get_template('firemonitor/dashboard.html')
+    template = loader.get_template('firemonitor/dashboard_old.html')
     return HttpResponse(template.render(context))
 
 

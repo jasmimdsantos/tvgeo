@@ -15,17 +15,18 @@
                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#questionariointerno" href="#questionariointerno">
                                Questionário Interno
                             </a>
+                            <span class="tools pull-right">
+                                <a data-toggle="collapse" href="#questionariointerno" class="fa fa-chevron-down"></a>
+                            </span>
                         </h4>
                     </div>
                     <div id="questionariointerno" class="panel-collapse collapse">
                         <div class="panel-body">
-                            {{ aia.programas_gab  }}
                             {% if aia.respostas|length >= 5  %}
                                 {% include "impacto/include/quadro_post.html" with respostas=aia.respostas aia=aia.aia_gab programas=aia.programas_gab %}
                             {% else %}
                                 Você não respondeu ao formulário.
                             {% endif %}
-
                             <a class="btn btn btn-primary" href="/impacto/quadro/{{ impacto_id }}/">Responder Questionário</a>
                         </div>
                     </div>

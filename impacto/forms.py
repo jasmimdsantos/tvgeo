@@ -27,7 +27,7 @@ class Empresa_ProjetosForm(Form):
 class AreaForm(ModelForm):
     class Meta():
         model = Area
-        fields = ['descricao',]
+        fields = ['descricao', 'local_FK']
 
 class ImpactoProjetoForm(ModelForm):
     class Meta():

@@ -11,13 +11,14 @@
               <form action="/impacto/projetos/perfil_projeto/criar_area/{{ projeto.id }}/" method="POST">
                   {% csrf_token %}
                   {{ form|crispy }}
+                  <a href="#">Buscar</a>
                   <p>Para converter os formatos, utilize o website <a href="https://ogre.adc4gis.com/" target="_blank">OGRE</a> </p>
                   <br/>
                   <input class="btn btn btn-primary" type="submit" value="Criar">
+                  <input type="hidden" value="">
               </form>
           </div>
       </div>
   </div>
 
 {% endblock %}
-

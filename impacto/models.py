@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth.models import Group
+from camada.models import Local
 
 class Status_Projeto(models.Model):
     """ tabela de status do projeto """
@@ -115,6 +116,8 @@ class Area(models.Model):
     """ tabela de areas """
     descricao = models.CharField(max_length=100, verbose_name=u'Descrição')
     projeto_FK = models.ForeignKey(Projeto, verbose_name=u'Projeto')
+    local_FK = models.ForeignKey(Local, verbose_name=u'Local')
+
     def __str__(self):
         return self.descricao
 

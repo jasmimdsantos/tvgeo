@@ -42,10 +42,58 @@
                     </div>
                 </div>
               </div>
-          {% if is_superuser %}
-            <a class="btn btn btn-primary" href="/impacto/projetos/perfil_projeto/admin_grupo/{{ projeto.id }}/">Editar Equipe</a>
-          {% endif %}
           </div>
+      </div>
+      {% if is_superuser %}
+        <div class="col-lg-12">
+            </br>
+            <div class="col-lg-5">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEquipe" href="#accordionEquipe">
+                                Equipe
+                            </a>
+                            <span class="tools pull-right">
+                            <a data-toggle="collapse" href="#accordionEquipe" class="fa fa-chevron-down"></a>
+                            </span>
+                        </h4>
+                    </div>
+                    <div id="accordionEquipe" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <form action="/impacto/projetos/perfil_projeto/admin_grupo/" method="POST">
+                                <input type="hidden" name="projeto_id" value="{{ projeto.id }}">
+                                <table class="display dataTable" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Membro?</th>
+                                            <th>Nome</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Membro?</th>
+                                            <th>Nome</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for user_member in usersform %}
+                                            <tr>
+                                                <td><input type="checkbox" name="users_member" value="{{ user_member.id }}" {% if user_member.checked %} checked{% endif %}></td>
+                                                <td>{{ user_member.nome }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            <br/>
+                            <input class="btn btn btn-primary" type="submit" value="Salvar">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      {% endif %}
     <div class="row">
       <div class="col-lg-12">
           <h4>Fases</h4>

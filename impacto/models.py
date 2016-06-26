@@ -8,6 +8,9 @@ class Status_Projeto(models.Model):
     """ tabela de status do projeto """
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
 
+    class Meta:
+        ordering = ['descricao']
+
     def __str__(self):
         return self.descricao
 
@@ -16,6 +19,9 @@ class Meio(models.Model):
     """ tabela de status meios """
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
 
+    class Meta:
+        ordering = ['descricao']
+
     def __str__(self):
         return self.descricao
 
@@ -23,6 +29,9 @@ class Meio(models.Model):
 class TipoArea(models.Model):
     """ tabela de status meios """
     descricao = models.CharField(max_length=50, verbose_name=u'Descrição')
+
+    class Meta:
+        ordering = ['descricao']
 
     def __str__(self):
         return self.descricao
@@ -43,6 +52,9 @@ class  Impacto(models.Model):
     meio_FK = models.ForeignKey(Meio, verbose_name='Meio')
     descricao = models.CharField(max_length=250, verbose_name=u'Nome')
     conceito = models.TextField(verbose_name='Descrição', default='')
+
+    class Meta:
+        ordering = ['descricao', ]
 
     def __str__(self):
         return self.descricao
@@ -118,6 +130,9 @@ class Area(models.Model):
     projeto_FK = models.ForeignKey(Projeto, verbose_name=u'Projeto')
     local_FK = models.ForeignKey(Local, verbose_name=u'Local')
 
+    class Meta:
+        ordering = ['descricao']
+
     def __str__(self):
         return self.descricao
 
@@ -135,9 +150,6 @@ class FaseProjeto(models.Model):
 
     def __str__(self):
         return self.get_descricao_display()
-
-
-
 
 
 class ImpactoProjeto(models.Model):

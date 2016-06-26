@@ -33,7 +33,6 @@ urlpatterns = [
 
     url(r'^api/get_impactos/(?P<meio>\d+)/$', views.api_get_impacto),
 
-    url(r'^projetos/perfil_projeto/admin_grupo/(?P<projeto>\d+)/$', views.admin_grupo),
     url(r'^projetos/perfil_projeto/admin_grupo/$', views.admin_grupo_post),
 
     url(r'^$', views.impacto),

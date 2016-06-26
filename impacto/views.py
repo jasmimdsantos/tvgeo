@@ -106,8 +106,8 @@ def respostas_gab(impacto):
 @login_required
 def admin_grupo_post(request):
     if request.user.is_superuser and request.POST:
-        projeto_id = request.POST['projeto']
-        users = request.POST.getlist('users')
+        projeto_id = request.POST['projeto_id']
+        users = request.POST.getlist('users_member')
 
         if not check_group(request.user.id, projeto_id):
             return HttpResponse('User out of project group', status=401)
@@ -128,26 +128,6 @@ def admin_grupo_post(request):
                 group_FK.user_set.remove(user_group.id)
 
         return redirect("/impacto/projetos/perfil_projeto/"+projeto_id+"/")
-
-
-@login_required
-def admin_grupo(request, projeto):
-    context = RequestContext(request)
-    page = sitetools.sitemap ( request.get_full_path ( ) ).context
-    context.update ( page )
-
-    if not check_group(request.user.id, projeto):
-            return HttpResponse('User out of project group', status=401)
-
-    context['usersform'] = []
-    context['projeto_id'] = projeto
-
-    if request.user.is_superuser:
-        for user in User.objects.all():
-            mont = {'nome': user, 'id': user.id, 'checked': check_group(user.id, projeto)}
-            context['usersform'].append(mont)
-
-    return render(request, 'impacto/admin_group.html', context)
 
 
 @csrf_exempt
@@ -488,8 +468,16 @@ def perfil_projeto(request, projeto):
         impactos['content']['impacto'] = impactoprojeto_FK
         impactos['content']['diagnostico'] = diagnostico_FK
 
+    context['usersform'] = []
+
     if request.user.is_superuser:
         context['is_superuser'] = True
+        for user in User.objects.all():
+            mont = {'nome': user, 'id': user.id, 'checked': check_group(user.id, projeto)}
+            context['usersform'].append(mont)
+
+
+    context['projeto_id'] = projeto
 
     return render(request, "impacto/perfil_projeto.html", context)
 

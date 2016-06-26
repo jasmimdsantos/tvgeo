@@ -1,6 +1,10 @@
 {% extends 'layout.html' %} {% load staticfiles %}
 {% load crispy_forms_tags %}
 
+{% block cssformat %}
+    <link href="/static/assets/css/modal_local.css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
     {% include "impacto/include/fase_temp_header.html" %}
     <div class="row" xmlns="http://www.w3.org/1999/html">
@@ -11,7 +15,7 @@
               <form action="/impacto/projetos/perfil_projeto/criar_area/{{ projeto.id }}/" method="POST">
                   {% csrf_token %}
                   {{ form|crispy }}
-                  <a href="#">Buscar</a>
+                  <a id="btnModal" href="#">Buscar</a>
                   <p>Para converter os formatos, utilize o website <a href="https://ogre.adc4gis.com/" target="_blank">OGRE</a> </p>
                   <br/>
                   <input class="btn btn btn-primary" type="submit" value="Criar">
@@ -21,4 +25,97 @@
       </div>
   </div>
 
+    <div id="local-modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">×</span>
+                <h2>Buscar Locais</h2>
+            </div>
+            <div class="modal-body">
+                <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Nome</th>
+                            <th>Geometria</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>id</th>
+                            <th>Nome</th>
+                            <th>Geometria</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <a href="/camada/local/criar/" class="btn btn btn-primary">Criar Local</a><br/><br/>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scriptsJava %}
+    <script>
+        $(document).ready(function() {
+            $("#btnModal").click(function() {
+              $('#local-modal').css('display', 'block');
+            });
+
+            $(".close").click(function() {
+              $('#local-modal').css('display', 'none');
+            });
+
+            $(window).click(function(event) {
+                if ($(event.target).is("#local-modal")) {
+                    $('#local-modal').css('display', 'none');
+                }
+            });
+
+           table =  $("#example").DataTable( {
+                "lengthMenu": [[100, -1], [100, "All"]],
+                "processing": true,
+                "serverSide": false,
+                "order": [[ 1, "desc" ]],
+                "ajax": '/camada/api/local/lista/',
+                "columns": [
+                    { "data": "id", "visible":false },
+                    { "data": "descricao" },
+                    { "data": "geometria" }
+               ],
+                "language" : {
+                        "sProcessing":   "A processar...",
+                        "sLengthMenu":   "Mostrar _MENU_ registos",
+                        "sZeroRecords":  "Não foram encontrados resultados",
+                        "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+                        "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registos",
+                        "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
+                        "sInfoPostFix":  "",
+                        "sSearch":       "Procurar:",
+                        "sUrl":          "",
+                        "oPaginate": {
+                                        "sFirst":    "Primeiro",
+                                        "sPrevious": "Anterior",
+                                        "sNext":     "Seguinte",
+                                        "sLast":     "Último"
+                                    }
+                }
+            } );
+
+            $('#example tbody').on( 'click', 'tr', function () {
+                  if ( $(this).hasClass('selected') ) {
+                      $(this).removeClass('selected');
+                  }
+                  else {
+                      table.$('tr.selected').removeClass('selected');
+                      $(this).addClass('selected');
+                      id = table.row('.selected').data()['id'];
+                      $("#id_local_FK").val(id.toString()).change();
+                      $('#local-modal').css('display', 'none');
+                  }
+           } );
+
+        } );
+    </script>
 {% endblock %}

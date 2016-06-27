@@ -50,7 +50,7 @@ def create_or_update_local(req):
                 qry = Local(descricao=form_descricao, ponto=wktexto)
                 qry.save()
                 local_id = qry.id
-    elif 'poligono' in req:
+    elif 'poligono' in req and req['poligono'] != '':
         poligono = req['poligono']
         try:
             local_FK = Local.objects.get(pk=local_id)
@@ -62,7 +62,8 @@ def create_or_update_local(req):
             qry.save()
             local_id = qry.id
 
-    elif 'linha' in req:
+    elif 'linha' in req and req['linha'] != '':
+        print("Linha")
         linha = req['linha']
         try:
             local_FK = Local.objects.get(pk=local_id)
@@ -74,15 +75,20 @@ def create_or_update_local(req):
             qry.save()
             local_id = qry.id
 
-    elif 'ponto' in req:
+    elif 'ponto' in req and req['ponto'] != '':
+        print("Ponto")
         ponto = req['ponto']
         try:
             local_FK = Local.objects.get(pk=local_id)
             local_FK.descricao = form_descricao
             local_FK.ponto = ponto
             local_FK.save()
+            print("Atualizou POnto")
         except Local.DoesNotExist or NameError:
+            print("Criar Local")
             qry = Local(descricao=form_descricao, ponto=ponto)
+            print(form_descricao)
+            print(ponto)
             qry.save()
             local_id = qry.id
 

@@ -39,6 +39,7 @@
                             <th>id</th>
                             <th>Nome</th>
                             <th>Geometria</th>
+                            <th>Opções</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -46,6 +47,7 @@
                             <th>id</th>
                             <th>Nome</th>
                             <th>Geometria</th>
+                            <th>Opções</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -58,7 +60,22 @@
 
 {% block scriptsJava %}
     <script>
+        function popupMap(map_id) {
+            eventW = window.event
+            eventW.stopPropagation();
+            url = '/camada/local/ver/' + map_id + '/';
+            newW = 980;
+            newH = 450;
+            left = (screen.width - newW) / 2;
+            top = (screen.height - newH) / 2;
+            newwindow = window.open(url, 'name', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, ' +
+                    'width=' + newW + ',height=' + newH + ',left=' + left + ',top=' + top);
+            newwindow.resizeTo(newW, newH);
+            newwindow.moveTo(left, top);
+            newwindow.focus();
+        }
         $(document).ready(function() {
+
             $("#btnModal").click(function() {
               $('#local-modal').css('display', 'block');
             });
@@ -82,7 +99,13 @@
                 "columns": [
                     { "data": "id", "visible":false },
                     { "data": "descricao" },
-                    { "data": "geometria" }
+                    { "data": "geometria" },
+                    { "data": "id",
+                            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                $(nTd).html("<a class='btn btn-primary btn-sm' onclick='popupMap("+oData.id+");' href='#"
+                                        +oData.id+"/'> Ver Mapa </a>");
+
+                    } }
                ],
                 "language" : {
                         "sProcessing":   "A processar...",

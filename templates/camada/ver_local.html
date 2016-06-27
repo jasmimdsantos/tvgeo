@@ -4,10 +4,10 @@
 {% leaflet_js %}
 {% leaflet_css %}
 
+<h2 style="text-align: center;">{{ nome_mapa }}</h2>
 <input id="poligono_tipo" type="hidden" value="{{ obj.type }}">
 {% leaflet_map "yourmap" callback="main_map_init" %}
-
-
+<button onclick="window.open('', '_self', ''); window.close();" type="button">Fechar</button>
 <script src="/static/assets/js/vendor/jquery-1.12.0.min.js"></script>
 <script>
     var type_geojson = $('#poligono_tipo').val();

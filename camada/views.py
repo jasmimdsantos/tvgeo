@@ -162,13 +162,17 @@ def api_lista_local(request):
     return HttpResponse(dados, content_type='application/json')
 
 def ver_local(request, id_local):
+    local_FK = Local.objects.get(pk=id_local)
     geometria, obj = Local.campo.auto_get(instance=id_local)
 
     geojson = wkt.loads(obj)
-    print(geojson)
-    context = {'obj': {
-        'type': geojson['type'],
-        'coordinates': geojson['coordinates']
-    }}
+
+    context = {
+        'nome_mapa': local_FK.descricao,
+        'obj': {
+            'type': geojson['type'],
+            'coordinates': geojson['coordinates']
+            }
+        }
 
     return render(request, 'camada/ver_local.html', context)
